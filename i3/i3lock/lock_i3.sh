@@ -4,7 +4,7 @@ scrot -o /tmp/screen.png
 # convert /tmp/screen.png -scale 20% -scale 500% /tmp/screen.png
 convert /tmp/screen.png -scale 20% -scale 500% -fill black -colorize 20% /tmp/screen.png
 
-img=$HOME/dot-files/i3/screen-lock.png
+img=$HOME/dot-files/i3/i3lock/screen-lock.png
 # convert $img -scale 25% $img
 
 if [[ -f $img ]] 

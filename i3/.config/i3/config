@@ -120,6 +120,8 @@ bindsym $mod+Shift+q kill
 bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # bindcode $mod+40 exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "90" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
 
+# use skippy for a "splashed window view"
+bindsym $mod+Tab exec skippy-xd
 
 # change focus
 bindsym $mod+h focus left
@@ -235,7 +237,7 @@ mode "resize" {
 
 
 # lockscreen
-set $Locker ~/dot-files/i3/lock_i3.sh
+set $Locker ~/dot-files/i3/i3lock/lock_i3.sh
 bindsym $mod+shift+x exec $Locker && sleep 0.5
 
 bindsym $mod+Escape mode $sysmenu
@@ -253,23 +255,23 @@ mode $sysmenu {
 }
 
 
-bindsym $mod+Tab mode $wsmenu
+bindsym $mod+Shift+Tab mode $wsmenu
 set $wsmenu "WS[1]: tmp  WS[2]: work  WS[3]: terminal  WS[4]: NotAssigned  WS[5]: NotAssigned  WS[6]: 666  WS[7]: NotAssigned  WS[8]: Campus  WS[9]: Blender  WS[10]: config"
 mode $wsmenu {
-    bindsym a       exec --no-startup-id ~/dot-files/i3/workspaces/WS_1.sh
-    bindsym z       exec --no-startup-id ~/dot-files/i3/workspaces/WS_2.sh
-    bindsym e       exec --no-startup-id ~/dot-files/i3/workspaces/WS_3.sh
-    bindsym r       exec --no-startup-id ~/dot-files/i3/workspaces/WS_4.sh
-    bindsym t       exec --no-startup-id ~/dot-files/i3/workspaces/WS_5.sh
-    bindsym y       exec --no-startup-id ~/dot-files/i3/workspaces/WS_6.sh
-    bindsym u       exec --no-startup-id ~/dot-files/i3/workspaces/WS_7.sh
-    bindsym i       exec --no-startup-id ~/dot-files/i3/workspaces/WS_8.sh
-    bindsym o       exec --no-startup-id ~/dot-files/i3/workspaces/WS_9.sh
-    bindsym p       exec --no-startup-id ~/dot-files/i3/workspaces/WS_10.sh
+    bindsym a exec --no-startup-id ~/dot-files/i3/workspaces/WS_1.sh , mode "default"
+    bindsym z exec --no-startup-id ~/dot-files/i3/workspaces/WS_2.sh , mode "default
+    bindsym e exec --no-startup-id ~/dot-files/i3/workspaces/WS_3.sh , mode "default
+    bindsym r exec --no-startup-id ~/dot-files/i3/workspaces/WS_4.sh , mode "default
+    bindsym t exec --no-startup-id ~/dot-files/i3/workspaces/WS_5.sh , mode "default
+    bindsym y exec --no-startup-id ~/dot-files/i3/workspaces/WS_6.sh , mode "default
+    bindsym u exec --no-startup-id ~/dot-files/i3/workspaces/WS_7.sh , mode "default
+    bindsym i exec --no-startup-id ~/dot-files/i3/workspaces/WS_8.sh , mode "default
+    bindsym o exec --no-startup-id ~/dot-files/i3/workspaces/WS_9.sh , mode "default
+    bindsym p exec --no-startup-id ~/dot-files/i3/workspaces/WS_10.sh, mode "default
 
-    bindsym Tab     mode "default"
-    bindsym Return  mode "default"
-    bindsym Escape  mode "default"
+    bindsym Tab    mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -285,44 +287,48 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color     
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # status bar
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# use polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    position top
+# bar {
+#     position top
 
-    # show tray icons
-    tray_output primary # primary|none|HDMI2
-    tray_padding 2
-    workspace_min_width 0
+#     # show tray icons
+#     tray_output primary # primary|none|HDMI2
+#     tray_padding 3
+#     workspace_min_width 10
 
-    i3bar_command i3bar --transparency
+#     i3bar_command i3bar --transparency
 
-    status_command i3blocks -c ./i3blocks.conf
-    # status_command i3blocks -c ~/.dotSetup/i3/i3blocks.conf
+#     # status_command i3blocks -c ~/dot-files/i3/i3blocks/i3blocks.conf
 
-    colors {
-    background $bg-color50 # last two digits are settting transparency
-        separator #757575
-        #                  border             background         text
-        focused_workspace  $bg-color          $bg-color          $text-color
-        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-    }
+#     colors {
+#     background $bg-color50 # last two digits are settting transparency
+#         separator #757575
+#         #                  border             background         text
+#         focused_workspace  $bg-color          $bg-color          $text-color
+#         inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#         urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#     }
 
-}
+# }
 
 # status bar #2 (bottom)
-bar {
-    position bottom
-    workspace_buttons no
-    status_command i3status
-    output primary
-    tray_output none # primary|none|HDMI2
-}
+# bar {
+#     position bottom
+#     workspace_buttons no
+#     status_command i3status
+#     output primary
+#     tray_output none # primary|none|HDMI2
+# }
 
 
-# kill i3blocks process to refresh it (caps-lock toggle)
-bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
+# # kill i3blocks process to refresh it (caps-lock toggle)
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # custom keybindings 
@@ -368,10 +374,10 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xcompmgr -c -l0 -t0 -r0 -o.00
 
 # launch screen sweetness (smooth transitions,...)
-exec --no-startup-id picom 
+# exec --no-startup-id picom 
 
 # location provider (used for redshift)
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

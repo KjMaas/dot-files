@@ -1,0 +1,6 @@
+install_i3.sh
+scripts/
+workspaces/
+screen-lock.png
+i3blocks.conf
+lock_i3.sh

@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 970,
+       "width": 1902,
+       "x": 9,
+       "y": 77
+    },
+    "marks": [],
+    "name": "New Links | Hacker News - Brave",
+    "percent": 1,
+    "swallows": [
+       {
+        "class": "^Brave\\-browser$",
+        "instance": "^brave\\-browser$",
+        "title": "^New Links | Hacker News - Brave$",
+        "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+

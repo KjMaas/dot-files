@@ -1,0 +1,138 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 1 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 1,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 2 children
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 1,
+            "type": "con",
+            "nodes": [
+                {
+                    // splith split container with 1 children
+                    "border": "normal",
+                    "floating": "auto_off",
+                    "layout": "splith",
+                    "marks": [],
+                    "percent": 0.8,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            // tabbed split container with 3 children
+                            "border": "normal",
+                            "floating": "auto_off",
+                            "layout": "tabbed",
+                            "marks": [],
+                            "percent": 1,
+                            "type": "con",
+                            "nodes": [
+                                {
+                                    "border": "none",
+                                    "current_border_width": 2,
+                                    "floating": "auto_off",
+                                    "geometry": {
+                                       "height": 948,
+                                       "width": 1902,
+                                       "x": 9,
+                                       "y": 99
+                                    },
+                                    "marks": [],
+                                    "name": "Chat | Microsoft Teams",
+                                    "percent": 0.333333333333333,
+                                    "swallows": [
+                                       {
+                                       "class": "^Microsoft\\ Teams\\ \\-\\ Preview$",
+                                       "instance": "^microsoft\\ teams\\ \\-\\ preview$",
+                                       // "title": "^Chat\\ \\|\\ Microsoft\\ Teams$",
+                                       "window_role": "^browser\\-window$"
+                                       }
+                                    ],
+                                    "type": "con"
+                                },
+                                {
+                                    "border": "normal",
+                                    "current_border_width": 2,
+                                    "floating": "auto_off",
+                                    "geometry": {
+                                       "height": 990,
+                                       "width": 625,
+                                       "x": 1284,
+                                       "y": 55
+                                    },
+                                    "marks": [],
+                                    "name": "floki - Home",
+                                    "percent": 0.333333333333333,
+                                    "swallows": [
+                                       {
+                                       "class": "^Notion$",
+                                       "instance": "^notion$",
+                                       // "title": "^floki\\ \\-\\ Home$",
+                                       "window_role": "^browser\\-window$"
+                                       }
+                                    ],
+                                    "type": "con"
+                                },
+                                {
+                                    "border": "normal",
+                                    "current_border_width": 2,
+                                    "floating": "auto_off",
+                                    "geometry": {
+                                       "height": 970,
+                                       "width": 1902,
+                                       "x": 9,
+                                       "y": 77
+                                    },
+                                    "marks": [],
+                                    "name": "brave-floki",
+                                    "percent": 0.333333333333333,
+                                    "swallows": [
+                                       {
+                                        "class": "^Brave\\-browser$",
+                                        "instance": "^brave\\-browser$",
+                                        "title": "^New Links | Hacker News - Brave$",
+                                        "window_role": "^browser$"
+                                       }
+                                    ],
+                                    "type": "con"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 968,
+                       "width": 947,
+                       "x": 960,
+                       "y": 77
+                    },
+                    "marks": [],
+                    "name": "Clockify",
+                    "percent": 0.2,
+                    "swallows": [
+                       {
+                       "class": "^Clockify$",
+                       "instance": "^clockify$",
+                       "title": "^Clockify$",
+                       "window_role": "^browser\\-window$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+

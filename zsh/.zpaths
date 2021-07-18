@@ -1,0 +1,8 @@
+#!/bin/bash
+
+###################
+# my custom paths #
+###################
+
+# add local bin folder to path (where nvr resides for exemple)
+export PATH="$HOME/.local/bin:$PATH"

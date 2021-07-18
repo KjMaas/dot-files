@@ -21,7 +21,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #44400011
+background = #335ECD0
 background-alt = #99999950
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -70,7 +70,7 @@ font-7 = Nimbus Mono PS:style=Regular:scale=8;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = redshift xbacklight pulseaudio xkeyboard filesystem memory cpu wlan eth battery temperature date
+modules-right = cpu memory temperature battery filesystem wlan eth date
 
 tray-position = right
 tray-padding = 2
@@ -88,6 +88,57 @@ scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[bar/bottom]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 25%
+height = 30
+offset-x = 75%
+offset-y = 0%
+radius = 10.0
+fixed-center = false
+bottom = true
+
+font-0 = ${bar/top.font-0}
+font-1 = ${bar/top.font-1}
+font-2 = ${bar/top.font-2}
+font-3 = ${bar/top.font-3}
+font-4 = ${bar/top.font-4}
+font-5 = ${bar/top.font-5}
+font-6 = ${bar/top.font-6}
+font-7 = ${bar/top.font-7}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = ${colors.primary}
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = 
+modules-center = redshift xbacklight pulseaudio xkeyboard 
+modules-right = 
+
+;wm-restack = i3
+override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -183,7 +234,7 @@ label-urgent-padding = 2
 label-urgent-font = 2
 
 ; Separator in between workspaces
-label-separator = <>
+label-separator = 
 label-separator-font = 4
 
 
@@ -206,7 +257,7 @@ type = internal/xbacklight
 format = <label> <bar>
 label = *
 
-bar-width = 5
+bar-width = 10
 bar-fill = ═
 bar-fill-font = 2
 bar-fill-foreground = #9f78e1
@@ -281,7 +332,7 @@ type = internal/date
 interval = 5
 
 date =
-date-alt = " %Y-%m-%d"
+date-alt = "%Y-%m-%d"
 
 time = %H:%M
 time-alt = %H:%M:%S
@@ -302,7 +353,7 @@ label-volume-foreground = ${root.foreground}
 label-muted = <\ muted
 label-muted-foreground = #666
 
-bar-volume-width = 5
+bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55

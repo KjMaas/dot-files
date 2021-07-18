@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+#######################
+# my custom functions #
+#######################
+
+
+# list directory content when using 'cd'
+function cd () {
+    builtin cd "$1";
+    ls -AlF;
+    }
+
+# cd into directory and show dir tree when created
+function mkcd () {
+    currentDir="$(pwd)"
+    mkdir -p "$1";
+    builtin cd "$1";
+    tree -L 3 -d "$currentDir";
+    }

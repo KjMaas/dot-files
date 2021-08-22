@@ -21,3 +21,25 @@ fi
 
 alias l='ls -ahlF'
 alias n='nvim '
+
+
+# nvm sourcing, completion and more
+alias snvm='
+source /usr/share/nvm/init-nvm.sh
+echo nvm autocompletion enabled!
+'
+
+
+# Load pyenv
+alias spy='
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init --path)"
+echo "pyenv magic enabled!"
+'
+
+
+# list directory content when using 'z'
+# alias z=z "$1";ls -AF;
+

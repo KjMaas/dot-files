@@ -44,3 +44,4 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 
 printf ".zprofile sourced\n"
+eval "$(pyenv init --path)"

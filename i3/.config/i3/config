@@ -91,9 +91,10 @@ bindsym XF86AudioMute exec "amixer -q set Master toggle && pkill -RTMIN+2 i3bloc
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Backlight
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec brightnessctl s +5%
+bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -104,8 +105,6 @@ bindsym --whole-window $mod+button3 floating toggle
 bindsym $mod+Return exec alacritty
 # start a floating terminal
 bindsym $mod+Shift+Return exec ~/dot-files/i3/scripts/focus_window.sh "alacritty -t /!\Delete-Me/!\ "
-# for_window [class="Arandr" instance="arandr"] floating enable
-# for_window [title="Alacritty"] border pixel 4
 for_window [title="Alacritty"] border pixel 4
 
 # kill focused window
@@ -359,7 +358,7 @@ exec --no-startup-id flameshot
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#other stuff 
+# other stuff 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # custom walpaper
 exec_always --no-startup-id feh --randomize --bg-scale ~/Documents/Blender/bgnd/renders/*

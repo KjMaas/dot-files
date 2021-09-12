@@ -124,7 +124,7 @@ module-margin-left = 1
 module-margin-right = 1
 
 modules-left = 
-modules-center = redshift xbacklight pulseaudio xkeyboard 
+modules-center = redshift brightnessctl pulseaudio xkeyboard 
 modules-right = 
 
 ;wm-restack = i3
@@ -250,6 +250,16 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
+
+
+[module/brightnessctl]
+type = custom/script
+exec = ~/.config/polybar/scripts/brightnessctl.sh
+format = <label>
+label = %output%
+interval = 1
+enable-scroll = true
+
 
 [module/xbacklight]
 type = internal/xbacklight

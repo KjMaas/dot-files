@@ -6,3 +6,4 @@
 
 # add local bin folder to path (where nvr resides for exemple)
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v17.2.0/bin:$PATH"

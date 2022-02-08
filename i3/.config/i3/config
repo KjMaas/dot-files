@@ -2,7 +2,6 @@
 # this file and re-run i3-config-wizard(1).
 
 
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Ressources:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,6 +108,8 @@ for_window [title="Alacritty"] border pixel 4
 
 # kill focused window
 bindsym $mod+Shift+q kill
+# enable/disable mouse focus
+focus_follows_mouse no
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Program launcher
@@ -116,8 +117,8 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# bindcode $mod+40 exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "90" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 16"
+bindcode $mod+40 exec "rofi -show"
+bindcode $mod+c exec "rofi -modi drun,run -show drun"
 
 # use skippy for a "splashed window view"
 bindsym $mod+Tab exec skippy-xd
@@ -159,7 +160,7 @@ bindsym $mod+shift+a focus child
 title_align center
 
 # remember where you come from
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 # switch between the current and the previously focused one
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth
@@ -217,7 +218,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -289,43 +290,6 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color     
 # use polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#     position top
-
-#     # show tray icons
-#     tray_output primary # primary|none|HDMI2
-#     tray_padding 3
-#     workspace_min_width 10
-
-#     i3bar_command i3bar --transparency
-
-#     # status_command i3blocks -c ~/dot-files/i3/i3blocks/i3blocks.conf
-
-#     colors {
-#     background $bg-color50 # last two digits are settting transparency
-#         separator #757575
-#         #                  border             background         text
-#         focused_workspace  $bg-color          $bg-color          $text-color
-#         inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-#         urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-#     }
-
-# }
-
-# status bar #2 (bottom)
-# bar {
-#     position bottom
-#     workspace_buttons no
-#     status_command i3status
-#     output primary
-#     tray_output none # primary|none|HDMI2
-# }
-
-
 # # kill i3blocks process to refresh it (caps-lock toggle)
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
 
@@ -394,11 +358,11 @@ bindsym $mod+shift+p move workspace to output left
 set $monitor "[a]randr [c]opy  [r]ight  [l]eft [t]emp"
 bindsym $mod+shift+m mode $monitor
 mode $monitor {
-    bindsym a       mode "default"; exec --no-startup-id arandr 
-    bindsym c       mode "default"; exec --no-startup-id xrandr --output DP1 --auto --same-as eDP1
-    bindsym r       mode "default"; exec --no-startup-id xrandr --output DP1 --auto --right-of eDP1
-    bindsym l       mode "default"; exec --no-startup-id xrandr --output DP1 --auto --left-of eDP1
-    bindsym t       mode "default"; exec --no-startup-id xrandr --output DVI-I-1-1 --auto --left-of eDP1
+    bindsym a       mode "default"; exec --no-startup-id arandr
+    bindsym c       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --same-as eDP-1
+    bindsym r       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1
+    bindsym l       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1
+    bindsym t       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1
     bindsym Escape  mode "default"
 
 }
@@ -406,6 +370,7 @@ mode $monitor {
 for_window [class="Arandr" instance="arandr"] floating enable
 
 
+exec --no-startup-id gnome-settings-daemon
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # memo

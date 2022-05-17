@@ -31,10 +31,12 @@ in
       discord
 
       # base
-      arandr
+      #arandr
       imagemagick
       keepassxc
       brave
+      #pcmanfm
+      libsForQt5.dolphin
 
       # development
       vscode
@@ -46,8 +48,20 @@ in
       cargo
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+
+      ## Sway-related packages swaylock
+      #swayidle
+      #wl-clipboard
+      #mako # notification daemon
+      #alacritty # Alacritty is the default terminal in the config
+      #wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
     ];
   };
+
+  #wayland.windowManager.sway = {
+  #  enable = true;
+  #  wrapperFeatures.gtk = true ;
+  #};
 
   #  programs.git = {
   #    enable = true;

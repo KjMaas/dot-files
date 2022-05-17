@@ -19,18 +19,6 @@ in
     ./hardware-configuration.nix
   ];
 
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    amdgpuBusId = "PCI:4:00:0";
-    nvidiaBusId = "PCI:1:00:0";
-  };
-
-  boot = {
-    #kernelParams = [ "nomodeset" ];
-    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-    kernelModules = [ "wl" ];
-  };
-
   nixpkgs.config = {
     allowUnfree = true;
     cudaSupport = true;
@@ -42,32 +30,50 @@ in
     extraOptions = "experimental-features = nix-command flakes";
   };
 
-  #specialisation = {
-  #  external-display.configuration = {
-  #    system.nixos.tags = [ "external-display" ];
-  #    hardware.nvidia.prime.offload.enable = lib.mkForce false;
-  #    hardware.nvidia.powerManagement.enable = lib.mkForce false;
-  #  };
-  #};
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    amdgpuBusId = "PCI:4:00:0";
+    nvidiaBusId = "PCI:1:00:0";
+  };
 
-  #  systemd.services.nvidia-control-devices = {
-  #	  wantedBy = [ "multi-user.target" ];
-  #	  serviceConfig.ExecStart = "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
-  #  };
+  boot = {
+    #kernelParams = [ "nomodeset" ];
+    extraModulePackages = [
+      config.boot.kernelPackages.broadcom_sta
+      pkgs.linuxPackages.nvidia_x11
+    ];
+    # blacklistedKernelModules = [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
+    kernelModules = [ "wl" ];
+  };
 
 
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   boot.loader = {
-    efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      # efiSysMountPoint = "/boot/efi";
+    };
     grub = {
       enable = true;
       devices = [ "nodev" ];
       efiSupport = true;
       useOSProber = true;
+      # copyKernels = true;
+      # efiInstallAsRemovable = true;
+      # fsIdentifier = "label";
+      #splashImage = ./backgrounds/grub-nixos-3.png;
+      #splashMode = "stretch";
+      # extraEntries = ''
+      #   menuentry "Reboot" {
+      #     reboot
+      #   }
+      #   menuentry "Poweroff" {
+      #     halt
+      #   }
+      # '';
     };
   };
-
 
 
   # Set your time zone.
@@ -89,7 +95,7 @@ in
     enable = true;
 
     # Enable the X11 windowing system.
-    videoDrivers = [ "nvidia" "modesetting"];
+    videoDrivers = [ "nvidia" "amdgpu" ];
 
     # Configure keymap in X11
     layout = "us,fr";
@@ -121,6 +127,23 @@ in
   };
   services.gnome = {
     core-utilities.enable = false;
+  };
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+    extraPackages = with pkgs; [
+      swaylock
+      swayidle
+      wl-clipboard
+      mako # notification daemon
+      alacritty # Alacritty is the default terminal in the config
+      wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
+      wdisplays
+    ];
+    extraOptions = [
+      "--unsupported-gpu"
+    ];
   };
 
 
@@ -169,6 +192,7 @@ in
 
     # graphics
     nvidia-offload
+    linuxPackages.nvidia_x11
 
     # dev
     (import ./vim.nix)
@@ -203,7 +227,7 @@ in
   fonts = {
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts =  with pkgs; [
+    fonts = with pkgs; [
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -217,7 +241,7 @@ in
     hostName = "nixos"; # Define your hostname.
 
     # Pick only one of the below networking options.
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
     # Configure network proxy if necessary

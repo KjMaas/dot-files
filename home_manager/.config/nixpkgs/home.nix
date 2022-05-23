@@ -15,7 +15,7 @@ in
 
   fonts.fontconfig.enable = true;
 
-  # Home Manager needs a bit of information about you and the
+  # Home Manag#em needs a bit of information about you and the
   # paths it should manage.
   home = {
     username = "klaas";
@@ -24,7 +24,6 @@ in
     packages = with pkgs; [
       # 3D
       pkgsUnstable.blender
-      #blender
 
       # social media
       signal-desktop
@@ -32,13 +31,20 @@ in
 
       # base
       #arandr
+      gimp
+      inkscape
       imagemagick
       keepassxc
       brave
       #pcmanfm
       libsForQt5.dolphin
+      libsForQt5.dolphin-plugins
+      konsole
 
+      gparted
       # development
+      git
+      alacritty
       vscode
 
       pkgsUnstable.neovim
@@ -47,21 +53,14 @@ in
       nodejs
       cargo
 
+      etcher
+      stow
+
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
-      ## Sway-related packages swaylock
-      #swayidle
-      #wl-clipboard
-      #mako # notification daemon
-      #alacritty # Alacritty is the default terminal in the config
-      #wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
     ];
   };
 
-  #wayland.windowManager.sway = {
-  #  enable = true;
-  #  wrapperFeatures.gtk = true ;
-  #};
 
   #  programs.git = {
   #    enable = true;
@@ -114,7 +113,7 @@ in
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "vi-mode" "z"];
+      plugins = [ "git" "vi-mode" "z" ];
       theme = "robbyrussell";
     };
 
@@ -126,6 +125,16 @@ in
 
   services = {
     flameshot.enable = true;
+  };
+
+
+  # theme-ing
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
   };
 
 

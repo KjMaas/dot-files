@@ -397,7 +397,8 @@ cursor:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /bin/zsh
+  # program: /bin/zsh
+  program: /home/klaasjan/.nix-profile/bin/zsh
   args:
     - --login
 

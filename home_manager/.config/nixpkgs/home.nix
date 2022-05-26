@@ -18,43 +18,41 @@ in
   # Home Manag#em needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "klaas";
-    homeDirectory = "/home/klaas";
+    username = "klaasjan";
+    homeDirectory = "/home/klaasjan";
 
     packages = with pkgs; [
       # 3D
-      pkgsUnstable.blender
+      #pkgsUnstable.blender
 
       # social media
-      signal-desktop
-      discord
+      #signal-desktop
+      #discord
 
       # base
       #arandr
-      gimp
-      inkscape
-      imagemagick
-      keepassxc
-      brave
+      #gimp
+      #inkscape
+      #imagemagick
+      #keepassxc
+      #brave
       #pcmanfm
-      libsForQt5.dolphin
-      libsForQt5.dolphin-plugins
-      konsole
+      #gparted
 
-      gparted
       # development
-      git
-      alacritty
-      vscode
+      #alacritty
+      #vscode
 
-      pkgsUnstable.neovim
-      python39Packages.pip
-      nodePackages.npm
-      nodejs
-      cargo
+      #pkgsUnstable.neovim
+      #python39Packages.pip
+      #nodePackages.npm
+      #nodejs
+      #cargo
 
-      etcher
-      stow
+      #etcher
+      stow                      # Simlinking on steroids!
+      nix                       # Most Powerful package manager ever!!!
+      direnv                    # A shell extension that manages your environment
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
@@ -62,14 +60,8 @@ in
   };
 
 
-  #  programs.git = {
-  #    enable = true;
-  #    userName = "Yasuaki Kudo";
-  #    userEmail = "yasu@yasuaki.com";
-  #  };
-
   programs.neovim = {
-    enable = false;
+    enable = true;
     plugins = [
       pkgs.vimPlugins.vim-airline
       pkgs.vimPlugins.vim-nix
@@ -87,10 +79,37 @@ in
 
 
   home.sessionVariables = { EDITOR = "nvim"; };
-  #home.sessionPath = [ "~/.local/bin/foo" ];
-  #xsession.enable = true;  
+  home.sessionPath = [ "~/.profile" ];
 
+  xsession = {
+    enable = false;
 
+    windowManager.i3 = {
+      enable = false;
+      config = let mod = "Mod4"; in
+        {
+          fonts = [ "DejaVu Sans 12" ];
+          modifier = mod;
+          keybindings = pkgs.lib.mkOptionDefault {
+            "${mod}+m" = "exec ${pkgs.i3lock}/bin/i3lock -n -c 000000";
+          };
+        };
+    };
+  };
+
+  programs.git = {
+    enable = false;
+    userName = "KjMaas";
+    userEmail = "klaasjan.maas@laposte.net";
+    aliases = {
+      st = "status";
+    };
+  };
+
+  programs.bash = {
+    enable = false;
+
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -109,28 +128,45 @@ in
           sha256 = "0w8x5ilpwx90s2s2y56vbzq92ircmrf0l5x8hz4g1nx3qzawv6af";
         };
       }
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.5.0";
+          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        };
+      }
     ];
 
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "vi-mode" "z" ];
-      theme = "robbyrussell";
+      theme = "robbyrussell-nixified";
     };
 
+    initExtra = ''
+      # enable nix commands
+      . /home/klaasjan/.nix-profile/etc/profile.d/nix.sh
+
+      # enable direnv hooks
+      eval "$(direnv hook zsh)"
+    '';
     envExtra = ''
-      export PATH="$PATH:$HOME/.local/bin"
+      export PATH="$PATH:$HOME/.local/bin" # needed to use lvim
     '';
   };
 
 
-  services = {
-    flameshot.enable = true;
-  };
+  # services = {
+  #   flameshot.enable = true;
+  # };
 
 
   # theme-ing
   gtk = {
-    enable = true;
+    enable = false;
     theme = {
       name = "Materia-dark";
       package = pkgs.materia-theme;

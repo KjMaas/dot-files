@@ -17,12 +17,14 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../sway/sway.nix
   ];
 
   nixpkgs.config = {
     allowUnfree = true;
-    cudaSupport = true;
+    cudaSupport = false;
   };
+
   hardware.enableAllFirmware = true;
 
   nix = {
@@ -36,6 +38,11 @@ in
     nvidiaBusId = "PCI:1:00:0";
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
+
   boot = {
     #kernelParams = [ "nomodeset" ];
     extraModulePackages = [
@@ -43,6 +50,7 @@ in
       pkgs.linuxPackages.nvidia_x11
     ];
     # blacklistedKernelModules = [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
+    blacklistedKernelModules = [ "nouveau" ];
     kernelModules = [ "wl" ];
   };
 
@@ -52,7 +60,7 @@ in
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
-      # efiSysMountPoint = "/boot/efi";
+      efiSysMountPoint = "/boot/efi";
     };
     grub = {
       enable = true;
@@ -95,7 +103,7 @@ in
     enable = true;
 
     # Enable the X11 windowing system.
-    videoDrivers = [ "nvidia" "amdgpu" ];
+    videoDrivers = [ "nvidia" "amdgpu"];
 
     # Configure keymap in X11
     layout = "us,fr";
@@ -111,40 +119,43 @@ in
 
   # Use Gnome desktop manager
   services.xserver = {
-    autorun = true;
 
     desktopManager = {
       xterm.enable = false;
-      gnome.enable = true;
-    }; # desktopManager
+      gnome.enable = false;
+    };
 
     displayManager = {
+      lightdm.enable = false;
       gdm = {
-        enable = true;
+        enable = false;
         wayland = true;
       };
-    }; # displayManager 
+    };
   };
   services.gnome = {
-    core-utilities.enable = false;
+    core-utilities.enable = true;
   };
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true; # so that gtk works properly
-    extraPackages = with pkgs; [
-      swaylock
-      swayidle
-      wl-clipboard
-      mako # notification daemon
-      alacritty # Alacritty is the default terminal in the config
-      wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
-      wdisplays
-    ];
-    extraOptions = [
-      "--unsupported-gpu"
-    ];
-  };
+ # configure backlight
+ programs.light.enable = true;
+
+#  programs.sway = {
+#    enable = true;
+#    wrapperFeatures.gtk = true; # so that gtk works properly
+#    extraPackages = with pkgs; [
+#      swaylock
+#      swayidle
+#      wl-clipboard
+#      mako # notification daemon
+#      alacritty # Alacritty is the default terminal in the config
+#      wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
+#      wdisplays
+#    ];
+#    extraOptions = [
+#      "--unsupported-gpu"
+#    ];
+#  };
 
 
   # sync with Microsoft OneDrive
@@ -154,7 +165,11 @@ in
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ hplip ];
+    drivers = with pkgs; [ 
+      hplip                       # Print, scan and fax HP drivers for Linux
+#      hplipWithPlugin             # Print, scan and fax HP drivers for Linux
+#      python39Packages.distro     # Linux Distribution - a Linux OS platform information API.
+    ];
   };
 
   programs.system-config-printer.enable = true;
@@ -167,9 +182,10 @@ in
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    audio.enable =true;
     alsa = {
       enable = true;
-      support32Bit = true;
+      #support32Bit = true;
     };
     pulse.enable = true;
     jack.enable = true;
@@ -179,7 +195,7 @@ in
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.klaas = {
+  users.users.klaasjan = {
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "audio" "video" ]; # Enable ‘sudo’ for the user.
@@ -195,18 +211,21 @@ in
     linuxPackages.nvidia_x11
 
     # dev
-    (import ./vim.nix)
+    vim
     git
     alacritty
 
     # utilities
-    wget
-    htop
-    pciutils
-    lshw
-    unzip
-    tree
+    bash
     bat
+    htop
+    jq              # A lightweight and flexible command-line JSON processor
+    lshw
+    nmap            # Utility for network discovery and security auditing
+    pciutils
+    tree
+    unzip
+    wget
 
     gnumake
     gcc

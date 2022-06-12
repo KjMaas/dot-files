@@ -1,10 +1,13 @@
 $1 &
 pid="$!"
 
+echo $pid
+echo $1
 # Wait for the window to open and grab its window ID
 winid=''
 while : ; do
     winid=$(wmctrl -lp | awk -vpid=$pid '$3==pid {print $1; exit}')
+    echo $winid
     [[ -z "${winid}" ]] || break
 done
 
@@ -12,10 +15,10 @@ done
 wmctrl -ia "${winid}"
 
 # Make it float
-i3-msg floating enable > /dev/null;
+swaymsg floating enable > /dev/null;
 
 # Move it to the center for good measure
-i3-msg move position center > /dev/null;
+swaymsg move position center > /dev/null;
 
 # Wait for the application to quit
 wait "${pid}";

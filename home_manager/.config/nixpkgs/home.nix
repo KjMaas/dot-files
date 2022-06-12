@@ -6,7 +6,9 @@ let
     cudaSupport = true;
   };
 
-  pkgsUnstable = import <nixpkgs-unstable> { config = baseConfig; };
+  pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
+
+  #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
 
 in
 {
@@ -18,8 +20,8 @@ in
   # Home Manag#em needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "klaas";
-    homeDirectory = "/home/klaas";
+    username = "klaasjan";
+    homeDirectory = "/home/klaasjan";
 
     packages = with pkgs; [
       # 3D
@@ -28,32 +30,45 @@ in
       # social media
       signal-desktop
       discord
-
+      
+      (callPackage ~/Documents/lvim/default.nix { })
       # base
-      #arandr
-      gimp
+      #libreoffice-fresh-unwrapped	# Comprehensive, professional-quality productivity suite
+      gimp				# The GNU Image Manipulation Program
       inkscape
       imagemagick
+      flameshot
       keepassxc
       brave
-      #pcmanfm
-      libsForQt5.dolphin
-      libsForQt5.dolphin-plugins
+      #hplip                       	# Print, scan and fax HP drivers for Linux
+      #hplipWithPlugin             	# Print, scan and fax HP drivers for Linux
+      #python39Packages.distro     	# Linux Distribution - a Linux OS platform information API.
+      qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
+
+
+      xfce.thunar
+      gvfs
+
+      nnn
       konsole
 
+      rclone
+      rclone-browser
+
       gparted
+
       # development
       git
       alacritty
       vscode
 
-      pkgsUnstable.neovim
-      python39Packages.pip
-      nodePackages.npm
-      nodejs
-      cargo
+      #pkgsUnstable.neovim
+      #python39Packages.pip
+      #nodePackages.npm
+      #nodejs
+      #cargo
 
-      etcher
+      #etcher
       stow
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
@@ -69,7 +84,7 @@ in
   #  };
 
   programs.neovim = {
-    enable = false;
+    enable = true;
     plugins = [
       pkgs.vimPlugins.vim-airline
       pkgs.vimPlugins.vim-nix
@@ -123,9 +138,9 @@ in
   };
 
 
-  services = {
-    flameshot.enable = true;
-  };
+ # services = {
+ #   flameshot.enable = true;
+ # };
 
 
   # theme-ing

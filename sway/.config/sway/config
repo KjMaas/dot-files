@@ -1,22 +1,11 @@
-# Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
 
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Ressources:
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# https://i3wm.org/docs/userguide.html
-# https://www.youtube.com/watch?v=ARKIwOlazKI
-# font-awesome icons availlable @ https://fontawesome.com/cheatsheet/free/brands
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Display
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# --- doesn't work?! ---
-set $display DP1 # eDP1/HDMI1/HDMI2
-# --- doesn't work?! ---
-
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment WAYLAND_DISPLAY
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Theme
@@ -28,224 +17,64 @@ set $active-bg-color     #2090FF
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #999999
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
+
 # gaps
 gaps inner 5
 gaps outer 5
 # thin borders
 hide_edge_borders smart
-# default_border pixel 4
+default_border pixel 5
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Keyboard switch
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-exec_always --no-startup-id "setxkbmap -layout fr" #,us -variant ,phonetic_winkeys -option grp:alt_shift_toggle,compose:ralt"
+### Output configuration
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+#
+# Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
+output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output eDP-1 resolution 1920x1080 position 1920,0
+output HDMI-A-1 resolution 1920x1080 position 0,0
+#
+
+### Idle configuration
+#
+# Example configuration:
+#
+# TODO
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+         timeout 300 'swaylock-fancy' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock-fancy'
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# i3 config file (v4)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# set mod key to 'Win' key
-set $mod Mod4
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Font for window titles.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Will also be used by the bar unless a different font is used in the bar {} block below.
-font pango:System San Francisco 11
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Lock screen
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Network Manager
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Volume control
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Use pactl to adjust volume in PulseAudio.
-# set $refresh_i3status killall -SIGUSR1 i3status
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+ unmute && pkill -RTMIN+2 i3blocks"
-bindsym XF86AudioLowerVolume exec "amixer set Master 5%- unmute && pkill -RTMIN+2 i3blocks"
-bindsym XF86AudioMute exec "amixer -q set Master toggle && pkill -RTMIN+2 i3blocks"
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Backlight
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-# bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec brightnessctl s +5%
-bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-# righ mouse button+mod toggles floating
-bindsym --whole-window $mod+button3 floating toggle
-
-# start a terminal
-bindsym $mod+Return exec alacritty
-# start a floating terminal
-bindsym $mod+Shift+Return exec ~/dot-files/i3/scripts/focus_window.sh "alacritty -t /!\Delete-Me/!\ "
-for_window [title="Alacritty"] border pixel 4
-
-# kill focused window
-bindsym $mod+Shift+q kill
-# enable/disable mouse focus
-focus_follows_mouse no
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Program launcher
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "wofi"
-# bindcode $mod+40 exec "rofi -show"
-# bindcode $mod+c exec "wofi -modi drun,run -show drun"
-
-# use skippy for a "splashed window view"
-bindsym $mod+Tab exec skippy-xd
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# split in horizontal orientation
-bindsym $mod+shift+v split h
-# split in vertical orientation
-bindsym $mod+v split v
-
-# change container layout (stacked, tabbed, toggle split, fullscreen)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+f fullscreen toggle
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-# focus the child container
-bindsym $mod+shift+a focus child
-
-# window-title alignment
-title_align center
-
-# remember where you come from
-workspace_auto_back_and_forth yes
-# switch between the current and the previously focused one
-bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth
-
-# read 1 character and mark the current window with this character
-bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
-# read 1 character and go to the window with the character
-bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# managing workspaces
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# workspace_layout default|stacking|tabbed
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r 
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-
+# TODO
 # lockscreen
-set $Locker ~/dot-files/i3/i3lock/lock_i3.sh
+set $Locker swaylock-fancy
 bindsym $mod+shift+x exec $Locker && sleep 0.5
 
 bindsym $mod+Escape mode $sysmenu
 set $sysmenu "System: [l]ock log[o]ut [h]ibernate  [s]uspend  [S]hutdown  re[b]oot"
 mode $sysmenu {
     bindsym l       exec --no-startup-id $Locker, mode "default"
-    bindsym o       exit
+
     bindsym s       exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
     bindsym h       exec --no-startup-id $Locker && systemctl hibernate, mode "default"
@@ -256,24 +85,193 @@ mode $sysmenu {
 }
 
 
-bindsym $mod+Shift+Tab mode $wsmenu
-set $wsmenu "WS[1]: tmp  WS[2]: work  WS[3]: terminal  WS[4]: NotAssigned  WS[5]: NotAssigned  WS[6]: 666  WS[7]: NotAssigned  WS[8]: Campus  WS[9]: Blender  WS[10]: config"
-mode $wsmenu {
-    bindsym a exec --no-startup-id ~/dot-files/i3/workspaces/WS_1.sh , mode "default"
-    bindsym z exec --no-startup-id ~/dot-files/i3/workspaces/WS_2.sh , mode "default
-    bindsym e exec --no-startup-id ~/dot-files/i3/workspaces/WS_3.sh , mode "default
-    bindsym r exec --no-startup-id ~/dot-files/i3/workspaces/WS_4.sh , mode "default
-    bindsym t exec --no-startup-id ~/dot-files/i3/workspaces/WS_5.sh , mode "default
-    bindsym y exec --no-startup-id ~/dot-files/i3/workspaces/WS_6.sh , mode "default
-    bindsym u exec --no-startup-id ~/dot-files/i3/workspaces/WS_7.sh , mode "default
-    bindsym i exec --no-startup-id ~/dot-files/i3/workspaces/WS_8.sh , mode "default
-    bindsym o exec --no-startup-id ~/dot-files/i3/workspaces/WS_9.sh , mode "default
-    bindsym p exec --no-startup-id ~/dot-files/i3/workspaces/WS_10.sh, mode "default
 
-    bindsym Tab    mode "default"
+### Input configuration
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+# Touchpad
+input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+}
+# Keyboard
+ input "5426:624:Razer_Razer_Blade_Keyboard" {
+    xkb_layout "us,fr"
+    xkb_options grp:win_space_toggle,compose:caps
+}
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+    bindsym $mod+m exec ./../wofi/window-select.sh
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # split in horizontal orientation
+    bindsym $mod+shift+v splith
+    # split in vertical orientation
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # focus the parent container
+    bindsym $mod+a focus parent
+    # focus the child container
+    bindsym $mod+shift+a focus child
+
+    # window-title alignment
+    title_align center
+
+    # remember where you come from
+    workspace_auto_back_and_forth yes
+
+    # switch between the current and the previously focused one
+    bindsym $mod+b workspace back_and_forth
+    bindsym $mod+Shift+b move container to workspace back_and_forth
+
+
+
+
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+
+# Resizing containers:
+#
+bindsym $mod+r mode "resize"
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+
+exec waybar
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
+
+include /etc/sway/config.d/*
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # window colors
@@ -286,13 +284,18 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color     
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# status bar
+# Backlight
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# use polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 
-# # kill i3blocks process to refresh it (caps-lock toggle)
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Volume control
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bindsym XF86AudioRaiseVolume exec 'pamixer -i --allow-boost 2'
+bindsym XF86AudioLowerVolume exec 'pamixer -d 2'
+bindsym XF86AudioMute exec 'pamixer -t'
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # custom keybindings 
@@ -302,6 +305,7 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 # thunar
 bindsym $mod+shift+f exec thunar
 
+# TODO
 # brave profiles
 set $brave "[i]ncognito  [p]ersonal  [f]loki  [c]ampus"
 bindsym $mod+shift+w mode $brave
@@ -319,63 +323,25 @@ mode $brave {
 # launch flameshot
 exec --no-startup-id flameshot
 
-# bindsym $mod+p title_format "Important | %title"
 
+# sceenshots and screen-recording
+####
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# other stuff 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# custom walpaper
-exec_always --no-startup-id feh --randomize --bg-scale ~/Documents/Blender/bgnd/renders/*
+# Take a screenshot of the whole screen
+# grim /tmp/screenshot.png
 
-# add extra monitors with "xrandr" (install graphical lib 'arandr')
-# exec_always xrandr <configs>
+# Take a screenshot of the current window
+# grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" screenshot.png
 
-# lauch polkit authentification (usefull for out-of-CLI authentification)
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# Take a screenshot of a part of the screen
+# grim -g "$(slurp)" screenshot.png
 
-# screen transparency (usefull for Zoom)
-exec --no-startup-id xcompmgr -c -l0 -t0 -r0 -o.00
+# output it to the clipboard
+# grim -g "$(slurp)" - | wl-copy
 
-# launch screen sweetness (smooth transitions,...)
-# exec --no-startup-id picom 
+# Video capture of the entire screen
+# grim -g "$(slurp)" - | wl-copy
 
-# location provider (used for redshift)
-# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+# Partial capture
+# wf-recorder -g "$(slurp)"
 
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# managing additional monitors
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# assign worspaces to monitors (run xrandr --listmonitors or --current)
-# workspace 3 output primary
-# workspace 5 output DP1
-
-# Moving workspaces between screens 
-bindsym $mod+p move workspace to output right
-bindsym $mod+shift+p move workspace to output left
-
-# monitor mode
-set $monitor "[a]randr [c]opy  [r]ight  [l]eft [t]emp"
-bindsym $mod+shift+m mode $monitor
-mode $monitor {
-    bindsym a       mode "default"; exec --no-startup-id arandr
-    bindsym c       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --same-as eDP-1
-    bindsym r       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1
-    bindsym l       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1
-    bindsym t       mode "default"; exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1
-    bindsym Escape  mode "default"
-
-}
-# make arandr a floating window
-for_window [class="Arandr" instance="arandr"] floating enable
-
-
-exec --no-startup-id gnome-settings-daemon
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# memo
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# exec --no-startup-id i3-msg 'workspace $ws1; exec brave --incognito; workspace $ws9; title_format "Important | %title"'
-# save layout:
-# i3-save-tree --workspace 1 > ~/.i3/workspace-1.json

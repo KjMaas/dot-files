@@ -6,14 +6,14 @@ let
     cudaSupport = true;
   };
 
+  # Import config files
+  # nvimsettings = import ./nvim/neovim.nix;
+
   pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
   #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
 
 in
 {
-  imports = [
-    ../../derivations/neovim.nix
-  ];
 
   nixpkgs.config = baseConfig;
 
@@ -30,22 +30,22 @@ in
       pkgsUnstable.blender		# Da best!
 
       # social media
-      signal-desktop			# Private, simple, and secure messenger
-      discord				# All-in-one cross-platform voice and text chat for gamers
-      mpv				# General-purpose media player, fork of MPlayer and mplayer2
+      signal-desktop	# Private, simple, and secure messenger
+      discord			   	# All-in-one cross-platform voice and text chat for gamers
+      mpv	      			# General-purpose media player, fork of MPlayer and mplayer2
       
       # base
-      brave				# Privacy-oriented browser for Desktop and Laptop computers
-      drawio				# A desktop application for creating diagrams
-      gimp				# The GNU Image Manipulation Program
+      brave			    	# Privacy-oriented browser for Desktop and Laptop computers
+      drawio			   	# A desktop application for creating diagrams
+      gimp			    	# The GNU Image Manipulation Program
       inkscape				# Vector graphics editor
       imagemagick			# A software suite to create, edit, compose, or convert bitmap images
       keepassxc				# Offline password manager with many features.
-      libreoffice-qt			# Comprehensive, professional-quality productivity suite
-					# /!\ " buildPhase completed in 50 minutes 17 seconds "
-      pdfsam-basic			# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
-      zathura				# A highly customizable and functional PDF viewer
-      light				# GNU/Linux application to control backlights
+      libreoffice-qt	# Comprehensive, professional-quality productivity suite
+				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
+      pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
+      zathura		    	# A highly customizable and functional PDF viewer
+      light			    	# GNU/Linux application to control backlights
       gammastep				# Screen color temperature manager
       #flameshot			# Powerful yet simple to use screenshot software
 
@@ -53,37 +53,31 @@ in
 
       xfce.thunar			# Xfce file manager
       xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
-      gvfs				# Virtual Filesystem support library
+      gvfs	    			# Virtual Filesystem support library
 
-      nnn				# Small ncurses-based file browser forked from noice
+      nnn		      		# Small ncurses-based file browser forked from noice
 
-      rclone				# Command line program to sync files and directories to and from major cloud storage
-      rclone-browser			# Graphical Frontend to Rclone written in Qt
-      #etcher				# Flash OS images to SD cards and USB drives, safely and easily
-      stow				# Symlinking on steroids!
+      rclone			  	# Command line program to sync files and directories to and from major cloud storage
+      rclone-browser	# Graphical Frontend to Rclone written in Qt
+      #etcher			  	# Flash OS images to SD cards and USB drives, safely and easily
+      stow				    # Symlinking on steroids!
 
       #gparted				# Graphical disk partitioning tool
 
       # development
-      git				# Distributed version control system
-      tig				# Text-mode interface for git
+      git	      			# Distributed version control system
+      tig			      	# Text-mode interface for git
       alacritty				# A cross-platform, GPU-accelerated terminal emulator
       #pycritty				# A CLI tool for changing your alacritty configuration on the fly
-      vscode				# Open source source code editor developed by Microsoft
+      vscode			  	# Open source source code editor developed by Microsoft
 
 
-      (import ../../derivations/lvim.nix)
+      # Language servers for neovim; change these to whatever languages you code in
+      # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
+      rnix-lsp
+      sumneko-lua-language-server
 
-      (callPackage ~/Documents/lvim/default.nix { })
-      #pkgsUnstable.neovim
-      #python39Packages.pip
-      #nodePackages.npm
-      #nodejs
-      #cargo
 
-      #hplip                       	# Print, scan and fax HP drivers for Linux
-      #hplipWithPlugin             	# Print, scan and fax HP drivers for Linux
-      #python39Packages.distro     	# Linux Distribution - a Linux OS platform information API.
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
@@ -98,10 +92,11 @@ in
   #  };
 
 
-  #home.sessionVariables = { EDITOR = "vim"; };
+  home.sessionVariables = { EDITOR = "lvim"; };
   #home.sessionPath = [ "~/.local/bin/foo" ];
   #xsession.enable = true;  
 
+  # programs.neovim = nvimsettings pkgs;
 
   programs.zsh = {
     enable = true;
@@ -130,15 +125,22 @@ in
     };
 
     envExtra = ''
+      # this is where lvim binary is stored
       export PATH="$PATH:$HOME/.local/bin"
       
-      # required for npm (solves permissions errors when trying to install packages globally)
-      export PATH=~/.npm-packages/bin:$PATH
-      export NODE_PATH=~/.npm-packages/lib/node_modules
+      # # required for npm (solves permissions errors when trying to install packages globally)
+      # export PATH=~/.npm-packages/bin:$PATH
+      # export NODE_PATH=~/.npm-packages/lib/node_modules
     '';
 
   };
 
+  # Direnv
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+  };
 
   services = {
     flameshot.enable = true;	# Powerful yet simple to use screenshot software

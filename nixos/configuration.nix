@@ -18,6 +18,8 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../sway/sway.nix
+     # Configure neovim
+    ../home_manager/.config/nixpkgs/nvim/nvim.nix
   ];
 
   nixpkgs.config = {
@@ -201,6 +203,7 @@ in
     vim             # The most popular clone of the VI editor
     git             # Distributed version control system
     alacritty       # A cross-platform, GPU-accelerated terminal emulator
+    shellcheck      # Shell script analysis tool
 
     # utilities
     bash

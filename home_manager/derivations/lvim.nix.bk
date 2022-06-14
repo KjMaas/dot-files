@@ -1,0 +1,59 @@
+with import <nixpkgs> {};
+# {
+#   # neovim-unwrapped
+# # wrapNeovim,
+# import <nixpkgs> {},
+# fetchFromGitHub,
+# stdenv,
+# makeWrapper,
+# lib,
+# ripgrep,
+# git,
+# fzf
+# }:
+
+let
+  # nvim-customized = wrapNeovim neovim-unwrapped {};
+in
+stdenv.mkDerivation rec {
+  pname = "lunarvim";
+  version = "0.0.1";
+
+  src = fetchFromGitHub {
+    owner = "LunarVim";
+    repo = "LunarVim";
+    rev = "238bbf18ac4e35152be06736c75e94a81e3382e8";
+    sha256 = "0yfr3vh8p1s9wy21s6bgpp6kp6s9pqlb6k66s76sa22vz4sjiyxb";
+    # rev = "5d964c58848dde02bf04ce67bffe2398d2bbf1a1";
+    # sha256 = "sha256-9m9GLT3+zjHAD0Y9+G7SqWkUXvbd+uuQ2jYHObNWAo4=";
+  };
+
+  # --no-install-dependencies
+  # nativeBuildInputs = [ makeWrapper nvim-customized ];
+  # buildInputs = [ nvim-customized ];
+  buildInputs = [ git neovim ];
+
+  buildPhase = ''
+  echo """
+        STARTING BUILD PHASE
+  """
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/bin
+    cp -r $(pwd) $out/lvim
+    nvim --version
+
+    chmod +x "$out/lvim/utils/installer/install.sh"
+    bash -s  $out/lvim/utils/installer/install.sh --local --no-install-dependencies
+
+    # export shim="$out/lvim/utils/bin/lvim"
+    # substituteInPlace "$shim" --replace "exec nvim" "exec ${neovim}/bin/nvim"
+    # chmod +x "$shim"
+    # makeWrapper "$shim" "$out/bin/lvim" \
+      # --set LUNARVIM_RUNTIME_DIR "$out" \
+      # --prefix PATH : ${lib.makeBinPath [ fzf git ripgrep ]}
+    runHook postInstall
+  '';
+}

@@ -28,7 +28,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -277,22 +277,22 @@ include /etc/sway/config.d/*
 # window colors
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                       border              background         text                   indicator
-client.focused          $bg-color           $bg-color           $text-color           #98ff99
-client.unfocused        $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
-client.focused_inactive $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
-client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           #98ff99
+#client.focused          $bg-color           $bg-color           $text-color           #98ff99
+#client.unfocused        $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
+#client.focused_inactive $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
+#client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           #98ff99
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Backlight
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -T 1.1
+bindsym XF86MonBrightnessDown exec light -T 0.9
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Volume control
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bindsym XF86AudioRaiseVolume exec 'pamixer -i --allow-boost 2'
+bindsym XF86AudioRaiseVolume exec 'pamixer -i 2'
 bindsym XF86AudioLowerVolume exec 'pamixer -d 2'
 bindsym XF86AudioMute exec 'pamixer -t'
 
@@ -320,8 +320,16 @@ mode $brave {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # startup
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # launch flameshot
-exec --no-startup-id flameshot
+#exec --no-startup-id flameshot
+
+# gammastep
+exec gammastep-indicator &
+
+# Notifications
+bindsym Control+Space       exec makoctl dismiss
+bindsym Control+Shift+Space exec makoctl dismiss --all
 
 
 # sceenshots and screen-recording

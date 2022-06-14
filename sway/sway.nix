@@ -17,8 +17,11 @@
 
   programs.sway = {
     enable = true;
+    wrapperFeatures.gtk = true; # so that gtk works properly
+
     extraPackages = with pkgs; [
       dmenu-wayland   # dmenu for wayland-compositors
+      foot            # A fast, lightweight and minimalistic Wayland terminal emulator
       swaylock-fancy  # This is an swaylock bash script with bluring and lock img
       swaylock        # Screen locker for Wayland
       swayidle        # Idle management daemon for Wayland
@@ -29,7 +32,7 @@
       pamixer         # Pulseaudio command line mixer
       slurp           # Select a region in a Wayland compositor
       rofi-wayland    # Window switcher, run dialog and dmenu replacement for Wayland
-      rofi-emoji      # An emoji selector plugin for Rofi
+      #rofi-emoji      # An emoji selector plugin for Rofi
       waybar          # Highly customizable Wayland bar for Sway and Wlroots based compositors
       wofi            # A launcher/menu program for wlroots based wayland compositors
       wofi-emoji      # Simple emoji selector for Wayland using wofi and wl-clipboard
@@ -37,7 +40,7 @@
       wf-recorder     # Utility program for screen recording of wlroots-based compositors
       wdisplays       # A graphical application for configuring displays in Wayland compositors
       wmctrl          # CLI tool to interact with EWMH/NetWM compatible X Window Managers
-      wlsunset        # Day/night gamma adjustments for Wayland
+      #wlsunset        # Day/night gamma adjustments for Wayland
       xwayland        # An X server for interfacing X11 apps with the Wayland protocol
 
       (python38.withPackages(ps: with ps; [ i3pystatus keyring ]))
@@ -71,10 +74,10 @@
     };
   };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.defaultSession = "sway";
+  #services.xserver.enable = true;
+  #services.xserver.displayManager.defaultSession = "sway";
   #services.xserver.displayManager.sddm.enable = true;
-  services.xserver.libinput.enable = true;
+  #services.xserver.libinput.enable = true;
 
   # share screen with wlroots-based compositors
   xdg.portal.wlr.enable = true;

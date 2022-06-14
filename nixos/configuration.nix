@@ -100,8 +100,6 @@ in
 
 
   services.xserver = {
-    enable = true;
-
     # Enable the X11 windowing system.
     videoDrivers = [ "nvidia" "amdgpu"];
 
@@ -117,15 +115,22 @@ in
   };
 
 
-  # Use Gnome desktop manager
+  # Desktop Manager
   services.xserver = {
+    enable = true;
 
     desktopManager = {
       xterm.enable = false;
       gnome.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
     };
 
     displayManager = {
+      defaultSession = "xfce+sway";
       lightdm.enable = false;
       gdm = {
         enable = false;
@@ -134,32 +139,14 @@ in
     };
   };
   services.gnome = {
-    core-utilities.enable = true;
+    core-utilities.enable = false;
   };
 
  # configure backlight
  programs.light.enable = true;
 
-#  programs.sway = {
-#    enable = true;
-#    wrapperFeatures.gtk = true; # so that gtk works properly
-#    extraPackages = with pkgs; [
-#      swaylock
-#      swayidle
-#      wl-clipboard
-#      mako # notification daemon
-#      alacritty # Alacritty is the default terminal in the config
-#      wofi # Dmenu is the default in the config but i recommend wofi since its wayland native
-#      wdisplays
-#    ];
-#    extraOptions = [
-#      "--unsupported-gpu"
-#    ];
-#  };
-
-
-  # sync with Microsoft OneDrive
-  services.onedrive.enable = true;
+ # sync with Microsoft OneDrive
+ services.onedrive.enable = true;
 
 
   # Enable CUPS to print documents.
@@ -204,33 +191,35 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    home-manager
+    home-manager    # A user environment configurator
 
     # graphics
     nvidia-offload
     linuxPackages.nvidia_x11
 
     # dev
-    vim
-    git
-    alacritty
+    vim             # The most popular clone of the VI editor
+    git             # Distributed version control system
+    alacritty       # A cross-platform, GPU-accelerated terminal emulator
 
     # utilities
     bash
-    bat
-    htop
+    bat             # A cat(1) clone with syntax highlighting and Git integration
+    htop            # An interactive process viewer
+    htop-vim        # An interactive process viewer for Linux, with vim-style keybindings
     jq              # A lightweight and flexible command-line JSON processor
-    lshw
+    lshw            # Provide detailed information on the hardware configuration of the machine
     nmap            # Utility for network discovery and security auditing
-    pciutils
-    tree
-    unzip
-    wget
+    neofetch        # A fast, highly customizable system info script
+    pciutils        # Programs for inspecting and manipulating configuration of PCI devices
+    tree            # Command to produce a depth indented directory listing
+    unzip           # An extraction utility for archives compressed in .zip format
+    wget            # Tool for retrieving files using HTTP, HTTPS, and FTP
 
-    gnumake
-    gcc
+    gnumake         # A tool to control the generation of non-source files from sources
+    gcc             # GNU Compiler Collection, version 11.3.0 (wrapper script)
 
-    stow
+    stow            # Simlinking farm on steroids!
 
   ];
 

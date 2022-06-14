@@ -7,17 +7,19 @@ let
   };
 
   pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
-
   #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
 
 in
 {
+  imports = [
+    ../../derivations/neovim.nix
+  ];
 
   nixpkgs.config = baseConfig;
 
   fonts.fontconfig.enable = true;
 
-  # Home Manag#em needs a bit of information about you and the
+  # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
     username = "klaasjan";
@@ -25,51 +27,63 @@ in
 
     packages = with pkgs; [
       # 3D
-      pkgsUnstable.blender
+      pkgsUnstable.blender		# Da best!
 
       # social media
-      signal-desktop
-      discord
+      signal-desktop			# Private, simple, and secure messenger
+      discord				# All-in-one cross-platform voice and text chat for gamers
+      mpv				# General-purpose media player, fork of MPlayer and mplayer2
       
-      (callPackage ~/Documents/lvim/default.nix { })
       # base
-      #libreoffice-fresh-unwrapped	# Comprehensive, professional-quality productivity suite
+      brave				# Privacy-oriented browser for Desktop and Laptop computers
+      drawio				# A desktop application for creating diagrams
       gimp				# The GNU Image Manipulation Program
-      inkscape
-      imagemagick
-      flameshot
-      keepassxc
-      brave
-      #hplip                       	# Print, scan and fax HP drivers for Linux
-      #hplipWithPlugin             	# Print, scan and fax HP drivers for Linux
-      #python39Packages.distro     	# Linux Distribution - a Linux OS platform information API.
+      inkscape				# Vector graphics editor
+      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
+      keepassxc				# Offline password manager with many features.
+      libreoffice-qt			# Comprehensive, professional-quality productivity suite
+					# /!\ " buildPhase completed in 50 minutes 17 seconds "
+      pdfsam-basic			# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
+      zathura				# A highly customizable and functional PDF viewer
+      light				# GNU/Linux application to control backlights
+      gammastep				# Screen color temperature manager
+      #flameshot			# Powerful yet simple to use screenshot software
+
       qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
 
+      xfce.thunar			# Xfce file manager
+      xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
+      gvfs				# Virtual Filesystem support library
 
-      xfce.thunar
-      gvfs
+      nnn				# Small ncurses-based file browser forked from noice
 
-      nnn
-      konsole
+      rclone				# Command line program to sync files and directories to and from major cloud storage
+      rclone-browser			# Graphical Frontend to Rclone written in Qt
+      #etcher				# Flash OS images to SD cards and USB drives, safely and easily
+      stow				# Symlinking on steroids!
 
-      rclone
-      rclone-browser
-
-      gparted
+      #gparted				# Graphical disk partitioning tool
 
       # development
-      git
-      alacritty
-      vscode
+      git				# Distributed version control system
+      tig				# Text-mode interface for git
+      alacritty				# A cross-platform, GPU-accelerated terminal emulator
+      #pycritty				# A CLI tool for changing your alacritty configuration on the fly
+      vscode				# Open source source code editor developed by Microsoft
 
+
+      (import ../../derivations/lvim.nix)
+
+      (callPackage ~/Documents/lvim/default.nix { })
       #pkgsUnstable.neovim
       #python39Packages.pip
       #nodePackages.npm
       #nodejs
       #cargo
 
-      #etcher
-      stow
+      #hplip                       	# Print, scan and fax HP drivers for Linux
+      #hplipWithPlugin             	# Print, scan and fax HP drivers for Linux
+      #python39Packages.distro     	# Linux Distribution - a Linux OS platform information API.
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
@@ -79,29 +93,12 @@ in
 
   #  programs.git = {
   #    enable = true;
-  #    userName = "Yasuaki Kudo";
-  #    userEmail = "yasu@yasuaki.com";
+  #    userName = "Klaasjan Maas";
+  #    userEmail = "klaasjan.maas@laposte.net";
   #  };
 
-  programs.neovim = {
-    enable = true;
-    plugins = [
-      pkgs.vimPlugins.vim-airline
-      pkgs.vimPlugins.vim-nix
-    ];
-    #settings = { ignorecase = true; };
-    extraConfig = ''
-      set mouse=a
-      set number
-      set relativenumber
-      set ignorecase
-      set pastetoggle=<F2>
-      set clipboard+=unnamedplus
-    '';
-  };
 
-
-  home.sessionVariables = { EDITOR = "nvim"; };
+  #home.sessionVariables = { EDITOR = "vim"; };
   #home.sessionPath = [ "~/.local/bin/foo" ];
   #xsession.enable = true;  
 
@@ -134,13 +131,18 @@ in
 
     envExtra = ''
       export PATH="$PATH:$HOME/.local/bin"
+      
+      # required for npm (solves permissions errors when trying to install packages globally)
+      export PATH=~/.npm-packages/bin:$PATH
+      export NODE_PATH=~/.npm-packages/lib/node_modules
     '';
+
   };
 
 
- # services = {
- #   flameshot.enable = true;
- # };
+  services = {
+    flameshot.enable = true;	# Powerful yet simple to use screenshot software
+  };
 
 
   # theme-ing

@@ -109,7 +109,9 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "light -T 1.1",
+        "on-scroll-down": "light -T 0.9"
     },
 
     "battery": {

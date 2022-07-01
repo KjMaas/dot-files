@@ -11,7 +11,6 @@ let
 
   pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
   #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
-
 in
 {
 
@@ -28,11 +27,21 @@ in
     packages = with pkgs; [
       # 3D
       pkgsUnstable.blender		# Da best!
+      f3d             # Fast and minimalist 3D viewer using VTK
+      foxotron        # General purpose model viewer
+      # assimp          # A library to import various 3D model formats
+
+     # (f3d.override { 
+      #  cmakeFlags = ["F3D_MODULE_ASSIMP=ON"];
+      #  }
+      # )
 
       # social media
-      signal-desktop	# Private, simple, and secure messenger
       discord			   	# All-in-one cross-platform voice and text chat for gamers
+      signal-desktop	# Private, simple, and secure messenger
+      whatsapp-for-linux		# Whatsapp desktop messaging app
       mpv	      			# General-purpose media player, fork of MPlayer and mplayer2
+      zoom-us         # zoom.us video conferencing application
       
       # base
       brave			    	# Privacy-oriented browser for Desktop and Laptop computers
@@ -43,11 +52,12 @@ in
       keepassxc				# Offline password manager with many features.
       libreoffice-qt	# Comprehensive, professional-quality productivity suite
 				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
+      mako            # A lightweight Wayland notification daemon
+
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
       zathura		    	# A highly customizable and functional PDF viewer
-      light			    	# GNU/Linux application to control backlights
-      gammastep				# Screen color temperature manager
       #flameshot			# Powerful yet simple to use screenshot software
+      qalculate-gtk   # The ultimate desktop calculator
 
       qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
 
@@ -57,18 +67,16 @@ in
 
       nnn		      		# Small ncurses-based file browser forked from noice
 
+      wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
       rclone			  	# Command line program to sync files and directories to and from major cloud storage
       rclone-browser	# Graphical Frontend to Rclone written in Qt
       #etcher			  	# Flash OS images to SD cards and USB drives, safely and easily
       stow				    # Symlinking on steroids!
 
-      #gparted				# Graphical disk partitioning tool
-
       # development
       git	      			# Distributed version control system
       tig			      	# Text-mode interface for git
-      alacritty				# A cross-platform, GPU-accelerated terminal emulator
-      #pycritty				# A CLI tool for changing your alacritty configuration on the fly
+      # alacritty				# A cross-platform, GPU-accelerated terminal emulator
       vscode			  	# Open source source code editor developed by Microsoft
 
 
@@ -76,8 +84,6 @@ in
       # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
       rnix-lsp
       sumneko-lua-language-server
-
-
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
@@ -95,8 +101,6 @@ in
   home.sessionVariables = { EDITOR = "lvim"; };
   #home.sessionPath = [ "~/.local/bin/foo" ];
   #xsession.enable = true;  
-
-  # programs.neovim = nvimsettings pkgs;
 
   programs.zsh = {
     enable = true;
@@ -125,6 +129,9 @@ in
     };
 
     envExtra = ''
+      # direnv hook
+      eval "$(direnv hook zsh)"
+
       # this is where lvim binary is stored
       export PATH="$PATH:$HOME/.local/bin"
       

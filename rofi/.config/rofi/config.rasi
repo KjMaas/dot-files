@@ -1,14 +1,6 @@
 configuration {
-    modi: [
-            drun
-            , window
-            , "finder:~/dot-files/rofi/.config/rofi/scripts/finder.sh"
-            , "test:~/dot-files/rofi/.config/rofi/scripts/test.sh"
-            /* , run, */
-            /* , ssh, */
-            /* , keys, */
-            /* , filebrowser, */
-    ];
+    modi: "drun,run,calc,ssh,emoji";
+    
     font: "mono 12";
 
     location: 6;
@@ -17,7 +9,7 @@ configuration {
     fixed-num-lines: true;
 
     show-icons: true;
-    terminal: "rofi-sensible-terminal";
+    terminal: "foot";
     /*	ssh-client: "ssh";*/
     /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
     /*	run-command: "{cmd}";*/
@@ -38,18 +30,19 @@ configuration {
 
     /* sort: false; */
     /* sorting-method: "normal"; */
-    /* case-sensitive: false; */
+    case-sensitive: false;
 
     cycle: true;
     sidebar-mode: true;
     hover-select: true;
+    fake-transparency: true;
 
     /*	eh: 1;*/
     /*	auto-select: false;*/
     /*	parse-hosts: false;*/
     /*	parse-known-hosts: true;*/
-    /*	combi-modi: "window,run";*/
-    /*	matching: "normal";*/
+    combi-modi: "drun, run, window";
+    matching: "fuzzy";
     /*	tokenize: true;*/
     /*	m: "-5";*/
     /*	filter: ;*/
@@ -72,14 +65,16 @@ configuration {
     /* application-fallback-icon: ; */
     /* pid: "/run/user/1000/rofi.pid"; */
 
-    /*	display-window: ;*/
+    display-window: "Windows ";
     /*	display-windowcd: ;*/
     /*	display-run: ;*/
     /*	display-ssh: ;*/
-    /*	display-drun: ;*/
+    display-drun: "Applications";
     /*	display-combi: ;*/
     /*	display-keys: ;*/
     /*	display-filebrowser: ;*/
+    display-calc: ">>>";
+    display-emoji: "\\ô/";
 
     /*	kb-primary-paste: "Control+V,Shift+Insert";*/
     /*	kb-secondary-paste: "Control+v,Insert";*/

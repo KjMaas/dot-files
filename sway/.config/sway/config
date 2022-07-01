@@ -4,8 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment WAYLAND_DISPLAY
+exec dbus-sway-environment
+exec configure-gtk
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Theme
@@ -29,10 +29,14 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term foot
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
+# set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
+set $menu rofi -show combi
+bindsym $mod+c exec rofi -show calc
+bindsym $mod+shift+e exec rofi -matching normal -show emoji
 
 # gaps
 gaps inner 5
@@ -48,7 +52,7 @@ default_border pixel 5
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
 output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output eDP-1 resolution 1920x1080 position 1920,0
-output HDMI-A-1 resolution 1920x1080 position 0,0
+# output HDMI-A-1
 #
 
 ### Idle configuration
@@ -74,10 +78,10 @@ bindsym $mod+Escape mode $sysmenu
 set $sysmenu "System: [l]ock log[o]ut [h]ibernate  [s]uspend  [S]hutdown  re[b]oot"
 mode $sysmenu {
     bindsym l       exec --no-startup-id $Locker, mode "default"
-
+    bindsym o       exec --no-startup-id loginctl terminate-user $USER
+    bindsym h       exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym s       exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym h       exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym b       exec --no-startup-id systemctl reboot, mode "default"
 
     bindsym Return  mode "default"
@@ -126,9 +130,7 @@ input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
+
 # Moving around:
 #
     # Move your focus around
@@ -152,6 +154,7 @@ input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
 #
 # Workspaces:
 #
@@ -271,7 +274,7 @@ exec waybar
 #    }
 #}
 
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # window colors
@@ -307,13 +310,14 @@ bindsym $mod+shift+f exec thunar
 
 # TODO
 # brave profiles
-set $brave "[i]ncognito  [p]ersonal  [f]loki  [c]ampus"
+set $brave "[i]ncognito  persona[l]  [p]ro  [c]ampus"
 bindsym $mod+shift+w mode $brave
+# profile directories can be found in  ~/.config/BraveSoftware/Brave-Browser/
 mode $brave {
     bindsym i       mode "default"; exec brave --incognito
-    bindsym p       mode "default"; exec brave --profile-directory=Profile\ 3
-    bindsym f       mode "default"; exec brave --profile-directory=Profile\ 1
-    bindsym c       mode "default"; exec brave --profile-directory=Profile\ 5
+    bindsym l       mode "default"; exec brave --profile-directory=Default
+    bindsym p       mode "default"; exec brave --profile-directory=Profile\ 1
+    bindsym c       mode "default"; exec brave --profile-directory=Profile\ 2
     bindsym Escape  mode "default"
 }
 
@@ -324,25 +328,31 @@ mode $brave {
 # launch flameshot
 #exec --no-startup-id flameshot
 
+
 # gammastep
 exec gammastep-indicator &
 
 # Notifications
+exec mako
 bindsym Control+Space       exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
+
+# Start the clipboard manager in the background
+exec wl-paste -t text --watch clipman store
+# Select a clipboard entry using rofi
+bindsym $mod+Shift+p exec clipman pick -t rofi
 
 
 # sceenshots and screen-recording
 ####
+# Take a screenshot of a part of the screen
+bindsym $mod+Shift+s exec grim -g "$(slurp)" -t png - | swappy -f - | wl-copy
 
 # Take a screenshot of the whole screen
 # grim /tmp/screenshot.png
 
 # Take a screenshot of the current window
 # grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" screenshot.png
-
-# Take a screenshot of a part of the screen
-# grim -g "$(slurp)" screenshot.png
 
 # output it to the clipboard
 # grim -g "$(slurp)" - | wl-copy

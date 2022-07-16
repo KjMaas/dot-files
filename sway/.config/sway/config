@@ -13,10 +13,12 @@ exec configure-gtk
 # colors
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
-set $active-bg-color     #2090FF
+set $active-bg-color     #0090FF
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color     #999999
+set $urgent-bg-color     #992900
+set $indicator           #98ff99
+
 
 ### Variables
 #
@@ -102,7 +104,7 @@ input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
 }
 # Keyboard
  input "5426:624:Razer_Razer_Blade_Keyboard" {
-    xkb_layout "us,fr"
+    xkb_layout "eu,us,fr"
     xkb_options grp:win_space_toggle,compose:caps
 }
 
@@ -280,10 +282,10 @@ exec waybar
 # window colors
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                       border              background         text                   indicator
-#client.focused          $bg-color           $bg-color           $text-color           #98ff99
-#client.unfocused        $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
-#client.focused_inactive $inactive-bg-color  $inactive-bg-color  $inactive-text-color  #98ff99
-#client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           #98ff99
+client.focused          $active-bg-color    $active-bg-color    $active-bg-color      $indicator
+client.unfocused        $inactive-bg-color  $inactive-bg-color  $inactive-text-color  $indicator
+client.focused_inactive $inactive-bg-color  $inactive-bg-color  $inactive-text-color  $indicator
+client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           $indicator
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

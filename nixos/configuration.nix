@@ -126,7 +126,7 @@ in
 
   services.xserver = {
     # Enable the X11 windowing system.
-    videoDrivers = [ "nvidia"];
+    videoDrivers = [ "nvidia" ];
 
     # Configure keymap in X11
     layout = "us,fr";
@@ -167,20 +167,20 @@ in
     core-utilities.enable = false;
   };
 
- # configure backlight
- programs.light.enable = true;
+  # configure backlight
+  programs.light.enable = true;
 
- # sync with Microsoft OneDrive
- services.onedrive.enable = true;
+  # sync with Microsoft OneDrive
+  services.onedrive.enable = false;
 
 
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ 
-      hplip                       # Print, scan and fax HP drivers for Linux
-#      hplipWithPlugin             # Print, scan and fax HP drivers for Linux
-#      python39Packages.distro     # Linux Distribution - a Linux OS platform information API.
+    drivers = with pkgs; [
+      hplip # Print, scan and fax HP drivers for Linux
+      #      hplipWithPlugin             # Print, scan and fax HP drivers for Linux
+      #      python39Packages.distro     # Linux Distribution - a Linux OS platform information API.
     ];
   };
 
@@ -194,7 +194,7 @@ in
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    audio.enable =true;
+    audio.enable = true;
     alsa = {
       enable = true;
       support32Bit = true;
@@ -283,26 +283,30 @@ in
 
       environmentFile = "/run/keys/wireless";
       networks = {
-          Freebox-48448F = {
-              psk = "@PSK_FREE@";
-              priority = 10;
-          };
-          Livebox-30AC = {
-              psk = "@PSK_ORANGE@";
-              priority = 10;
-          };
-          NETGEAR78 = {
-              pskRaw = "@PSK_PRADES@";
-              priority = 3;
-          };
-          NETGEAR78_EXT = {
-              psk = "@PSK_PRADES_EXT@";
-              priority = 4;
-          };
-          Majok = {
-              psk = "@PSK_MAJOK@";
-              priority = 100;
-          };
+        "Freebox-48448F" = {
+          psk = "@PSK_FREE@";
+          priority = 10;
+        };
+        "Livebox-30AC" = {
+          psk = "@PSK_ORANGE@";
+          priority = 10;
+        };
+        "NETGEAR78" = {
+          pskRaw = "@PSK_PRADES@";
+          priority = 3;
+        };
+        "NETGEAR78_EXT" = {
+          psk = "@PSK_PRADES_EXT@";
+          priority = 4;
+        };
+        "Majok" = {
+          psk = "@PSK_MAJOK@";
+          priority = 100;
+        };
+        "CAMPUS-NUMERIQUE" = {
+          psk = "@PSK_CAMPUS@";
+          priority = 10;
+        };
       };
     };
 

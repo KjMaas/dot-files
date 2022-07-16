@@ -28,7 +28,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term kitty
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -307,8 +307,10 @@ bindsym XF86AudioMute exec 'pamixer -t'
 
 # thunar
 bindsym $mod+shift+f exec thunar
+# nnn
+bindsym $mod+shift+n exec $term nnn -ea
 
-# TODO
+
 # brave profiles
 set $brave "[i]ncognito  persona[l]  [p]ro  [c]ampus"
 bindsym $mod+shift+w mode $brave

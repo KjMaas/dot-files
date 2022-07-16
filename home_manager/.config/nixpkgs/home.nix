@@ -48,11 +48,10 @@ in
       drawio			   	# A desktop application for creating diagrams
       gimp			    	# The GNU Image Manipulation Program
       inkscape				# Vector graphics editor
-      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
       keepassxc				# Offline password manager with many features.
-      libreoffice-qt	# Comprehensive, professional-quality productivity suite
 				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
       mako            # A lightweight Wayland notification daemon
+      zip             # Compressor/archiver for creating and modifying zipfiles
 
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
       zathura		    	# A highly customizable and functional PDF viewer
@@ -65,16 +64,43 @@ in
       xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
       gvfs	    			# Virtual Filesystem support library
 
-      nnn		      		# Small ncurses-based file browser forked from noice
+      # nnn	Configuration
+      (nnn.override { withNerdIcons = true; }) # Small ncurses-based file browser forked from noice
+      less            # A more advanced file pager than ‘more’
+      tree            # Command to produce a depth indented directory listing
+      mediainfo       # Supplies technical and tag information about a video or audio file
+      mktemp          # Simple tool to make temporary file handling in shells scripts safe and simple
+      unzip           # An extraction utility for archives compressed in .zip format
+      man             # An implementation of the standard Unix documentation system accessed using the man command
+      bat             # A cat(1) clone with syntax highlighting and Git integration
+      viu             # A command-line application to view images from the terminal written in Rust
+      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
+      ffmpegthumbnailer  # A lightweight video thumbnailer
+      ffmpeg          # A complete, cross-platform solution to record, convert and stream audio and video
+      libreoffice-qt	# Comprehensive, professional-quality productivity suite
+      poppler         # A PDF rendering library
+      fontpreview     # Highly customizable and minimal font previewer written in bash
+      djvulibre       # The big set of CLI tools to make/modify/optimize/show/export DJVU files
+      glow            # Render markdown on the CLI, with pizzazz!
+      w3m             # A text-mode web browser
+      pistol          # General purpose file previewer designed for Ranger, Lf to make scope.sh redundant
+      tmux            # Terminal multiplexer
+      kitty           # A modern, hackable, featureful, OpenGL based terminal emulator
+
+
+
+
 
       wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
       rclone			  	# Command line program to sync files and directories to and from major cloud storage
       rclone-browser	# Graphical Frontend to Rclone written in Qt
-      #etcher			  	# Flash OS images to SD cards and USB drives, safely and easily
+      # etcher			  	# Flash OS images to SD cards and USB drives, safely and easily
       stow				    # Symlinking on steroids!
 
       # development
+      dbeaver         # Universal SQL Client for developers, DBA and analysts
       git	      			# Distributed version control system
+      poetry          # Python dependency management and packaging made easy.
       tig			      	# Text-mode interface for git
       # alacritty				# A cross-platform, GPU-accelerated terminal emulator
       vscode			  	# Open source source code editor developed by Microsoft
@@ -98,7 +124,23 @@ in
   #  };
 
 
-  home.sessionVariables = { EDITOR = "lvim"; };
+  home.sessionVariables = { 
+    # key-bookmark pairs
+    NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads/";
+
+    # FIFO to write hovered file path to
+    NNN_FIFO="/tmp/nnn.fifo";
+
+    # plugins
+    NNN_PLUG="p:preview-tui;f:finder;o:fzopen;d:diffs;v:imgview";
+
+    # default programs
+    EDITOR="lvim";
+    TERMINAL="foot";
+    ICONLOOKUP=1;
+    IMAGE="viu";
+    # USE_PISTOL=1;
+  };
   #home.sessionPath = [ "~/.local/bin/foo" ];
   #xsession.enable = true;  
 
@@ -138,6 +180,9 @@ in
       # # required for npm (solves permissions errors when trying to install packages globally)
       # export PATH=~/.npm-packages/bin:$PATH
       # export NODE_PATH=~/.npm-packages/lib/node_modules
+
+      # nnn configuration
+      # source ~/dot-files/nnn/.config/nnn/nnn_env_vars
     '';
 
   };

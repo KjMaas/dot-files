@@ -311,6 +311,8 @@ bindsym XF86AudioMute exec 'pamixer -t'
 bindsym $mod+shift+f exec thunar
 # nnn
 bindsym $mod+shift+n exec $term nnn -ea
+# system monitoring
+bindsym $mod+shift+t exec $term btop
 
 
 # brave profiles

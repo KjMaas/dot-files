@@ -312,6 +312,7 @@ bindsym $mod+shift+f exec thunar
 # nnn
 bindsym $mod+shift+n exec $term nnn -ea
 # system monitoring
+bindsym $mod+t exec $term htop
 bindsym $mod+shift+t exec $term btop
 
 

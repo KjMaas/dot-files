@@ -146,7 +146,7 @@ in
     NNN_FIFO="/tmp/nnn.fifo";
 
     # plugins
-    NNN_PLUG="p:preview-tui;f:finder;o:fzopen;d:diffs;v:imgview";
+    NNN_PLUG="p:preview-tui;d:dragdrop;o:fzopen";
 
     # default programs
     EDITOR="lvim";

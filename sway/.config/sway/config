@@ -30,7 +30,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term kitty -1
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -42,7 +42,7 @@ bindsym $mod+shift+e exec rofi -matching normal -show emoji
 
 # gaps
 gaps inner 5
-gaps outer 5
+gaps outer 10
 # thin borders
 hide_edge_borders smart
 default_border pixel 5
@@ -330,13 +330,16 @@ mode $brave {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # startup
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
 # launch flameshot
 #exec --no-startup-id flameshot
 
 
+# bluetooth
+exec --no-startup-id blueman-applet
 # gammastep
-exec gammastep-indicator &
+exec --no-startup-id gammastep-indicator
 
 # Notifications
 exec mako

@@ -40,7 +40,6 @@ in
       discord			   	# All-in-one cross-platform voice and text chat for gamers
       signal-desktop	# Private, simple, and secure messenger
       whatsapp-for-linux		# Whatsapp desktop messaging app
-      mpv	      			# General-purpose media player, fork of MPlayer and mplayer2
       zoom-us         # zoom.us video conferencing application
       
       # base
@@ -51,10 +50,10 @@ in
       keepassxc				# Offline password manager with many features.
 				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
       mako            # A lightweight Wayland notification daemon
+      btop            # A monitor of resources
       zip             # Compressor/archiver for creating and modifying zipfiles
 
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
-      zathura		    	# A highly customizable and functional PDF viewer
       #flameshot			# Powerful yet simple to use screenshot software
       qalculate-gtk   # The ultimate desktop calculator
 
@@ -64,8 +63,19 @@ in
       xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
       gvfs	    			# Virtual Filesystem support library
 
+
       # nnn	Configuration
       (nnn.override { withNerdIcons = true; }) # Small ncurses-based file browser forked from noice
+      # preview-tabbed
+      tabbed          # Simple generic tabbed fronted to xembed aware applications
+      mpv             # General-purpose media player, fork of MPlayer and mplayer2
+      sxiv            # Simple X Image Viewer
+      nsxiv           # New Suckless X Image Viewer
+      zathura		    	# A highly customizable and functional PDF viewer
+      file            # A program that shows the type of files
+      mktemp          # Simple tool to make temporary file handling in shells scripts safe and simple
+      wtype           # xdotool type for wayland (Fake keyboard/mouse input, window management, and more)
+      # preview-tui
       less            # A more advanced file pager than ‘more’
       tree            # Command to produce a depth indented directory listing
       mediainfo       # Supplies technical and tag information about a video or audio file
@@ -78,14 +88,17 @@ in
       ffmpegthumbnailer  # A lightweight video thumbnailer
       ffmpeg          # A complete, cross-platform solution to record, convert and stream audio and video
       libreoffice-qt	# Comprehensive, professional-quality productivity suite
-      poppler         # A PDF rendering library
+      poppler_utils   # A PDF rendering library
       fontpreview     # Highly customizable and minimal font previewer written in bash
       djvulibre       # The big set of CLI tools to make/modify/optimize/show/export DJVU files
       glow            # Render markdown on the CLI, with pizzazz!
       w3m             # A text-mode web browser
       pistol          # General purpose file previewer designed for Ranger, Lf to make scope.sh redundant
-      tmux            # Terminal multiplexer
       kitty           # A modern, hackable, featureful, OpenGL based terminal emulator
+      # launcher
+      fzf             # A command-line fuzzy finder written in Go
+      # drag-and-drop
+      xdragon         # Simple drag-and-drop source/sink for X 
 
 
 
@@ -98,6 +111,7 @@ in
       stow				    # Symlinking on steroids!
 
       # development
+      # tmux            # Terminal multiplexer
       dbeaver         # Universal SQL Client for developers, DBA and analysts
       git	      			# Distributed version control system
       poetry          # Python dependency management and packaging made easy.

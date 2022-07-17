@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Image viewer
+Exec=/home/klaasjan/.nix-profile/bin/sxiv -a %F

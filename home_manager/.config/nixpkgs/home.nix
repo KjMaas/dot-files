@@ -201,6 +201,24 @@ in
 
   };
 
+  # default app-launchers
+  # usefull commands:
+  # XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query filetype foo.pdf
+  # XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default application/pdf
+  # cat /home/klaasjan/.nix-profile/share/applications/mimeinfo.cache
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "image/png" = ["img.desktop"];
+      "image/jpg" = ["img.desktop"];
+      "image/jpeg" = ["img.desktop"];
+      "text/html" = ["brave-browser.desktop"];
+      "text/x-python" = ["text.desktop"];
+      "text/plain" = ["text.desktop"];
+      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
+    };
+  };
+
   # Direnv
   programs.direnv = {
     enable = true;

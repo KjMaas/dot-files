@@ -160,9 +160,22 @@ lvim.plugins = {
     config = function()
       require("color-picker")
     end,
-  }
+  },
+  {
+    "euclio/vim-markdown-composer"
+  },
 }
 
+-- map helper
+local function map(mode, lhs, rhs, opts)
+    local options = {noremap = true}
+    if opts then options = vim.tbl_extend('force', options, opts) end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+map("n", "<F2>", ":ComposerStart<cr>" )
+vim.api.nvim_exec([[
+  let g:markdown_composer_autostart = 0
+  ]], false)
 
 dofile("/home/klaasjan/dot-files/lvim/.config/lvim/plugins/colorpicker.lua")
 

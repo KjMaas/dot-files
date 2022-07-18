@@ -303,6 +303,10 @@ in
           psk = "@PSK_MAJOK@";
           priority = 100;
         };
+        "Galaxy S94b45" = {
+          psk = "@PSK_ANTALYA@";
+          priority = 90;
+        };
         "CAMPUS-NUMERIQUE" = {
           psk = "@PSK_CAMPUS@";
           priority = 10;

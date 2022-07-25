@@ -299,6 +299,10 @@ in
           psk = "@PSK_PRADES_EXT@";
           priority = 4;
         };
+        "Bbox-9A77B139" = {
+          psk = "@PSK_MONICA@";
+          priority = 4;
+        };
         "Majok" = {
           psk = "@PSK_MAJOK@";
           priority = 100;

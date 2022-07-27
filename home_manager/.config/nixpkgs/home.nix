@@ -49,7 +49,6 @@ in
       inkscape				# Vector graphics editor
       keepassxc				# Offline password manager with many features.
 				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
-      mako            # A lightweight Wayland notification daemon
       btop            # A monitor of resources
       zip             # Compressor/archiver for creating and modifying zipfiles
 
@@ -123,6 +122,7 @@ in
       vscode			  	# Open source source code editor developed by Microsoft
 
 
+      # lvim (NeoVim) specific configuration
       # Language servers for neovim; change these to whatever languages you code in
       # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
       rnix-lsp
@@ -142,20 +142,26 @@ in
 
 
   home.sessionVariables = { 
-    # key-bookmark pairs
-    NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads/";
+    XDG_CONFIG_HOME="$HOME/.config";
+    EDITOR="lvim";
+    VISUAL="lvim";
+    TERMINAL="kitty";
 
+    # specific to nnn
+    # key-bookmark pairs
+    NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads/;m:$HOME/onedrive/Majok/";
     # FIFO to write hovered file path to
     NNN_FIFO="/tmp/nnn.fifo";
-
     # plugins
     NNN_PLUG="p:preview-tui;d:dragdrop;o:fzopen";
-
-    # default programs
-    EDITOR="lvim";
-    TERMINAL="foot";
+    # extra options
+    NNN_OPTS="ea";
+    # use EDITOR
+    NNN_USE_EDITOR=1;
+    # Set a distinct color for each tab (by default all are blue)
+    NNN_CONTEXT_COLORS=1234;
+    # use icons in preview mode
     ICONLOOKUP=1;
-    IMAGE="viu";
     # USE_PISTOL=1;
   };
   #home.sessionPath = [ "~/.local/bin/foo" ];

@@ -115,6 +115,7 @@ input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term --title="termfloat"
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -373,4 +374,12 @@ bindsym $mod+Shift+s exec grim -g "$(slurp)" -t png - | swappy -f - | wl-copy
 
 # Partial capture
 # wf-recorder -g "$(slurp)"
+
+
+
+# Window rules
+##############
+
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
+for_window [title="termfloat"] floating enable, resize set width 1030 height 710
 

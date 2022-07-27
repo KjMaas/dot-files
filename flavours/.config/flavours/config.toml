@@ -1,0 +1,28 @@
+
+# Commands go through bash
+shell = "zsh -c '{}'"
+
+# Sway supports the default '#' comments, so it can be ommited
+# 'rewrite' is also ommited, as it defaults to false
+[[items]]
+file = "~/.config/sway/colorscheme"
+template = "sway"
+subtemplate = "colors"
+hook = "swaymsg reload"
+rewrite = true
+# Swaymsg reload temporarily freezes input, so it's marked as not light
+light = false
+
+[[item]]
+file = "~/.config/waybar/colors.css"
+template = "waybar"
+hook = "pkill -SIGUSR2 waybar"
+rewrite = true
+
+[[item]]
+file = "~/.config/rofi/themes/colors.rasi"
+template = "rofi"
+subtemplate = "custom"
+rewrite = true
+# start= "/* Start flavours */"
+# end = "/* End flavours */"

@@ -91,18 +91,19 @@ in
       foot             # A fast, lightweight and minimalistic Wayland terminal emulator
       # nm-tray          # Simple Network Manager frontend written in Qt
       gammastep				 # Screen color temperature manager
-      # wlsunset         # Day/night gamma adjustments for Wayland
       grim             # Grab images from a Wayland compositor
       kanshi           # Dynamic display configuration tool
       light			    	 # GNU/Linux application to control backlights
-      # mako             # A lightweight Wayland notification daemon
+      mako             # A lightweight Wayland notification daemon
       pamixer          # Pulseaudio command line mixer
       polkit_gnome     # A dbus session bus service that is used to bring up authentication dialogs
       slurp            # Select a region in a Wayland compositor
       swappy           # A Wayland native snapshot editing tool
+      swaybg           # Wallpaper tool for Wayland compositors
       swaylock-fancy   # This is an swaylock bash script with bluring and lock img
       swaylock         # Screen locker for Wayland
       swayidle         # Idle management daemon for Wayland
+      swayr            # A window switcher (and more) for sway
       rofi             # Window switcher, run dialog and dmenu replacement for Wayland
       vimiv-qt         # Image viewer with Vim-like keybindings (Qt port)
       waybar           # Highly customizable Wayland bar for Sway and Wlroots based compositors

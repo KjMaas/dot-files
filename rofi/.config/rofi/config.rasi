@@ -168,4 +168,5 @@ configuration {
 /* @theme "gruvbox-dark-soft" */
 /* @theme "paper-float" */
 @theme "Arc-Dark"
+@theme "colors.rasi"
 

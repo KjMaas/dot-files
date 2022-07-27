@@ -103,6 +103,9 @@ in
 
 
 
+      # Colorscheme
+      flavours        # An easy to use base16 scheme manager/builder that integrates with any workflow
+      wpgtk           # Template based wallpaper/colorscheme generator and manager
 
       wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
       rclone			  	# Command line program to sync files and directories to and from major cloud storage
@@ -232,13 +235,13 @@ in
 
 
   # theme-ing
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "Materia-dark";
+  #     package = pkgs.materia-theme;
+  #   };
+  # };
 
 
   # This value determines the Home Manager release that your

@@ -52,6 +52,10 @@ in
       btop            # A monitor of resources
       zip             # Compressor/archiver for creating and modifying zipfiles
 
+      # pandoc section
+      pandoc          # Conversion between markup formats
+      wkhtmltopdf     # Tools for rendering web pages to PDF or images
+
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
       #flameshot			# Powerful yet simple to use screenshot software
       qalculate-gtk   # The ultimate desktop calculator

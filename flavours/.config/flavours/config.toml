@@ -26,3 +26,12 @@ subtemplate = "custom"
 rewrite = true
 # start= "/* Start flavours */"
 # end = "/* End flavours */"
+
+[[item]]
+file = "~/.config/kitty/kitty.conf"
+template = "kitty"
+subtemplate = "default"
+rewrite = false
+start= "# Start flavours"
+end = "# End flavours"
+

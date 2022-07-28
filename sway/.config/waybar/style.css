@@ -8,7 +8,7 @@
 
 #window {
     background-color: transparent;
-    color: @base03;
+    color: @base04;
     border-radius: 10px;
     padding: 0 10px;
 }
@@ -45,6 +45,8 @@ window#waybar.chromium {
 #workspaces {
     background-color: transparent;
     border-radius: 10px;
+    border-top: solid 1px @base0E;
+    border-bottom: solid 1px @base0E;
     border-right: solid 5px @base0E;
     border-left: solid 5px @base0E;
     padding: 3px 0px;

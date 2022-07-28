@@ -1,23 +1,23 @@
 /*
 *
-* Base16 Nord
-* Author: arcticicestudio
+* Base16 Dracula
+* Author: Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
 *
 */
 
-@define-color base00 #2E3440;
-@define-color base01 #3B4252;
-@define-color base02 #434C5E;
-@define-color base03 #4C566A;
-@define-color base04 #D8DEE9;
-@define-color base05 #E5E9F0;
-@define-color base06 #ECEFF4;
-@define-color base07 #8FBCBB;
-@define-color base08 #BF616A;
-@define-color base09 #D08770;
-@define-color base0A #EBCB8B;
-@define-color base0B #A3BE8C;
-@define-color base0C #88C0D0;
-@define-color base0D #81A1C1;
-@define-color base0E #B48EAD;
-@define-color base0F #5E81AC;
+@define-color base00 #282936;
+@define-color base01 #3a3c4e;
+@define-color base02 #4d4f68;
+@define-color base03 #626483;
+@define-color base04 #62d6e8;
+@define-color base05 #e9e9f4;
+@define-color base06 #f1f2f8;
+@define-color base07 #f7f7fb;
+@define-color base08 #ea51b2;
+@define-color base09 #b45bcf;
+@define-color base0A #00f769;
+@define-color base0B #ebff87;
+@define-color base0C #a1efe4;
+@define-color base0D #62d6e8;
+@define-color base0E #b45bcf;
+@define-color base0F #00f769;

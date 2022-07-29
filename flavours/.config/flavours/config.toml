@@ -35,3 +35,17 @@ rewrite = false
 start= "# Start flavours"
 end = "# End flavours"
 
+# [[item]]
+# file = "~/.config/lvim/colors.lua"
+# template = "neovim"
+# subtemplate = "default"
+# rewrite = true
+# # hook = "lvim reload"
+
+[[item]]
+file = "~/.config/zathura/zathurarc"
+template = "zathura"
+subtemplate = "recolor"
+rewrite = false
+start= "/* Start flavours */"
+end = "/* End flavours */"

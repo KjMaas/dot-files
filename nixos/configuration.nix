@@ -256,6 +256,9 @@ in
     EDITOR = "lvim";
   };
 
+  # add zsh completion for system packages
+  environment.pathsToLink = [ "/share/zsh" ];
+
 
   fonts = {
     fontDir.enable = true;

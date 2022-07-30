@@ -129,10 +129,10 @@ in
     videoDrivers = [ "nvidia" ];
 
     # Configure keymap in X11
-    layout = "us,fr";
+    layout = "eu";
     xkbOptions = "
-      grp:win_space_toggle 
-      eurosign:e
+      # grp:win_space_toggle 
+      # eurosign:e
     ";
 
     # Enable touchpad support (enabled default in most desktopManager).

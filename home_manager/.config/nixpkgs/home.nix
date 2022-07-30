@@ -53,8 +53,17 @@ in
       zip             # Compressor/archiver for creating and modifying zipfiles
 
       # pandoc section
-      pandoc          # Conversion between markup formats
-      wkhtmltopdf     # Tools for rendering web pages to PDF or images
+      ################
+      # pandoc                          # Conversion between markup formats
+      pandoc-drawio-filter              # Pandoc filter which converts draw.io diagrams to PDF
+      # texlive.combined.scheme-basic     # TeX Live environment for scheme-basic
+      texlive.combined.scheme-full
+      # haskellPackages.pandoc-citeproc # Supports using pandoc with citeproc
+      haskellPackages.pandoc
+      haskellPackages.citeproc # Supports using pandoc with citeproc
+      wkhtmltopdf                     # Tools for rendering web pages to PDF or images
+      mendeley                        # A reference manager and academic social network
+
 
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
       #flameshot			# Powerful yet simple to use screenshot software

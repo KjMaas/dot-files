@@ -143,6 +143,15 @@ in
   #    userName = "Klaasjan Maas";
   #    userEmail = "klaasjan.maas@laposte.net";
   #  };
+  home.shellAliases = {
+      gs = "git status";
+      v = "$EDITOR";
+      n = "nnn";
+      "..." = "cd ../..";
+      l="ls -ahlF";
+      ll = "ls -l";
+      ls = "ls --color=tty";
+  };
 
 
   home.sessionVariables = { 
@@ -176,9 +185,60 @@ in
     enableCompletion = true;
     defaultKeymap = "viins";
     enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+    cdpath = ["/tmp" "~/Documents"];
+    # dotDir = "$HOME/.config/zsh";
     # shellAliases = (import ./zsh/aliases.nix);
-    history.extended = true;
+    history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      ignorePatterns = [ "l *" "ls *" ];
+      ignoreSpace = true;
+    };
+    loginExtra = ''
+      echo "loginExtra: loaded!"
+    '';
+    logoutExtra = ''
+      echo "logoutExtra: loaded!"
+    '';
+    profileExtra = ''
+      echo "profileExtra: loaded!"
+    '';
+    sessionVariables = {};
+    initExtraFirst = ''
+      echo "initExtraFirst: loaded!"
+    '';
+    initExtra = ''
+      echo "initExtra: loaded!"
+      # direnv hook
+      eval "$(direnv hook zsh)"
 
+      # this is where lvim binary is stored
+      export PATH="$PATH:$HOME/.local/bin"
+
+      # # required for npm (solves permissions errors when trying to install packages globally)
+      # export PATH=~/.npm-packages/bin:$PATH
+      # export NODE_PATH=~/.npm-packages/lib/node_modules
+
+      # nnn configuration
+      # source ~/dot-files/nnn/.config/nnn/nnn_env_vars
+    '';
+    envExtra = ''
+      echo "envExtra: loaded!"
+      # list directory content when using 'cd'
+      function cd () {
+        builtin cd "$1";
+        ls -ahlF;
+      }
+
+      # cd into directory and show dir tree when created
+      currentDir="$(pwd)"
+      function mkcd () {
+        mkdir -p "$1";
+        builtin cd "$1";
+        tree -L 3 -d "$currentDir";
+      }
+    '';
     plugins = [
       {
         name = "zsh-syntax-highlighting";
@@ -196,21 +256,6 @@ in
       plugins = [ "git" "vi-mode" "z" ];
       theme = "robbyrussell";
     };
-
-    envExtra = ''
-      # direnv hook
-      eval "$(direnv hook zsh)"
-
-      # this is where lvim binary is stored
-      export PATH="$PATH:$HOME/.local/bin"
-      
-      # # required for npm (solves permissions errors when trying to install packages globally)
-      # export PATH=~/.npm-packages/bin:$PATH
-      # export NODE_PATH=~/.npm-packages/lib/node_modules
-
-      # nnn configuration
-      # source ~/dot-files/nnn/.config/nnn/nnn_env_vars
-    '';
 
   };
 

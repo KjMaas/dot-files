@@ -1,6 +1,14 @@
 configuration {
-    modi: "drun,run,calc,ssh,emoji";
-    
+    modi: [
+        "drun",
+        "run",
+        /* "calc", */
+        /* "ssh", */
+        /* "emoji", */
+        /* "combi", */
+        "custom:~/.config/rofi/scripts/exec_custom_script.sh"
+    ];
+
     font: "mono 12";
 
     location: 6;
@@ -9,7 +17,7 @@ configuration {
     fixed-num-lines: true;
 
     show-icons: true;
-    terminal: "foot";
+    terminal: "$TERMINAL";
     /*	ssh-client: "ssh";*/
     /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
     /*	run-command: "{cmd}";*/
@@ -41,7 +49,7 @@ configuration {
     /*	auto-select: false;*/
     /*	parse-hosts: false;*/
     /*	parse-known-hosts: true;*/
-    combi-modi: "drun, run, window";
+    /* combi-modi: "drun, run, custom"; */
     matching: "fuzzy";
     /*	tokenize: true;*/
     /*	m: "-5";*/
@@ -67,42 +75,43 @@ configuration {
 
     display-window: "Windows ";
     /*	display-windowcd: ;*/
-    /*	display-run: ;*/
+    display-run: "$";
     /*	display-ssh: ;*/
-    display-drun: "Applications";
+    display-drun: "Apps";
     /*	display-combi: ;*/
     /*	display-keys: ;*/
     /*	display-filebrowser: ;*/
     display-calc: ">>>";
     display-emoji: "\\ô/";
+    display-custom: "🛠️";
 
-    /*	kb-primary-paste: "Control+V,Shift+Insert";*/
-    /*	kb-secondary-paste: "Control+v,Insert";*/
+    kb-primary-paste: "Control+V,Shift+Insert";
+    kb-secondary-paste: "Control+v,Insert";
     /*	kb-clear-line: "Control+w";*/
-    /*	kb-move-front: "Control+a";*/
-    /*	kb-move-end: "Control+e";*/
-    /*	kb-move-word-back: "Alt+b,Control+Left";*/
-    /*	kb-move-word-forward: "Alt+f,Control+Right";*/
-    /*	kb-move-char-back: "Left,Control+b";*/
-    /*	kb-move-char-forward: "Right,Control+f";*/
+    kb-move-front: "Control+a";
+    kb-move-end: "Control+e";
+    kb-move-word-back: "Alt+b,Control+Left";
+    kb-move-word-forward: "Alt+f,Control+Right";
+    kb-move-char-back: "Left,Control+b";
+    kb-move-char-forward: "Right,Control+f";
     /*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
     /*	kb-remove-word-forward: "Control+Alt+d";*/
     /*	kb-remove-char-forward: "Delete,Control+d";*/
-    /*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
-    /*	kb-remove-to-eol: "Control+k";*/
-    /*	kb-remove-to-sol: "Control+u";*/
-    /*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+    kb-remove-char-back: "BackSpace,Control+x";
+    kb-remove-to-eol: "Control+Shift+d";
+    kb-remove-to-sol: "Control+u";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
     /*	kb-accept-custom: "Control+Return";*/
     /*	kb-accept-custom-alt: "Control+Shift+Return";*/
     /*	kb-accept-alt: "Shift+Return";*/
     /*	kb-delete-entry: "Shift+Delete";*/
-    /*	kb-mode-next: "Shift+Right,Control+Tab";*/
-    /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
-    /*	kb-mode-complete: "Control+l";*/
+    kb-mode-next: "Shift+Right,Control+l";
+    kb-mode-previous: "Shift+Left,Control+h";
+    kb-mode-complete: "Control+Shift+l";
     /*	kb-row-left: "Control+Page_Up";*/
     /*	kb-row-right: "Control+Page_Down";*/
-    /*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-    /*	kb-row-down: "Down,Control+n";*/
+    kb-row-up: "Up,Control+k";
+    kb-row-down: "Down,Control+j";
     /*	kb-row-tab: "Tab";*/
     /*	kb-page-prev: "Page_Up";*/
     /*	kb-page-next: "Page_Down";*/
@@ -113,7 +122,7 @@ configuration {
     /*	kb-ellipsize: "Alt+period";*/
     /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
     /*	kb-toggle-sort: "Alt+grave";*/
-    /*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
+    kb-cancel: "Escape,Control+c,Control+bracketleft";
     /*	kb-custom-1: "Alt+1";*/
     /*	kb-custom-2: "Alt+2";*/
     /*	kb-custom-3: "Alt+3";*/
@@ -167,6 +176,6 @@ configuration {
 /* @theme "solarized_alternate" */
 /* @theme "gruvbox-dark-soft" */
 /* @theme "paper-float" */
-@theme "Arc-Dark"
+/* @theme "Arc-Dark" */
 @theme "colors.rasi"
 

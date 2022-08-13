@@ -306,6 +306,10 @@ in
           psk = "@PSK_MONICA@";
           priority = 4;
         };
+        "Maison 2.4" = {
+          psk = "@PSK_CELINE@";
+          priority = 4;
+        };
         "Majok" = {
           psk = "@PSK_MAJOK@";
           priority = 100;

@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib,  ... }:
+
+# utils:
+# sha256 = lib.fakeSha256;
 
 let
   baseConfig = {
@@ -78,6 +81,11 @@ in
 				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
       qalculate-gtk   # The ultimate desktop calculator
 
+
+      helvum          # A GTK patchbay for pipewire
+      pavucontrol     # PulseAudio Volume Control
+      carla           # An audio plugin host
+      qjackctl        # A Qt application to control the JACK sound server daemon
       qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
 
 

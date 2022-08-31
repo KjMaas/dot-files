@@ -310,7 +310,7 @@ bindsym XF86AudioMute exec 'pamixer -t'
 # thunar
 bindsym $mod+shift+f exec thunar
 # nnn
-bindsym $mod+shift+n exec $term nnn -ea
+bindsym $mod+shift+n exec $term nnn
 # system monitoring
 bindsym $mod+t exec $term htop
 bindsym $mod+shift+t exec $term btop

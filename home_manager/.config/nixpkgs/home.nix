@@ -11,12 +11,17 @@ let
 
   pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
   #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
+
 in
 {
 
   nixpkgs.config = baseConfig;
 
   fonts.fontconfig.enable = true;
+
+  imports = [
+    ./programs/nnn
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -48,7 +53,7 @@ in
       gimp			    	# The GNU Image Manipulation Program
       inkscape				# Vector graphics editor
       keepassxc				# Offline password manager with many features.
-				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
+      trash-cli       # Command line tool for the desktop trash can
       btop            # A monitor of resources
       zip             # Compressor/archiver for creating and modifying zipfiles
 
@@ -65,54 +70,22 @@ in
       mendeley                        # A reference manager and academic social network
 
 
+      zathura		    	# A highly customizable and functional PDF viewer
       pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
-      #flameshot			# Powerful yet simple to use screenshot software
+      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
+      sxiv            # Simple X Image Viewer
+      libreoffice-qt	# Comprehensive, professional-quality productivity suite
+				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
       qalculate-gtk   # The ultimate desktop calculator
 
       qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
 
+
+      mimeo          # Open files by MIME-type or file name using regular expressions
+      perl532Packages.FileMimeInfo
       xfce.thunar			# Xfce file manager
       xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
       gvfs	    			# Virtual Filesystem support library
-
-
-      # nnn	Configuration
-      (nnn.override { withNerdIcons = true; }) # Small ncurses-based file browser forked from noice
-      # preview-tabbed
-      tabbed          # Simple generic tabbed fronted to xembed aware applications
-      mpv             # General-purpose media player, fork of MPlayer and mplayer2
-      sxiv            # Simple X Image Viewer
-      nsxiv           # New Suckless X Image Viewer
-      zathura		    	# A highly customizable and functional PDF viewer
-      file            # A program that shows the type of files
-      mktemp          # Simple tool to make temporary file handling in shells scripts safe and simple
-      wtype           # xdotool type for wayland (Fake keyboard/mouse input, window management, and more)
-      # preview-tui
-      less            # A more advanced file pager than ‘more’
-      tree            # Command to produce a depth indented directory listing
-      mediainfo       # Supplies technical and tag information about a video or audio file
-      mktemp          # Simple tool to make temporary file handling in shells scripts safe and simple
-      unzip           # An extraction utility for archives compressed in .zip format
-      man             # An implementation of the standard Unix documentation system accessed using the man command
-      bat             # A cat(1) clone with syntax highlighting and Git integration
-      viu             # A command-line application to view images from the terminal written in Rust
-      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
-      ffmpegthumbnailer  # A lightweight video thumbnailer
-      ffmpeg          # A complete, cross-platform solution to record, convert and stream audio and video
-      libreoffice-qt	# Comprehensive, professional-quality productivity suite
-      poppler_utils   # A PDF rendering library
-      fontpreview     # Highly customizable and minimal font previewer written in bash
-      djvulibre       # The big set of CLI tools to make/modify/optimize/show/export DJVU files
-      glow            # Render markdown on the CLI, with pizzazz!
-      w3m             # A text-mode web browser
-      pistol          # General purpose file previewer designed for Ranger, Lf to make scope.sh redundant
-      kitty           # A modern, hackable, featureful, OpenGL based terminal emulator
-      # launcher
-      fzf             # A command-line fuzzy finder written in Go
-      # drag-and-drop
-      xdragon         # Simple drag-and-drop source/sink for X 
-
-
 
 
       # Colorscheme
@@ -126,6 +99,7 @@ in
       stow				    # Symlinking on steroids!
 
       # development
+      kitty           # A modern, hackable, featureful, OpenGL based terminal emulator
       # tmux            # Terminal multiplexer
       dbeaver         # Universal SQL Client for developers, DBA and analysts
       git	      			# Distributed version control system
@@ -165,26 +139,11 @@ in
 
   home.sessionVariables = { 
     XDG_CONFIG_HOME="$HOME/.config";
+    MAJOK_DIR="$HOME/Documents/Majok";
+
     EDITOR="lvim";
     VISUAL="lvim";
     TERMINAL="kitty";
-
-    # specific to nnn
-    # key-bookmark pairs
-    NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads/;m:$HOME/onedrive/Majok/";
-    # FIFO to write hovered file path to
-    NNN_FIFO="/tmp/nnn.fifo";
-    # plugins
-    NNN_PLUG="p:preview-tui;d:dragdrop;o:fzopen";
-    # extra options
-    NNN_OPTS="ea";
-    # use EDITOR
-    NNN_USE_EDITOR=1;
-    # Set a distinct color for each tab (by default all are blue)
-    NNN_CONTEXT_COLORS=1234;
-    # use icons in preview mode
-    ICONLOOKUP=1;
-    # USE_PISTOL=1;
   };
   #home.sessionPath = [ "~/.local/bin/foo" ];
   #xsession.enable = true;  
@@ -228,9 +187,6 @@ in
       # # required for npm (solves permissions errors when trying to install packages globally)
       # export PATH=~/.npm-packages/bin:$PATH
       # export NODE_PATH=~/.npm-packages/lib/node_modules
-
-      # nnn configuration
-      # source ~/dot-files/nnn/.config/nnn/nnn_env_vars
     '';
     envExtra = ''
       echo "envExtra: loaded!"
@@ -273,16 +229,30 @@ in
   # XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query filetype foo.pdf
   # XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default application/pdf
   # cat /home/klaasjan/.nix-profile/share/applications/mimeinfo.cache
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "image/png" = ["img.desktop"];
-      "image/jpg" = ["img.desktop"];
-      "image/jpeg" = ["img.desktop"];
-      "text/html" = ["brave-browser.desktop"];
-      "text/x-python" = ["text.desktop"];
-      "text/plain" = ["text.desktop"];
-      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "image/png" = ["img.desktop"];
+        "image/jpg" = ["img.desktop"];
+        "image/jpeg" = ["img.desktop"];
+        "text/html" = ["brave-browser.desktop"];
+        "text/x-python" = ["text.desktop"];
+        "text/plain" = ["text.desktop"];
+        "application/pdf" = ["org.pwmt.zathura-pdf-mupdf.desktop"];
+      };
+    };
+    desktopEntries = {
+      btop = {
+        name = "btop";
+        genericName = "Ressource Manager";
+        exec = "btop";
+        type = "Application";
+        icon = "null";
+        terminal = true;
+        # categories = [ "Application" "Network"];
+        mimeType = [];
+      };
     };
   };
 

@@ -69,8 +69,10 @@ in
       # haskellPackages.pandoc-citeproc # Supports using pandoc with citeproc
       haskellPackages.pandoc
       haskellPackages.citeproc # Supports using pandoc with citeproc
+      haskellPackages.pandoc-crossref # Pandoc filter for cross-references
       wkhtmltopdf                     # Tools for rendering web pages to PDF or images
       mendeley                        # A reference manager and academic social network
+      unoconv                         # Convert between any document format supported by LibreOffice/OpenOffice
 
 
       zathura		    	# A highly customizable and functional PDF viewer
@@ -98,7 +100,7 @@ in
 
       # Colorscheme
       flavours        # An easy to use base16 scheme manager/builder that integrates with any workflow
-      wpgtk           # Template based wallpaper/colorscheme generator and manager
+      # wpgtk           # Template based wallpaper/colorscheme generator and manager
 
       wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
       rclone			  	# Command line program to sync files and directories to and from major cloud storage
@@ -201,7 +203,7 @@ in
       # list directory content when using 'cd'
       function cd () {
         builtin cd "$1";
-        ls -ahlF;
+        ls -ahlF --color=tty;
       }
 
       # cd into directory and show dir tree when created

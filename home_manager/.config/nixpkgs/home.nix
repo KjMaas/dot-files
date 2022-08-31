@@ -263,9 +263,9 @@ in
     enableZshIntegration = true;
   };
 
-  # services = {
-  #   flameshot.enable = true;	# Powerful yet simple to use screenshot software
-  # };
+  services = {
+    flameshot.enable = true;	# Powerful yet simple to use screenshot software
+  };
 
 
   # theme-ing

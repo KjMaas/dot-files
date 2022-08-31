@@ -126,6 +126,9 @@ in
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
       export MOZ_ENABLE_WAYLAND=1
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_DESKTOP=sway
+      export WLR_DRM_NO_MODIFIERS=1
     '';
   };
 
@@ -154,10 +157,8 @@ in
   # share screen with wlroots-based compositors
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
-  # (org.freedesktop.portal.Desktop) and object path
-  # (/org/freedesktop/portal/desktop).
-  # The portal interfaces include APIs for file access, opening URIs,
-  # printing and others.
+  # (org.freedesktop.portal.Desktop) and object path (/org/freedesktop/portal/desktop).
+  # The portal interfaces include APIs for file access, opening URIs, printing and others.
   services.dbus.enable = true;
   xdg = {
     portal = {

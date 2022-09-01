@@ -1,0 +1,43 @@
+#!/run/current-system/sw/bin/bash
+
+# Base16 nnn template by Klaasjan Maas
+# Generated scheme by Flavours
+
+# 272626 - Default Background
+# 4a4948 - Lighter Background (Used for status bars, line number and folding marks)
+# 6e6d6b - Selection Background
+# 91908d - Comments, Invisibles, Line Highlighting
+# b5b3af - Dark Foreground (Used for status bars)
+# d9d7d2 - Default Foreground, Caret, Delimiters, Operators
+# deddd8 - Light Foreground (Not often used)
+# e4e3df - Light Background (Not often used)
+# ac8b63 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+# b29a73 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
+# 7d7770 - Classes, Markup Bold, Search Text Background
+# 7a7878 - Strings, Inherited Class, Markup Code, Diff Inserted
+# 797972 - Support, Regular Expressions, Escape Characters, Markup Quotes
+# 797878 - Functions, Methods, Attribute IDs, Headings
+# 797973 - Keywords, Storage, Selector, Markup Italic, Diff Changed
+# 7d776f - Deprecated, Opening/Closing Embedded Language Tags
+
+
+# Set a distinct color for each tab (by default all are blue)
+# example (with optional fallback in base-8):
+tab1="7d7770"
+tab2="ac8b63"
+tab3="797973"
+tab4="7d776f"
+
+# file-specific colors
+blk="7a7878"
+chr="7a7878"
+dir="272626"
+exe="deddd8"
+reg="e4e3df"
+hardlink="deddd8"
+symlink="b5b3af"
+missing="ac8b63"
+orphan="b29a73"
+fifo="deddd8"
+sock="7a7878"
+other="deddd8"

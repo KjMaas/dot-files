@@ -19,7 +19,7 @@ export NNN_PLUG=$plugins
 # use Nuke to open files with the corect program
 # export NNN_OPENER=/home/klaasjan/.config/nnn/plugins/nuke
 # extra command-line options to launch nnn
-export NNN_OPTS="aCDeQUx";
+export NNN_OPTS="aDeQUx";
 # use EDITOR
 export NNN_USE_EDITOR=1;
 # set to a desktop file manager to open with the o key
@@ -43,9 +43,10 @@ export NNN_ARCHIVE='\\.(unzip|7z|bz2|gz|tar|tgz|zip)$'
 # export NNN_RCLONE='rclone mount --read-only'
 
 # Set a distinct color for each tab (by default all are blue)
-export NNN_COLORS='42651';
+SCRIPT_PATH=${0%/*} # path to the directory containing the current script
+source "$SCRIPT_PATH/final_colors"
+export NNN_COLORS="$tab_colors"
 # file-specific colors
-BLK='04' CHR='04' DIR='04' EXE='00' REG='00' HARDLINK='00' SYMLINK='06' MISSING='00' ORPHAN='01' FIFO='0F' SOCK='0F' OTHER='02'
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+export NNN_FCOLORS=$file_colors
 
 echo 'imported nnn environment variables'

@@ -1,0 +1,24 @@
+#!/run/current-system/sw/bin/bash
+
+# Set a distinct color for each tab (by default all are blue)
+TAB1="0a"
+TAB2="1b"
+TAB3="2c"
+TAB4="3d"
+# tab_colors='#0a1b2c3d;4265';
+TAB_COLORS="#$TAB1$TAB2$TAB3$TAB4"
+
+# file-specific colors
+BLK="0B"
+CHR="0B"
+DIR="00"
+EXE="06"
+REG="00"
+HARDLINK="06"
+SYMLINK="06"
+MISSING="00"
+ORPHAN="09"
+FIFO="06"
+SOCK="0B"
+OTHER="06"
+FILE_COLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"

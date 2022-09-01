@@ -28,6 +28,13 @@ rewrite = true
 # end = "/* End flavours */"
 
 [[item]]
+file = "~/.config/nnn/colors"
+template = "nnn"
+subtemplate = "custom"
+rewrite = true
+hook = "bash $HOME/.config/nnn/convert_colors.sh"
+
+[[item]]
 file = "~/.config/kitty/kitty.conf"
 template = "kitty"
 subtemplate = "default"

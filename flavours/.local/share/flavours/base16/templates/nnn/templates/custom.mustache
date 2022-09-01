@@ -1,0 +1,43 @@
+#!/run/current-system/sw/bin/bash
+
+# Base16 nnn template by Klaasjan Maas
+# {{scheme-name}} scheme by {{scheme-author}}
+
+# {{base00-hex}} - Default Background
+# {{base01-hex}} - Lighter Background (Used for status bars, line number and folding marks)
+# {{base02-hex}} - Selection Background
+# {{base03-hex}} - Comments, Invisibles, Line Highlighting
+# {{base04-hex}} - Dark Foreground (Used for status bars)
+# {{base05-hex}} - Default Foreground, Caret, Delimiters, Operators
+# {{base06-hex}} - Light Foreground (Not often used)
+# {{base07-hex}} - Light Background (Not often used)
+# {{base08-hex}} - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+# {{base09-hex}} - Integers, Boolean, Constants, XML Attributes, Markup Link Url
+# {{base0A-hex}} - Classes, Markup Bold, Search Text Background
+# {{base0B-hex}} - Strings, Inherited Class, Markup Code, Diff Inserted
+# {{base0C-hex}} - Support, Regular Expressions, Escape Characters, Markup Quotes
+# {{base0D-hex}} - Functions, Methods, Attribute IDs, Headings
+# {{base0E-hex}} - Keywords, Storage, Selector, Markup Italic, Diff Changed
+# {{base0F-hex}} - Deprecated, Opening/Closing Embedded Language Tags
+
+
+# Set a distinct color for each tab (by default all are blue)
+# example (with optional fallback in base-8):
+tab1="{{base0A-hex}}"
+tab2="{{base08-hex}}"
+tab3="{{base0E-hex}}"
+tab4="{{base0F-hex}}"
+
+# file-specific colors
+blk="{{base0B-hex}}"
+chr="{{base0B-hex}}"
+dir="{{base00-hex}}"
+exe="{{base06-hex}}"
+reg="{{base07-hex}}"
+hardlink="{{base06-hex}}"
+symlink="{{base04-hex}}"
+missing="{{base08-hex}}"
+orphan="{{base09-hex}}"
+fifo="{{base06-hex}}"
+sock="{{base0B-hex}}"
+other="{{base06-hex}}"

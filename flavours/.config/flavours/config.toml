@@ -41,6 +41,7 @@ subtemplate = "default"
 rewrite = false
 start= "# Start flavours"
 end = "# End flavours"
+hook = "kill -SIGUSR1 $(pgrep kitty)"
 
 # [[item]]
 # file = "~/.config/lvim/colors.lua"

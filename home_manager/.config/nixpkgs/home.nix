@@ -102,6 +102,7 @@ in
       flavours        # An easy to use base16 scheme manager/builder that integrates with any workflow
       # wpgtk           # Template based wallpaper/colorscheme generator and manager
 
+      libnotify       # A library that sends desktop notifications to a notification daemon
       wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
       rclone			  	# Command line program to sync files and directories to and from major cloud storage
       rclone-browser	# Graphical Frontend to Rclone written in Qt

@@ -109,7 +109,6 @@ input "1739:52643:1A582014:00_06CB:CDA3_Touchpad" {
 # Keyboard
  input "5426:624:Razer_Razer_Blade_Keyboard" {
     xkb_layout "eu"
-    # xkb_layout "eu,us,fr"
     # xkb_options grp:win_space_toggle 
 }
 

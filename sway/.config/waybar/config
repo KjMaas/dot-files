@@ -1,4 +1,6 @@
 [ {
+    "bar_id": "bar0",
+    "ipc": true,
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 15, // Waybar height (to be removed for auto height)
@@ -165,11 +167,13 @@
 	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     }
 }, {
+    "bar_id": "bar1",
+    "ipc": true,
     "layer": "top", // Waybar at top layer
     "position": "right", // Waybar position (top|bottom|left|right)
     "height": "", // Waybar height (to be removed for auto height)
 
-    "width": "", // Waybar width
+    "width": "15", // Waybar width
     "spacing": 5, // Gaps between modules (px)
 
     // Choose the order of the modules

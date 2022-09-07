@@ -1,27 +1,41 @@
 font=DejaVu Sans Mono 10
-background-color=#292929
-text-color=#cccccc
+
+width=300
+height=100
 margin=10
-padding=4
-border-size=1
-border-radius=0
+padding=7
+border-size=3
+border-radius=5
+text-alignment=center
+
 icons=1
 icon-location=right
+
+default-timeout=10
 sort=+time
+history=1
+max-history=20
+max-visible=5
+layer=top
+anchor=bottom-right
+
+# Start flavours
+## Base16 Generated
+# Author: Flavours
+#
+# You can use these variables anywhere in the mako configuration file.
+
+background-color=#2a2521
+text-color=#d8d1c8
+border-color=#797878
 
 [urgency=low]
-border-color=#cccccc
-default-timeout=5000
-
-[urgency=normal]
-border-color=#ed8712
-default-timeout=5000
+background-color=#2a2521
+text-color=#b49070
+border-color=#797878
 
 [urgency=high]
-border-color=#e53714
-default-timeout=0
-
-[category=mail]
-border-color=#37e514
-default-timeout=60000
-group-by=category
+background-color=#2a2521
+text-color=#82766b
+border-color=#797878
+# End flavours

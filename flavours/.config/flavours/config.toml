@@ -43,6 +43,16 @@ start= "/* Start flavours */"
 end = "/* End flavours */"
 
 [[item]]
+file = "~/.config/mako/config"
+template = "mako"
+subtemplate = "default"
+rewrite = false
+start= "# Start flavours"
+end = "# End flavours"
+hook = "makoctl reload"
+
+
+[[item]]
 file = "~/.config/nnn/colors"
 template = "nnn"
 subtemplate = "custom"

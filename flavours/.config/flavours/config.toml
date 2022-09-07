@@ -24,8 +24,6 @@ file = "~/.config/rofi/themes/colors.rasi"
 template = "rofi"
 subtemplate = "custom"
 rewrite = true
-# start= "/* Start flavours */"
-# end = "/* End flavours */"
 
 [[item]]
 file = "~/.config/kitty/kitty.conf"
@@ -35,13 +33,6 @@ rewrite = false
 start= "# Start flavours"
 end = "# End flavours"
 hook = "kill -SIGUSR1 $(pgrep kitty)"
-
-# [[item]]
-# file = "~/.config/lvim/colors.lua"
-# template = "neovim"
-# subtemplate = "default"
-# rewrite = true
-# # hook = "lvim reload"
 
 [[item]]
 file = "~/.config/zathura/zathurarc"

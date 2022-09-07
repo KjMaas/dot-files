@@ -1,12 +1,16 @@
 #!/run/current-system/sw/bin/bash
 
-cd "$HOME/.config/sway/wallpaper" || exit
+# NixOS specific (adds binaries such as echo, ps, xargs to PATH)
+PATH="/run/current-system/sw/bin/:$PATH"
+
+
+cd "$HOME/dot-files/services/wallpaper/" || exit
 
 export $(xargs < ./wallpaper_cache)
 
 if [[ -z "$WALLPAPERS" ]]; then
   WALLPAPERS="latest"
-  echo "WALLPAPERS=$WALLPAPERS" > ./wallpaper_cache
+  echo "WALLPAPERS=$WALLPAPERS" >> ./wallpaper_cache
 fi
 
 cd "$HOME/Pictures/Wallpapers/" || exit
@@ -18,16 +22,22 @@ do
   fi
 
   if [[ $(ls $wallpaper | wc -l) -lt 144 ]]; then
-    echo "$wallpaper is being rendered ( $(ls $wallpaper | wc -l)/144)"
+    msg="$wallpaper is being rendered ( $(ls $wallpaper | wc -l)/144)"
+    /home/klaasjan/.nix-profile/bin/notify-send "$msg"
+    echo "$msg"
     continue
   fi
 
 
   if [[ "$WALLPAPERS" == *:$wallpaper* ]]; then
-    echo "$wallpaper already converted to HHhMM.png format"
+    msg="$wallpaper already converted to HHhMM.png format"
+    echo "$msg"
     continue
   else
-    echo "converting $wallpaper to HHhMM.png format..."
+    msg="converting $wallpaper to HHhMM.png format..."
+    /home/klaasjan/.nix-profile/bin/notify-send "$msg"
+    echo "$msg"
+
     (
     cd "./$wallpaper" || exit
     M=-1
@@ -48,5 +58,5 @@ do
   fi
 done
 
-cd "$HOME/.config/sway/wallpaper" || exit
+cd "$HOME/dot-files/services/wallpaper/" || exit
 sed -E "s/^(WALLPAPERS=).*/\1$WALLPAPERS/" -i "./wallpaper_cache"

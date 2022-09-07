@@ -24,6 +24,11 @@ in
 
   imports = [
     ./programs/nnn
+
+    ./services/set_wallpaper.nix
+    ./services/dynamic_wallpaper.nix
+    ./services/dynamic_theme.nix
+
   ];
 
   # Home Manager needs a bit of information about you and the

@@ -23,6 +23,9 @@ in
   fonts.fontconfig.enable = true;
 
   imports = [
+    # Configure neovim
+    ./nvim/nvim.nix
+
     ./programs/nnn
 
     ./services/set_wallpaper.nix
@@ -125,12 +128,6 @@ in
       vscode			  	# Open source source code editor developed by Microsoft
 
 
-      # lvim (NeoVim) specific configuration
-      # Language servers for neovim; change these to whatever languages you code in
-      # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
-      rnix-lsp
-      sumneko-lua-language-server
-
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
     ];
@@ -144,7 +141,7 @@ in
   #  };
   home.shellAliases = {
       gs = "git status";
-      v = "$EDITOR";
+      v = "nvim -u $HOME/.config/nvim/init.lua";
       n = "nnn";
       "..." = "cd ../..";
       l="ls -ahlF";
@@ -157,8 +154,8 @@ in
     XDG_CONFIG_HOME="$HOME/.config";
     MAJOK_DIR="$HOME/Documents/Majok";
 
-    EDITOR="lvim";
-    VISUAL="lvim";
+    EDITOR="nvim -u $HOME/.config/nvim/init.lua";
+    VISUAL="nvim -u $HOME/.config/nvim/init.lua";
     TERMINAL="kitty";
   };
   #home.sessionPath = [ "~/.local/bin/foo" ];
@@ -194,18 +191,7 @@ in
     '';
     initExtra = ''
       echo "initExtra: loaded!"
-      # direnv hook
-      eval "$(direnv hook zsh)"
 
-      # this is where lvim binary is stored
-      export PATH="$PATH:$HOME/.local/bin"
-
-      # # required for npm (solves permissions errors when trying to install packages globally)
-      # export PATH=~/.npm-packages/bin:$PATH
-      # export NODE_PATH=~/.npm-packages/lib/node_modules
-    '';
-    envExtra = ''
-      echo "envExtra: loaded!"
       # list directory content when using 'cd'
       function cd () {
         builtin cd "$1";
@@ -219,6 +205,19 @@ in
         builtin cd "$1";
         tree -L 3 -d "$currentDir";
       }
+
+      # direnv hook
+      eval "$(direnv hook zsh)"
+
+      # this is where lvim binary is stored
+      export PATH="$PATH:$HOME/.local/bin"
+
+      # # required for npm (solves permissions errors when trying to install packages globally)
+      # export PATH=~/.npm-packages/bin:$PATH
+      # export NODE_PATH=~/.npm-packages/lib/node_modules
+    '';
+    envExtra = ''
+      ENV_EXTRA_LAST_LOADED="$(date)"
     '';
     plugins = [
       {

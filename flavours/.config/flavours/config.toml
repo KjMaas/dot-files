@@ -51,6 +51,12 @@ start= "# Start flavours"
 end = "# End flavours"
 hook = "makoctl reload"
 
+[[item]]
+file = "~/.config/nvim/lua/user/colors_base16.lua"
+template = "nvim"
+subtemplate = "custom"
+rewrite = true
+hook = "nvr --serverlist | xargs -I '{}' nvr --servername '{}' -cc ':source ~/.config/nvim/init.lua'"
 
 [[item]]
 file = "~/.config/nnn/colors"

@@ -21,5 +21,5 @@ file_colors="$(echo "$file_colors" | xargs -d '-' -I {} nix-shell ./hex2xterm256
 file_colors="$(echo "$file_colors" | xargs -I {} printf "%x\n" {} | tr -d '\n')"
 
 cd "$SCRIPT_PATH"
-echo "tab_colors=#$tab_colors;4444" > ./final_colors
+echo "tab_colors=#$tab_colors" > ./final_colors
 echo "file_colors=$file_colors" >> ./final_colors

@@ -8,9 +8,9 @@
         };
         Timer = {
           Persistent = "true";
-          OnCalendar = "*-*-* *:*:15,45,30,00";
+          OnCalendar = "*-*-* *:00,10,20,30,40,50:00";
           # ToDo: make timer startup depend on sway
-          OnStartupSec = "20s";
+          OnStartupSec = "10s";
           Unit = "dynamic_wallpaper.service";
         };
         Install = {

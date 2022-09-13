@@ -6,10 +6,19 @@ local modules = {
   'user.keymaps',
 
   'plugins.bufferline',
-  'plugins.lspconfig',
-  'plugins.nnn',
+  'plugins.gitsigns',
+  'plugins.lualine',
+  'plugins.treesitter',
 
+  'plugins.cmp',
+  'plugins.lsp.init',
+
+  'plugins.nnn',
   'plugins.nvimtree',
+  'plugins.telescope',
+
+  'plugins.which-key',
+
   'user.colors_base16',
 }
 

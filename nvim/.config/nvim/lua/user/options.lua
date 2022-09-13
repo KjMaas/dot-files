@@ -42,6 +42,8 @@ vim.o.undofile = true
 
 -- Disable default plugins
 vim.g.loaded_netrwPlugin = false                     -- This had an issue but I can't remember now.
+-- timeout for mapped sequence completion
+vim.o.timeoutlen = 100
 
 -- Set clipboard to use system clipboard
 vim.o.clipboard = "unnamedplus"

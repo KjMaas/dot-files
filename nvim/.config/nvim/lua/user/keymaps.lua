@@ -9,7 +9,7 @@ local nnoremap = Utils.nnoremap
 local vnoremap = Utils.vnoremap
 -- local xnoremap = Utils.xnoremap
 local inoremap = Utils.inoremap
--- local tnoremap = Utils.tnoremap
+local tnoremap = Utils.tnoremap
 -- local nmap = Utils.nmap
 -- local xmap = Utils.xmap
 
@@ -27,11 +27,28 @@ inoremap("jk", "<Esc>")
 -- scroll through wrapped lines
 nnoremap("j", "gj")
 nnoremap("k", "gk")
+-- move lines up or down
+inoremap("<A-j>", "<Esc>:m .+1<CR>==gi") 
+inoremap("<A-k>", "<Esc>:m .-2<CR>==gi") 
+nnoremap("<A-j>", ":m .+1<CR>==") 
+nnoremap("<A-k>", ":m .-2<CR>==") 
+vnoremap("<A-j>", ":m '<+1<CR>gv-gv")
+vnoremap("<A-k>", ":m '<-2<CR>gv-gv")
+
+
+-- Terminal window navigation
+tnoremap("<C-j>", "<C-\\><C-N><C-w>j")
+tnoremap("<C-h>", "<C-\\><C-N><C-w>h")
+tnoremap("<C-k>", "<C-\\><C-N><C-w>k")
+tnoremap("<C-l>", "<C-\\><C-N><C-w>l")
+
+
 
 -- Run omnifunc, mostly used for autocomplete
 inoremap("<C-SPACE>", "<C-x><C-o>")
 
 -- Save with Ctrl + S
+inoremap("<C-s>", "<Esc>:w<CR>")
 nnoremap("<C-s>", ":w<CR>")
 
 -- Close buffer

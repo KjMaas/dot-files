@@ -51,9 +51,6 @@ inoremap("<C-SPACE>", "<C-x><C-o>")
 inoremap("<C-s>", "<Esc>:w<CR>")
 nnoremap("<C-s>", ":w<CR>")
 
--- Close buffer
-nnoremap("<C-c>", ":q<CR>")
-
 -- Close Window
 nnoremap("<C-q>", "<C-w>c")
 
@@ -62,10 +59,6 @@ nnoremap("<C-h>", "<C-w>h")
 nnoremap("<C-j>", "<C-w>j")
 nnoremap("<C-k>", "<C-w>k")
 nnoremap("<C-l>", "<C-w>l")
-
--- Switch buffers (needs nvim-bufferline)
-nnoremap("<S-l>", ":BufferLineCycleNext<CR>")
-nnoremap("<S-h>", ":BufferLineCyclePrev<CR>")
 
 -- Splits
 nnoremap("<leader>j", ":split<CR>")
@@ -79,9 +72,6 @@ nnoremap("<leader><C-s>", ":%s//gc<Left><Left><Left>")
 vnoremap("<leader>s", ":s//g<Left><Left>")
 vnoremap("<leader><A-s>", ":%s//g<Left><Left>")
 vnoremap("<leader>S", ":%s//gc<Left><Left><Left>")
-
--- Delete buffer
-nnoremap("<A-w>", ":bd<CR>")
 
 -- Copy to system clippboard
 nnoremap("<leader>y", '"+y')

@@ -5,7 +5,7 @@ local modules = {
   'user.plugins',
   'user.keymaps',
 
-  'plugins.bufferline',
+  'plugins.barbar',
   'plugins.gitsigns',
   'plugins.lualine',
   'plugins.treesitter',

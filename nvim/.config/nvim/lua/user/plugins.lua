@@ -125,6 +125,12 @@ return packer.startup(function(use)
       config = function() require('plugins.nnn') end
     })
 
+    -- terminal
+    use({
+      "akinsho/toggleterm.nvim",
+      tag = '*',
+      config = function() require("plugins.toggleterm") end
+    })
 
     -- -- Startify./../
     -- use({

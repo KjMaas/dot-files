@@ -16,6 +16,7 @@ local modules = {
   'plugins.nnn',
   'plugins.nvimtree',
   'plugins.telescope',
+  'plugins.toggleterm',
 
   'plugins.which-key',
 

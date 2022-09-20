@@ -6,6 +6,7 @@ local modules = {
   'user.keymaps',
 
   'plugins.barbar',
+  'plugins.comment',
   'plugins.gitsigns',
   'plugins.lualine',
   'plugins.treesitter',

@@ -76,7 +76,10 @@ return packer.startup(function(use)
   })
 
   -- Snippets
-  use {"L3MON4D3/LuaSnip", config = function() require('plugins.snippets') end}
+  use ({
+    "L3MON4D3/LuaSnip",
+    --[[ config = function() require('plugins.snippets') end ]]
+  })
   use "rafamadriz/friendly-snippets"
 
   -- Treesitter
@@ -100,22 +103,25 @@ return packer.startup(function(use)
 
   -- bufferline
   use({
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require('plugins.bufferline') end,
+    --[[ 'akinsho/bufferline.nvim', ]]
+    --[[ config = function() require('plugins.bufferline') end, ]]
+    'romgrk/barbar.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = false },
+    config = function() require('plugins.barbar') end,
     event = 'BufWinEnter',
   })
 
   -- statusline
   use({
       'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
       config = function() require('plugins.lualine') end,
     })
 
     -- NvimTree
     use({
       'kyazdani42/nvim-tree.lua',
-      requires = 'kyazdani42/nvim-web-devicons',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
       config = function() require('plugins.nvimtree') end,  -- Must add this manually
     })
 

@@ -8,20 +8,20 @@
 
 -- Alternatively, you can provide a table specifying your colors to the setup function.
 require('base16-colorscheme').setup({
-    base00 = "#2b2522",
-    base01 = "#4e4643",
-    base02 = "#706663",
-    base03 = "#938784",
-    base04 = "#b5a7a4",
-    base05 = "#d8c7c4",
-    base06 = "#ded0cd",
-    base07 = "#e4d8d6",
-    base08 = "#84756e",
-    base09 = "#7d7770",
-    base0A = "#b17871",
-    base0B = "#797878",
-    base0C = "#787875",
-    base0D = "#797878",
-    base0E = "#7a7874",
-    base0F = "#ca8a7b"
+    base00 = "#2d2424",
+    base01 = "#514445",
+    base02 = "#746467",
+    base03 = "#988488",
+    base04 = "#bba4aa",
+    base05 = "#dfc4cb",
+    base06 = "#e4cdd3",
+    base07 = "#e8d6da",
+    base08 = "#8a7373",
+    base09 = "#787878",
+    base0A = "#ab6b7c",
+    base0B = "#ac737c",
+    base0C = "#787878",
+    base0D = "#7a7875",
+    base0E = "#797879",
+    base0F = "#787876"
 })

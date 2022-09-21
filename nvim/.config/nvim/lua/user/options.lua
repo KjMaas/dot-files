@@ -12,7 +12,7 @@ vim.wo.signcolumn        = 'yes'
 vim.wo.cursorline        = true
 
 -- Behaviour
-vim.o.hlsearch           = false
+vim.o.hlsearch           = true
 vim.o.ignorecase         = true                         -- Ignore case when using lowercase in search
 vim.o.smartcase          = true                         -- But don't ignore it when using upper case
 vim.o.smarttab           = true
@@ -43,7 +43,7 @@ vim.o.undofile = true
 -- Disable default plugins
 vim.g.loaded_netrwPlugin = false                     -- This had an issue but I can't remember now.
 -- timeout for mapped sequence completion
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 500
 
 -- Set clipboard to use system clipboard
 vim.o.clipboard = "unnamedplus"

@@ -10,7 +10,7 @@ local setup = {
     marks = true,               -- shows a list of your marks on ' and `
     registers = true,           -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = {
-      enabled = false,          -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = true,           -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20,         -- how many suggestions should be shown in the list?
     },
 
@@ -51,7 +51,7 @@ local setup = {
   },
 
   window = {
-    border = "none",            -- none, single, double, shadow
+    border = "shadow",          -- none, single, double, shadow
     position = "bottom",        -- bottom, top
     margin = { 1, 0, 1, 0 },    -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 },   -- extra window padding [top, right, bottom, left]
@@ -62,11 +62,11 @@ local setup = {
     height = { min = 4, max = 25 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3,                    -- spacing between columns
-    align = "left",                 -- align columns left, center or right
+    align = "center",               -- align columns left, center or right
   },
 
   ignore_missing = false,       -- enable this to hide mappings for which you didn't specify a label
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
+  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "^:", "^ "}, -- hide mapping boilerplate
   show_help = true,             -- show help message on the command line when the popup is visible
   triggers = "auto",            -- automatically setup triggers
   -- triggers = {"<leader>"}    -- or specify a list manually
@@ -101,40 +101,38 @@ local opts = {
 
 local mappings = {
 
-	f = {
-		name = "Find",
-		f = { "<cmd>Telescope find_files<cr>", "Files" },
-		s = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-		c = { "<cmd>Telescope commands<cr>", "Commands" },
-		h = { "<cmd>Telescope help_tags<cr>", "Help" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
-		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		t = { "<cmd>Telescope live_grep<cr>", "Text" },
-		b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-		p = { "<cmd>Telescope projects<cr>", "Projects" },
-	},
+  f = {
+    name = "Find",
+    f = { "<cmd>Telescope find_files<cr>", "Files" },
+    s = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    c = { "<cmd>Telescope commands<cr>", "Commands" },
+    h = { "<cmd>Telescope help_tags<cr>", "Help" },
+    r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    t = { "<cmd>Telescope live_grep<cr>", "Text" },
+    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    p = { "<cmd>Telescope projects<cr>", "Projects" },
+  },
 
-  	g = {
-		name = "Git",
-		g = { "<cmd>abo :Git<CR>", "Fugitive" },
-		l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame Line" },
-		L = { "<cmd>Git blame<cr>", "Blame File" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-			"Undo Stage Hunk",
-		},
-		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-		c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-		d = {
-			"<cmd>Gvdiffsplit<cr>",
-			"Diff",
-		},
-	},
+  g = {
+    name = "Git",
+    g = { "<cmd>abo :Git<CR>", "Fugitive" },
+    L = { "<cmd>Git blame<cr>", "Blame File" },
+    L = { "<cmd>Git blame<cr>", "Blame File" },
+    C = { "<cmd>Git commit<cr>", "Commit" },
+    d = { "<cmd>Gvdiffsplit<cr>", "Diff" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame Line" },
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Previous Hunk" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
+  },
 
   p = {
     name = "Packer",
@@ -144,6 +142,7 @@ local mappings = {
     S = { "<cmd>PackerStatus<cr>", "Status" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
+
 }
 
 which_key.setup(setup)

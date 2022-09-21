@@ -83,25 +83,10 @@ local function lsp_keymaps(bufnr)
   keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts(bufnr, "Go to references"))
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  keymap(
-  "n",
-  "[d",
-  '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
-  opts(bufnr, "Previous diagnostic")
-  )
-  keymap(
-  "n",
-  "gl",
-  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
-  opts(bufnr, "Show line's diagnostic")
-  )
+  keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts(bufnr, "Previous diagnostic"))
+  keymap("n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts(bufnr, "Show line's diagnostic"))
   keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts(bufnr, "Next diagnostic"))
-  keymap(
-  "n",
-  "<leader>q",
-  "<cmd>lua vim.diagnostic.setloclist()<CR>",
-  opts(bufnr, "Add buffer diagnostics to the list")
-  )
+  keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts(bufnr, "Add buffer diagnostics to the list"))
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 

@@ -3,124 +3,123 @@
 
 
 local Utils = require('user.utils')
+local opts = Utils.opts
 
--- local exprnnoremap = Utils.exprnnoremap
-local nnoremap = Utils.nnoremap
-local vnoremap = Utils.vnoremap
--- local xnoremap = Utils.xnoremap
-local inoremap = Utils.inoremap
-local tnoremap = Utils.tnoremap
--- local nmap = Utils.nmap
--- local xmap = Utils.xmap
+local map = vim.keymap.set
+local cmd = vim.cmd
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
-
 -- Reload configuration files
-inoremap("<leader>r", "<Esc>:source $MYVIMRC<CR>")
-nnoremap("<leader>r", ":source $MYVIMRC<CR>")
+map('n', "<leader>r", ":source $MYVIMRC<CR>", opts("reload NeoVim config."))
 
 -- jk to normal mode
-inoremap("jk", "<Esc>")
+map('i', "jk", "<Esc>", opts("return to normal mode"))
 -- scroll through wrapped lines
-nnoremap("j", "gj")
-nnoremap("k", "gk")
+map('n', "j", "gj", opts(""))
+map('n', "k", "gk", opts(""))
 -- move lines up or down
-inoremap("<A-j>", "<Esc>:m .+1<CR>==gi") 
-inoremap("<A-k>", "<Esc>:m .-2<CR>==gi") 
-nnoremap("<A-j>", ":m .+1<CR>==") 
-nnoremap("<A-k>", ":m .-2<CR>==") 
-vnoremap("<A-j>", ":m '<+1<CR>gv-gv")
-vnoremap("<A-k>", ":m '<-2<CR>gv-gv")
-
+map('i', "<A-j>", "<Esc>:m .+1<CR>==gi", opts("move line down")) 
+map('i', "<A-k>", "<Esc>:m .-2<CR>==gi", opts("move line up")) 
+map('n', "<A-j>", ":m .+1<CR>==", opts("move line down")) 
+map('n', "<A-k>", ":m .-2<CR>==", opts("move line up")) 
+map('v', "<A-j>", ":m '<+1<CR>gv-gv", opts("move line down"))
+map('v', "<A-k>", ":m '<-2<CR>gv-gv", opts("move line up"))
 
 -- Terminal window navigation
-tnoremap("<C-j>", "<C-\\><C-N><C-w>j")
-tnoremap("<C-h>", "<C-\\><C-N><C-w>h")
-tnoremap("<C-k>", "<C-\\><C-N><C-w>k")
-tnoremap("<C-l>", "<C-\\><C-N><C-w>l")
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  map('t', '<esc>', [[<C-\><C-n>]], opts)
+  map('t', 'jk', [[<C-\><C-n>]], opts)
+  map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-
+-- Resize with arrows
+map('n', "<C-Up>", ":resize +2<CR>", opts("Increase width of window"))
+map('n', "<C-Down>", ":resize -2<CR>", opts("Decrease width of window"))
+map('n', "<C-Left>", ":vertical resize -2<CR>", opts("Increase height of window"))
+map('n', "<C-Right>", ":vertical resize +2<CR>", opts("Decrease height of window"))
+map('i', "<C-Up>", ":resize +2<CR>", opts("Increase width of window"))
+map('i', "<C-Down>", ":resize -2<CR>", opts("Decrease width of window"))
+map('i', "<C-Left>", ":vertical resize -2<CR>", opts("Increase height of window"))
+map('i', "<C-Right>", ":vertical resize +2<CR>", opts("Decrease height of window"))
 
 -- Run omnifunc, mostly used for autocomplete
-inoremap("<C-SPACE>", "<C-x><C-o>")
+-- map('i', "<C-SPACE>", "<C-x><C-o>", opts(""))
 
 -- Save with Ctrl + S
-inoremap("<C-s>", "<Esc>:w<CR>")
-nnoremap("<C-s>", ":w<CR>")
+map('i', "<C-s>", "<Esc>:w<CR>", opts("save"))
+map('n', "<C-s>", ":w<CR>", opts("save"))
 
 -- Close Window
-nnoremap("<C-q>", "<C-w>c")
+map('n', "<C-q>", "<C-w>c", opts("close window"))
 
--- Move around windows (shifted to the right)
-nnoremap("<C-h>", "<C-w>h")
-nnoremap("<C-j>", "<C-w>j")
-nnoremap("<C-k>", "<C-w>k")
-nnoremap("<C-l>", "<C-w>l")
+-- Move around windows
+map('n', "<C-h>", "<C-w>h", opts(""))
+map('n', "<C-j>", "<C-w>j", opts(""))
+map('n', "<C-k>", "<C-w>k", opts(""))
+map('n', "<C-l>", "<C-w>l", opts(""))
 
 -- Splits
-nnoremap("<leader>j", ":split<CR>")
-nnoremap("<leader>l", ":vsplit<CR>")
+-- map('n', "<leader>j", ":split<CR>", opts(""))
+-- map('n', "<leader>l", ":vsplit<CR>", opts(""))
 
 -- Populate substitution
-nnoremap("<leader>s", ":s//g<Left><Left>")
-nnoremap("<leader>S", ":%s//g<Left><Left>")
-nnoremap("<leader><C-s>", ":%s//gc<Left><Left><Left>")
+map('n', "<leader>s", ":s//g<Left><Left>", opts(""))
+map('n', "<leader>S", ":%s//g<Left><Left>", opts(""))
+map('n', "<leader><C-s>", ":%s//gc<Left><Left><Left>", opts(""))
 
-vnoremap("<leader>s", ":s//g<Left><Left>")
-vnoremap("<leader><A-s>", ":%s//g<Left><Left>")
-vnoremap("<leader>S", ":%s//gc<Left><Left><Left>")
+map('v', "<leader>s", ":s//g<Left><Left>", opts(""))
+map('v', "<leader><A-s>", ":%s//g<Left><Left>", opts(""))
+map('v', "<leader>S", ":%s//gc<Left><Left><Left>", opts(""))
 
 -- Copy to system clippboard
-nnoremap("<leader>y", '"+y')
-vnoremap("<leader>y", '"+y')
+map('n', "<leader>y", '"+y', opts(""))
+map('v', "<leader>y", '"+y', opts(""))
 
 -- Paste from system clippboard
-nnoremap("<leader><C-v>", '"+p')
-vnoremap("<leader><C-v>", '"+p')
+map('n', "<leader><C-v>", '"+p', opts(""))
+map('v', "<leader><C-v>", '"+p', opts(""))
 
 -- Clear highlight search
-nnoremap("<leader>h", ":nohlsearch<CR>")
-vnoremap("<leader>h", ":nohlsearch<CR>")
+map('n', "<leader>h", ":nohlsearch<CR>", opts(""))
+map('v', "<leader>h", ":nohlsearch<CR>", opts(""))
 
 -- Local list
-nnoremap("<leader>lo", ":lopen<CR>")
-nnoremap("<leader>lc", ":lclose<CR>")
-nnoremap("<C-n>", ":lnext<CR>")
-nnoremap("<C-p>", ":lprev<CR>")
+map('n', "<leader>lo", ":lopen<CR>", opts(""))
+map('n', "<leader>lc", ":lclose<CR>", opts(""))
+map('n', "<C-n>", ":lnext<CR>", opts(""))
+map('n', "<C-p>", ":lprev<CR>", opts(""))
 
 -- Quickfix list
-nnoremap("<leader>co", ":copen<CR>")
-nnoremap("<leader>cc", ":cclose<CR>")
-nnoremap("<C-N>", ":cnext<CR>")
-nnoremap("<C-P>", ":cprev<CR>")
+map('n', "<leader>co", ":copen<CR>", opts("open quickfix list"))
+map('n', "<leader>cc", ":cclose<CR>", opts("close quickfix list"))
+map('n', "<C-N>", ":cnext<CR>", opts("next on quickfix list"))
+map('n', "<C-P>", ":cprev<CR>", opts("previous on quickfix list"))
 
 -- Open file in default application
-nnoremap("<leader>xo", "<Cmd> !xdg-open %<CR><CR>")
+map('n', "<leader>xo", "<Cmd> !xdg-open %<CR><CR>", opts("open in default app"))
 
 -- Fugitive
-nnoremap("<leader>G", ":G<CR>")
+map('n', "<leader>G", ":G<CR>", opts(""))
 
 -- Show line diagnostics
-nnoremap("<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
+map('n', "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', opts(""))
 
 -- Open local diagnostics in local list
-nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
+map('n', "<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts(""))
 
 -- Open all project diagnostics in quickfix list
-nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
-
--- Telescope
-nnoremap("<leader>ff", "<Cmd>Telescope find_files<CR>")
-nnoremap("<leader>fhf","<Cmd>Telescope find_files hidden=true<CR>")
-nnoremap("<leader>fb", "<Cmd>Telescope buffers<CR>")
-nnoremap("<leader>fg", "<Cmd>Telescope live_grep<CR>")
+map('n', "<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>", opts(""))
 
 -- File explorer
-nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")  -- NvimTree
--- nnoremap("<leader>e", "<Cmd>RnvimrToggle<CR>")
+map('n', "<leader>e", "<Cmd>NvimTreeToggle<CR>", opts(""))  -- NvimTree
 
 -- EasyAlign
 -- xmap("ga", "<cmd>EasyAlign")

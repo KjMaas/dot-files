@@ -36,32 +36,33 @@ nnn.setup({
     setup = nil,       -- or "explorer" / "picker", auto open on setup function
     tabpage = nil,     -- or "explorer" / "picker", auto open when opening new tabpage
     empty = true,      -- only auto open on empty buffer
-    ft_ignore = {      -- dont auto open for these filetypes
-    "gitcommit",
-  }
-},
+    ft_ignore = {      
+      "gitcommit",     -- dont auto open for these filetypes
+    }
+  },
 
-auto_close = true,    -- close tabpage/nvim when nnn is last window
-replace_netrw = nil,  -- or "explorer" / "picker"
+  auto_close = true,    -- close tabpage/nvim when nnn is last window
+  replace_netrw = nil,  -- or "explorer" / "picker"
 
-windownav = {         -- window movement mappings to navigate out of nnn
-left = "<C-h>",
-right = "<C-l>",
-next = "<C-j>",
-prev = "<C-k>",
-    },
+  -- window movement mappings to navigate out of nnn
+  windownav = {         
+    left = "<C-h>",
+    right = "<C-l>",
+    next = "<C-j>",
+    prev = "<C-k>",
+  },
 
-    buflisted = false,   -- whether or not nnn buffers show up in the bufferlist
-    quitcd = "tcd",      -- or "cd" / "lcd", command to run if quitcd file is found
-    offset = false,      -- whether or not to write position offset to tmpfile(for use in preview-tui)
+  buflisted = false,   -- whether or not nnn buffers show up in the bufferlist
+  quitcd = "tcd",      -- or "cd" / "lcd", command to run if quitcd file is found
+  offset = false,      -- whether or not to write position offset to tmpfile(for use in preview-tui)
 
-    mappings = {
-      { "<C-A-t>", nnn.builtin.open_in_tab },      -- open file(s) in tab
-      { "<C-A-s>", nnn.builtin.open_in_split },    -- open file(s) in split
-      { "<C-A-v>", nnn.builtin.open_in_vsplit },   -- open file(s) in vertical split
-      { "<C-A-y>", nnn.builtin.copy_to_clipboard },-- copy file(s) to clipboard
-      { "<C-A-w>", nnn.builtin.cd_to_path },       -- cd to file directory
-      { "<C-A-p>", nnn.builtin.open_in_preview },  -- open file in preview split keeping nnn focused
-      { "<C-A-e>", nnn.builtin.populate_cmdline }, -- populate cmdline (:) with file(s)
-    },
-  })
+  mappings = {
+    { "<C-A-t>", nnn.builtin.open_in_tab },      -- open file(s) in tab
+    { "<C-A-s>", nnn.builtin.open_in_split },    -- open file(s) in split
+    { "<C-A-v>", nnn.builtin.open_in_vsplit },   -- open file(s) in vertical split
+    { "<C-A-y>", nnn.builtin.copy_to_clipboard },-- copy file(s) to clipboard
+    { "<C-A-w>", nnn.builtin.cd_to_path },       -- cd to file directory
+    { "<C-A-p>", nnn.builtin.open_in_preview },  -- open file in preview split keeping nnn focused
+    { "<C-A-e>", nnn.builtin.populate_cmdline }, -- populate cmdline (:) with file(s)
+  },
+})

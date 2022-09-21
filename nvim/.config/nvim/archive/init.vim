@@ -1,1 +1,0 @@
-lua dofile("init.lua")

@@ -1,8 +1,0 @@
-require('options')
-require('keymaps')
---
---utilsrequire('commands')
-require('plugins')
-require('core.keymaps')
-require('core.utils')
-require('colors_base16')

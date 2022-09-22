@@ -45,6 +45,8 @@ in
     packages = with pkgs; [
       # 3D
       pkgsUnstable.blender		# Da best!
+      godot           # Free and Open Source 2D and 3D game engine
+      unityhub        # Game development tool
       f3d             # Fast and minimalist 3D viewer using VTK
       foxotron        # General purpose model viewer
       # assimp        # A library to import various 3D model formats

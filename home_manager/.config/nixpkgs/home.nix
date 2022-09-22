@@ -9,11 +9,13 @@ let
     cudaSupport = true;
   };
 
-  # Import config files
-  # nvimsettings = import ./nvim/neovim.nix;
-
-  pkgsUnstable = import (fetchTarball http://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { config = baseConfig; };
-  #pkgsUnstable = import <pkgs-unstable> { config = baseConfig; };
+  # Remember to add the unstable channel to the list of channels:
+  # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+  # nix-channel --update
+  # pkgsUnstable = import (
+  #   fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
+  # ) { config = baseConfig; };
+  pkgsUnstable = import <nixpkgs-unstable> { config = baseConfig; };
 
 in
 {
@@ -45,50 +47,51 @@ in
       pkgsUnstable.blender		# Da best!
       f3d             # Fast and minimalist 3D viewer using VTK
       foxotron        # General purpose model viewer
-      # assimp          # A library to import various 3D model formats
+      # assimp        # A library to import various 3D model formats
 
-     # (f3d.override { 
+      # (f3d.override { 
       #  cmakeFlags = ["F3D_MODULE_ASSIMP=ON"];
       #  }
       # )
 
       # social media
-      discord			   	# All-in-one cross-platform voice and text chat for gamers
-      signal-desktop	# Private, simple, and secure messenger
-      whatsapp-for-linux		# Whatsapp desktop messaging app
-      zoom-us         # zoom.us video conferencing application
+      discord			  # All-in-one cross-platform voice and text chat for gamers
+      signal-desktop	  # Private, simple, and secure messenger
+      whatsapp-for-linux  # Whatsapp desktop messaging app
+      zoom-us             # zoom.us video conferencing application
       
       # base
-      brave			    	# Privacy-oriented browser for Desktop and Laptop computers
-      drawio			   	# A desktop application for creating diagrams
-      gimp			    	# The GNU Image Manipulation Program
-      inkscape				# Vector graphics editor
-      keepassxc				# Offline password manager with many features.
-      trash-cli       # Command line tool for the desktop trash can
-      btop            # A monitor of resources
-      zip             # Compressor/archiver for creating and modifying zipfiles
+      brave	    # Privacy-oriented browser for Desktop and Laptop computers
+      drawio    # A desktop application for creating diagrams
+      gimp	    # The GNU Image Manipulation Program
+      inkscape  # Vector graphics editor
+      keepassxc # Offline password manager with many features.
+      trash-cli # Command line tool for the desktop trash can
+      btop      # A monitor of resources
+      zip       # Compressor/archiver for creating and modifying zipfiles
+      ripgrep   # A utility that combines the usability of The Silver Searcher with the raw speed of grep
 
       # pandoc section
       ################
       # pandoc                          # Conversion between markup formats
       pandoc-drawio-filter              # Pandoc filter which converts draw.io diagrams to PDF
-      # texlive.combined.scheme-basic     # TeX Live environment for scheme-basic
+      # texlive.combined.scheme-basic   # TeX Live environment for scheme-basic
       texlive.combined.scheme-full
       # haskellPackages.pandoc-citeproc # Supports using pandoc with citeproc
       haskellPackages.pandoc
-      haskellPackages.citeproc # Supports using pandoc with citeproc
-      haskellPackages.pandoc-crossref # Pandoc filter for cross-references
-      wkhtmltopdf                     # Tools for rendering web pages to PDF or images
-      mendeley                        # A reference manager and academic social network
-      unoconv                         # Convert between any document format supported by LibreOffice/OpenOffice
+      haskellPackages.citeproc          # Supports using pandoc with citeproc
+      haskellPackages.pandoc-crossref   # Pandoc filter for cross-references
+      wkhtmltopdf                       # Tools for rendering web pages to PDF or images
+      mendeley                          # A reference manager and academic social network
+      unoconv                           # Convert between any document format supported by LibreOffice/OpenOffice
 
 
-      zathura		    	# A highly customizable and functional PDF viewer
-      pdfsam-basic		# Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
-      imagemagick			# A software suite to create, edit, compose, or convert bitmap images
+      zathura	  	  # A highly customizable and functional PDF viewer
+      pdfsam-basic	  # Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files
+      imagemagick	  # A software suite to create, edit, compose, or convert bitmap images
       sxiv            # Simple X Image Viewer
-      libreoffice-qt	# Comprehensive, professional-quality productivity suite
-				             	# /!\ " buildPhase completed in 50 minutes 17 seconds "
+      libreoffice-qt  # Comprehensive, professional-quality productivity suite
+                      # /!\ " buildPhase completed in 50 minutes 17 seconds "
       qalculate-gtk   # The ultimate desktop calculator
 
 
@@ -96,37 +99,36 @@ in
       pavucontrol     # PulseAudio Volume Control
       carla           # An audio plugin host
       qjackctl        # A Qt application to control the JACK sound server daemon
-      qpwgraph 				# Qt graph manager for PipeWire, similar to QjackCtl
+      qpwgraph        # Qt graph manager for PipeWire, similar to QjackCtl
 
 
-      mimeo          # Open files by MIME-type or file name using regular expressions
+      mimeo               # Open files by MIME-type or file name using regular expressions
       perl532Packages.FileMimeInfo
-      xfce.thunar			# Xfce file manager
-      xfce.thunar-volman		# Thunar extension for automatic management of removable drives and media
-      gvfs	    			# Virtual Filesystem support library
+      xfce.thunar	      # Xfce file manager
+      xfce.thunar-volman  # Thunar extension for automatic management of removable drives and media
+      gvfs	    		  # Virtual Filesystem support library
 
 
       # Colorscheme
-      flavours        # An easy to use base16 scheme manager/builder that integrates with any workflow
-      # wpgtk           # Template based wallpaper/colorscheme generator and manager
+      flavours  # An easy to use base16 scheme manager/builder that integrates with any workflow
+      # wpgtk   # Template based wallpaper/colorscheme generator and manager
 
-      libnotify       # A library that sends desktop notifications to a notification daemon
-      wpa_supplicant_gui # Qt-based GUI for wpa_supplicant
-      rclone			  	# Command line program to sync files and directories to and from major cloud storage
-      rclone-browser	# Graphical Frontend to Rclone written in Qt
-      # etcher			  	# Flash OS images to SD cards and USB drives, safely and easily
-      stow				    # Symlinking on steroids!
+      libnotify           # A library that sends desktop notifications to a notification daemon
+      wpa_supplicant_gui  # Qt-based GUI for wpa_supplicant
+      rclone			  # Command line program to sync files and directories to and from major cloud storage
+      rclone-browser	  # Graphical Frontend to Rclone written in Qt
+      # etcher			  # Flash OS images to SD cards and USB drives, safely and easily
+      stow				  # Symlinking on steroids!
 
       # development
-      kitty           # A modern, hackable, featureful, OpenGL based terminal emulator
-      # tmux            # Terminal multiplexer
-      dbeaver         # Universal SQL Client for developers, DBA and analysts
-      git	      			# Distributed version control system
-      poetry          # Python dependency management and packaging made easy.
-      tig			      	# Text-mode interface for git
-      # alacritty				# A cross-platform, GPU-accelerated terminal emulator
-      vscode			  	# Open source source code editor developed by Microsoft
-
+      kitty         # A modern, hackable, featureful, OpenGL based terminal emulator
+      # tmux        # Terminal multiplexer
+      dbeaver       # Universal SQL Client for developers, DBA and analysts
+      git	        # Distributed version control system
+      poetry        # Python dependency management and packaging made easy.
+      tig		    # Text-mode interface for git
+      # alacritty	# A cross-platform, GPU-accelerated terminal emulator
+      vscode	 	# Open source source code editor developed by Microsoft
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
@@ -158,8 +160,6 @@ in
     VISUAL="nvim -u $HOME/.config/nvim/init.lua";
     TERMINAL="kitty";
   };
-  #home.sessionPath = [ "~/.local/bin/foo" ];
-  #xsession.enable = true;  
 
   programs.zsh = {
     enable = true;
@@ -229,6 +229,16 @@ in
           sha256 = "0w8x5ilpwx90s2s2y56vbzq92ircmrf0l5x8hz4g1nx3qzawv6af";
         };
       }
+      # ToDo (bugged tab completion)
+      # {
+      #   name = "zsh-autocomplete";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "marlonrichert";
+      #     repo = "zsh-autocomplete";
+      #     rev = "39423112977a8c520962bc11c46ee31e7ca873ca";
+      #     sha256 = "sha256-+UziTYsjgpiumSulrLojuqHtDrgvuG91+XNiaMD7wIs=";
+      #   };
+      # }
     ];
 
     oh-my-zsh = {

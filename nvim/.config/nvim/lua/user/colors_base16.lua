@@ -2,14 +2,14 @@
 -- by Klaasjan Maas,
 -- Generated scheme by Flavours
 
--- "#2b2522" "#83766d"
--- "#4d4743" "#ab7b68"
--- "#6f6965" "#7e7771"
--- "#918b86" "#bd8f76"
--- "#b3ada7" "#797973"
--- "#d6cfc9" "#7a7878"
--- "#dcd6d1" "#7c7777"
--- "#e2ddd9" "#7d7774"
+-- "#2a2522" "#82766c"
+-- "#4c4743" "#ad7969"
+-- "#6f6964" "#7e7771"
+-- "#918a86" "#bc8c77"
+-- "#b3aca7" "#797973"
+-- "#d6cec9" "#7a7878"
+-- "#dcd5d1" "#7c7777"
+-- "#e2dcd9" "#7d7774"
 
 local catpuccino_color_palette = {
 	rosewater = "#F2D5CF",
@@ -27,19 +27,19 @@ local catpuccino_color_palette = {
 	blue = "#8CAAEE",
 	lavender = "#BABBF1",
 
-    text = "#e2ddd9",
+    text = "#e2dcd9",
 	subtext1 = "#7c7777",
 	subtext0 = "#7d7774",
-	overlay2 = "#e2ddd9",
-	overlay1 = "#dcd6d1",
-	overlay0 = "#d6cfc9",
-	surface2 = "#918b86",
-	surface1 = "#6f6965",
-	surface0 = "#4d4743",
+	overlay2 = "#e2dcd9",
+	overlay1 = "#dcd5d1",
+	overlay0 = "#d6cec9",
+	surface2 = "#918a86",
+	surface1 = "#6f6964",
+	surface0 = "#4c4743",
 
-	base = "#6f6965",
-	mantle = "#4d4743",
-	crust = "#2b2522"
+	base = "#6f6964",
+	mantle = "#4c4743",
+	crust = "#2a2522"
 }
 
 

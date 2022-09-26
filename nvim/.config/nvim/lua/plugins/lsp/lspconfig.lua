@@ -128,6 +128,7 @@ require('lspconfig')['tsserver'].setup{
   flags = lsp_flags,
 }
 
+
 -- Register mappings with which-key
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
@@ -135,14 +136,28 @@ if not status_ok then
   return
 end
 
+-- Toogle diagnostics
+local diagnostics_active = true
+function _G.toggle_diagnostics()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.api.nvim_echo({ { "Show diagnostics" } }, false, {})
+    vim.diagnostic.enable()
+  else
+    vim.api.nvim_echo({ { "Disable diagnostics" } }, false, {})
+    vim.diagnostic.disable()
+  end
+end
+
 local mappings = {
 
   l = {
     name = "LSP",
-    f = { "<cmd>lua vim.diagnostic.open_float()<cr>", "open float" },
-    k = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "go to previous" },
-    j = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "go to next" },
-    q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "quickfix" },
+    f = { "<cmd>lua vim.diagnostic.open_float()<CR>", "open float" },
+    k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "go to previous" },
+    j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "go to next" },
+    q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "quickfix" },
+    D = { "<cmd>call v:lua.toggle_diagnostics()<CR>", "toggle in-line diagnostics" },
   },
 }
 

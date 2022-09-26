@@ -2,26 +2,45 @@
 -- by Klaasjan Maas,
 -- {{scheme-name}} scheme by {{scheme-author}}
 
+-- "#{{base00-hex}}" "#{{base08-hex}}"
+-- "#{{base01-hex}}" "#{{base09-hex}}"
+-- "#{{base02-hex}}" "#{{base0A-hex}}"
+-- "#{{base03-hex}}" "#{{base0B-hex}}"
+-- "#{{base04-hex}}" "#{{base0C-hex}}"
+-- "#{{base05-hex}}" "#{{base0D-hex}}"
+-- "#{{base06-hex}}" "#{{base0E-hex}}"
+-- "#{{base07-hex}}" "#{{base0F-hex}}"
 
--- All builtin colorschemes can be accessed with |:colorscheme|.
--- vim.cmd('colorscheme base16-gruvbox-dark-soft')
+local catpuccino_color_palette = {
+	rosewater = "#F2D5CF",
+	flamingo = "#EEBEBE",
+	pink = "#F4B8E4",
+	mauve = "#CA9EE6",
+	red = "#E78284",
+	maroon = "#EA999C",
+	peach = "#EF9F76",
+	yellow = "#E5C890",
+	green = "#A6D189",
+	teal = "#81C8BE",
+	sky = "#99D1DB",
+	sapphire = "#85C1DC",
+	blue = "#8CAAEE",
+	lavender = "#BABBF1",
 
--- Alternatively, you can provide a table specifying your colors to the setup function.
-require('base16-colorscheme').setup({
-    base00 = "#{{base00-hex}}",
-    base01 = "#{{base01-hex}}",
-    base02 = "#{{base02-hex}}",
-    base03 = "#{{base03-hex}}",
-    base04 = "#{{base04-hex}}",
-    base05 = "#{{base05-hex}}",
-    base06 = "#{{base06-hex}}",
-    base07 = "#{{base07-hex}}",
-    base08 = "#{{base08-hex}}",
-    base09 = "#{{base09-hex}}",
-    base0A = "#{{base0A-hex}}",
-    base0B = "#{{base0B-hex}}",
-    base0C = "#{{base0C-hex}}",
-    base0D = "#{{base0D-hex}}",
-    base0E = "#{{base0E-hex}}",
-    base0F = "#{{base0F-hex}}"
-})
+    text = "#{{base07-hex}}",
+	subtext1 = "#{{base0E-hex}}",
+	subtext0 = "#{{base0F-hex}}",
+	overlay2 = "#{{base07-hex}}",
+	overlay1 = "#{{base06-hex}}",
+	overlay0 = "#{{base05-hex}}",
+	surface2 = "#{{base03-hex}}",
+	surface1 = "#{{base02-hex}}",
+	surface0 = "#{{base01-hex}}",
+
+	base = "#{{base02-hex}}",
+	mantle = "#{{base01-hex}}",
+	crust = "#{{base00-hex}}"
+}
+
+
+return catpuccino_color_palette

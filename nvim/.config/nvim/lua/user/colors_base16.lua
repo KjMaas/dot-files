@@ -2,26 +2,45 @@
 -- by Klaasjan Maas,
 -- Generated scheme by Flavours
 
+-- "#2b2522" "#83766d"
+-- "#4d4743" "#ab7b68"
+-- "#6f6965" "#7e7771"
+-- "#918b86" "#bd8f76"
+-- "#b3ada7" "#797973"
+-- "#d6cfc9" "#7a7878"
+-- "#dcd6d1" "#7c7777"
+-- "#e2ddd9" "#7d7774"
 
--- All builtin colorschemes can be accessed with |:colorscheme|.
--- vim.cmd('colorscheme base16-gruvbox-dark-soft')
+local catpuccino_color_palette = {
+	rosewater = "#F2D5CF",
+	flamingo = "#EEBEBE",
+	pink = "#F4B8E4",
+	mauve = "#CA9EE6",
+	red = "#E78284",
+	maroon = "#EA999C",
+	peach = "#EF9F76",
+	yellow = "#E5C890",
+	green = "#A6D189",
+	teal = "#81C8BE",
+	sky = "#99D1DB",
+	sapphire = "#85C1DC",
+	blue = "#8CAAEE",
+	lavender = "#BABBF1",
 
--- Alternatively, you can provide a table specifying your colors to the setup function.
-require('base16-colorscheme').setup({
-    base00 = "#2d2424",
-    base01 = "#514445",
-    base02 = "#746467",
-    base03 = "#988488",
-    base04 = "#bba4aa",
-    base05 = "#dfc4cb",
-    base06 = "#e4cdd3",
-    base07 = "#e8d6da",
-    base08 = "#8a7373",
-    base09 = "#787878",
-    base0A = "#ab6b7c",
-    base0B = "#ac737c",
-    base0C = "#787878",
-    base0D = "#7a7875",
-    base0E = "#797879",
-    base0F = "#787876"
-})
+    text = "#e2ddd9",
+	subtext1 = "#7c7777",
+	subtext0 = "#7d7774",
+	overlay2 = "#e2ddd9",
+	overlay1 = "#dcd6d1",
+	overlay0 = "#d6cfc9",
+	surface2 = "#918b86",
+	surface1 = "#6f6965",
+	surface0 = "#4d4743",
+
+	base = "#6f6965",
+	mantle = "#4d4743",
+	crust = "#2b2522"
+}
+
+
+return catpuccino_color_palette

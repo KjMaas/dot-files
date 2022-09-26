@@ -1,4 +1,3 @@
-
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
   return
@@ -101,18 +100,12 @@ local opts = {
 
 local mappings = {
 
-  f = {
-    name = "Find",
-    f = { "<cmd>Telescope find_files<cr>", "Files" },
-    s = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    c = { "<cmd>Telescope commands<cr>", "Commands" },
-    h = { "<cmd>Telescope help_tags<cr>", "Help" },
-    r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
-    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-    t = { "<cmd>Telescope live_grep<cr>", "Text" },
-    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    p = { "<cmd>Telescope projects<cr>", "Projects" },
-  },
+  ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
+  ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["q"] = { "<cmd>q!<CR>", "Quit!" },
+  ["c"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
+  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
   g = {
     name = "Git",

@@ -5,10 +5,10 @@ vim.o.pumheight          = 10
 vim.o.showmode           = false
 vim.o.showtabline        = 2                            -- Always show tabline
 vim.o.title              = true
-vim.o.termguicolors      = false                         -- Use true colors, required for some plugins
+vim.o.termguicolors      = true                         -- Use true colors, required for some plugins
 vim.wo.number            = true
 vim.wo.relativenumber    = true
-vim.wo.signcolumn        = 'yes'
+vim.wo.signcolumn        = 'number'
 vim.wo.cursorline        = true
 
 -- Behaviour
@@ -41,12 +41,24 @@ vim.g.do_file_type_lua   = 1
 vim.o.undofile = true
 
 -- Disable default plugins
-vim.g.loaded_netrwPlugin = false                     -- This had an issue but I can't remember now.
+vim.g.loaded_netrwPlugin = false
 -- timeout for mapped sequence completion
 vim.o.timeoutlen = 500
 
 -- Set clipboard to use system clipboard
 vim.o.clipboard = "unnamedplus"
+
+
+-- vim.api.nvim_open_win(
+--   0, 
+--   false, 
+--   config = {
+--     relative='win', 
+--     width=12, 
+--     height=3, 
+--     -- bufpos={100,10}
+--   }
+-- )
 
 
 -- -- Python providers

@@ -21,7 +21,10 @@ nvim_tree.setup {
 
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
+  open_on_setup = true,
+  open_on_setup_file = false,
+  auto_reload_on_write = true,
+  root_dirs = {},
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
@@ -46,7 +49,7 @@ nvim_tree.setup {
     },
   },
 
-  sync_root_with_cwd = true,
+  sync_root_with_cwd = false,
   respect_buf_cwd = true,
   update_focused_file = {
     enable = true,
@@ -69,8 +72,8 @@ nvim_tree.setup {
   },
 
   view = {
+    adaptive_size = false,
     width = 30,
-    height = 30,
     hide_root_folder = false,
     side = "left",
     mappings = {
@@ -98,7 +101,7 @@ nvim_tree.setup {
         git = true,
         file = true,
         folder = true,
-        folder_arrow = true
+        folder_arrow = true,
       },
       glyphs = {
         default = "",

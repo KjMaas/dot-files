@@ -15,15 +15,16 @@ M.setup = function()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
-    -- show signs
+    virtual_text = true,
+
     signs = {
       active = signs,
     },
+
     update_in_insert = true,
     underline = true,
     severity_sort = true,
+
     float = {
       focusable = false,
       style = "minimal",
@@ -32,17 +33,19 @@ M.setup = function()
       header = "",
       prefix = "",
     },
+
   }
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
+  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  --   border = "rounded",
+  -- })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+  -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  --   border = "rounded",
+  -- })
+
 end
 
 local function lsp_highlight_document(client)
@@ -95,7 +98,7 @@ M.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
   end
   if client.name == "sumneko_lua" then
-    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_formatting = true
   end
   if client.name == "jsonls" then
     client.resolved_capabilities.document_formatting = false
@@ -109,6 +112,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
+  print("issue with cmp_nvim_lsp")
   return
 end
 

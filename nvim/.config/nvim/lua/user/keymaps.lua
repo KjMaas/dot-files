@@ -24,8 +24,8 @@ map('i', "<A-j>", "<Esc>:m .+1<CR>==gi", opts("move line down"))
 map('i', "<A-k>", "<Esc>:m .-2<CR>==gi", opts("move line up")) 
 map('n', "<A-j>", ":m .+1<CR>==", opts("move line down")) 
 map('n', "<A-k>", ":m .-2<CR>==", opts("move line up")) 
-map('v', "<A-j>", ":m '<+1<CR>gv-gv", opts("move line down"))
-map('v', "<A-k>", ":m '<-2<CR>gv-gv", opts("move line up"))
+map('v', "<A-j>", ":m '>+1<CR>gv=gv", opts("move line down"))
+map('v', "<A-k>", ":m '<-2<CR>gv=gv", opts("move line up"))
 
 -- Terminal window navigation
 function _G.set_terminal_keymaps()
@@ -41,17 +41,18 @@ end
 cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 -- Resize with arrows
-map('n', "<C-Up>", ":resize +2<CR>", opts("Increase width of window"))
-map('n', "<C-Down>", ":resize -2<CR>", opts("Decrease width of window"))
-map('n', "<C-Left>", ":vertical resize -2<CR>", opts("Increase height of window"))
-map('n', "<C-Right>", ":vertical resize +2<CR>", opts("Decrease height of window"))
-map('i', "<C-Up>", ":resize +2<CR>", opts("Increase width of window"))
-map('i', "<C-Down>", ":resize -2<CR>", opts("Decrease width of window"))
-map('i', "<C-Left>", ":vertical resize -2<CR>", opts("Increase height of window"))
-map('i', "<C-Right>", ":vertical resize +2<CR>", opts("Decrease height of window"))
-
--- Run omnifunc, mostly used for autocomplete
--- map('i', "<C-SPACE>", "<C-x><C-o>", opts(""))
+map('n', "<C-Up>", ":resize +2<CR>", opts("Increase window width"))
+map('n', "<C-Down>", ":resize -2<CR>", opts("Decrease window width"))
+map('n', "<C-Left>", ":vertical resize -2<CR>", opts("Increase window height"))
+map('n', "<C-Right>", ":vertical resize +2<CR>", opts("Decrease window height"))
+map('i', "<C-Up>", "<Esc>:resize +2<CR>", opts("Increase window width"))
+map('i', "<C-Down>", "<Esc>:resize -2<CR>", opts("Decrease window width"))
+map('i', "<C-Left>", "<Esc>:vertical resize -2<CR>", opts("Increase window height"))
+map('i', "<C-Right>", "<Esc>:vertical resize +2<CR>", opts("Decrease window height"))
+map('v', "<C-Up>", "<Esc>:resize +2<CR>gv", opts("Increase window width"))
+map('v', "<C-Down>", "<Esc>:resize -2<CR>gv", opts("Decrease window width"))
+map('v', "<C-Left>", "<Esc>:vertical resize -2<CR>gv", opts("Increase window height"))
+map('v', "<C-Right>", "<Esc>:vertical resize +2<CR>gv", opts("Decrease window height"))
 
 -- Save with Ctrl + S
 map('i', "<C-s>", "<Esc>:w<CR>", opts("save"))
@@ -65,10 +66,6 @@ map('n', "<C-h>", "<C-w>h", opts(""))
 map('n', "<C-j>", "<C-w>j", opts(""))
 map('n', "<C-k>", "<C-w>k", opts(""))
 map('n', "<C-l>", "<C-w>l", opts(""))
-
--- Splits
--- map('n', "<leader>j", ":split<CR>", opts(""))
--- map('n', "<leader>l", ":vsplit<CR>", opts(""))
 
 -- Populate substitution
 map('n', "<leader>s", ":s//g<Left><Left>", opts(""))
@@ -91,35 +88,42 @@ map('v', "<leader><C-v>", '"+p', opts(""))
 map('n', "<leader>h", ":nohlsearch<CR>", opts(""))
 map('v', "<leader>h", ":nohlsearch<CR>", opts(""))
 
--- Local list
-map('n', "<leader>lo", ":lopen<CR>", opts(""))
-map('n', "<leader>lc", ":lclose<CR>", opts(""))
-map('n', "<C-n>", ":lnext<CR>", opts(""))
-map('n', "<C-p>", ":lprev<CR>", opts(""))
-
--- Quickfix list
-map('n', "<leader>co", ":copen<CR>", opts("open quickfix list"))
-map('n', "<leader>cc", ":cclose<CR>", opts("close quickfix list"))
-map('n', "<C-N>", ":cnext<CR>", opts("next on quickfix list"))
-map('n', "<C-P>", ":cprev<CR>", opts("previous on quickfix list"))
-
 -- Open file in default application
 map('n', "<leader>xo", "<Cmd> !xdg-open %<CR><CR>", opts("open in default app"))
 
--- Fugitive
-map('n', "<leader>G", ":G<CR>", opts(""))
+-- -- Local list
+-- map('n', "<leader>lo", ":lopen<CR>", opts(""))
+-- map('n', "<leader>lc", ":lclose<CR>", opts(""))
+-- map('n', "<C-n>", ":lnext<CR>", opts(""))
+-- map('n', "<C-p>", ":lprev<CR>", opts(""))
 
--- Show line diagnostics
-map('n', "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', opts(""))
+-- -- Quickfix list
+-- map('n', "<leader>co", ":copen<CR>", opts("open quickfix list"))
+-- map('n', "<leader>cc", ":cclose<CR>", opts("close quickfix list"))
+-- map('n', "<C-N>", ":cnext<CR>", opts("next on quickfix list"))
+-- map('n', "<C-P>", ":cprev<CR>", opts("previous on quickfix list"))
 
--- Open local diagnostics in local list
-map('n', "<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts(""))
+-- -- Fugitive
+-- map('n', "<leader>G", ":G<CR>", opts(""))
 
--- Open all project diagnostics in quickfix list
-map('n', "<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>", opts(""))
+-- -- Show line diagnostics
+-- map('n', "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', opts(""))
 
--- File explorer
-map('n', "<leader>e", "<Cmd>NvimTreeToggle<CR>", opts(""))  -- NvimTree
+-- Run omnifunc, mostly used for autocomplete
+-- map('i', "<C-SPACE>", "<C-x><C-o>", opts(""))
+
+-- -- Open local diagnostics in local list
+-- map('n', "<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts(""))
+
+-- -- Open all project diagnostics in quickfix list
+-- map('n', "<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>", opts(""))
+
+-- -- File explorer
+-- map('n', "<leader>e", "<Cmd>NvimTreeToggle<CR>", opts(""))  -- NvimTree
+
+-- Splits
+-- map('n', "<leader>j", ":split<CR>", opts(""))
+-- map('n', "<leader>l", ":vsplit<CR>", opts(""))
 
 -- EasyAlign
 -- xmap("ga", "<cmd>EasyAlign")

@@ -1,6 +1,11 @@
 vim.env.MYVIMRC = "~/.config/nvim/init.lua"
 
+
+-- local transparent_window = true
+vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+
 local modules = {
+  'user.utils',
   'user.options',
   'user.plugins',
   'user.keymaps',
@@ -11,8 +16,10 @@ local modules = {
   'plugins.lualine',
   'plugins.treesitter',
 
+  'plugins.lsp',
+  'plugins.dap',
   'plugins.cmp',
-  'plugins.lsp.init',
+  'plugins.luasnip',
 
   'plugins.nnn',
   'plugins.nvimtree',
@@ -21,7 +28,7 @@ local modules = {
 
   'plugins.which-key',
 
-  'user.colors_base16',
+  'user.colorscheme',
 }
 
 
@@ -31,4 +38,15 @@ for _, v in pairs(modules) do
   print("--> " .. v)
   require(v)
 end
+
+-- local Utils = require('user.utils')
+-- if transparent_window then
+--   Utils.enable_transparent_mode()
+-- end
+
+-- vim.cmd [[colorscheme catppuccin]]
+
 print("Done!")
+
+
+

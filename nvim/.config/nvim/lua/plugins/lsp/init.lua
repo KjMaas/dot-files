@@ -1,10 +1,18 @@
 -- import LSP config, our installer and our handlers
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
-	return
+
+local modules = {
+  'lua-dev',
+  'mason',
+  'mason-lspconfig',
+  'lspconfig',
+  -- require("plugins.lsp.null-ls")
+}
+
+print("    sourcing LSP specifics...")
+for _, v in pairs(modules) do
+  package.loaded["plugins.lsp." .. v]=nil
+  print("    --> " .. v)
+  require("plugins.lsp." .. v)
 end
 
-require("plugins.lsp.mason")
-require("plugins.lsp.mason-lspconfig")
-require("plugins.lsp.handlers").setup()
-require("plugins.lsp.null-ls")
+print("    LSP loaded!")

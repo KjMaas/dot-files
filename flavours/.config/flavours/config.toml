@@ -39,8 +39,8 @@ file = "~/.config/zathura/zathurarc"
 template = "zathura"
 subtemplate = "recolor"
 rewrite = false
-start= "/* Start flavours */"
-end = "/* End flavours */"
+start= "# Start flavours"
+end = "# End flavours"
 
 [[item]]
 file = "~/.config/mako/config"

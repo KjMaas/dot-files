@@ -2,4 +2,4 @@
 Type=Application
 Name=Text editor
 Terminal=true
-Exec=/home/klaasjan/.local/bin/lvim %U
+Exec=/home/klaasjan/.nix-profile/bin/nvim  %U

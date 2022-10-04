@@ -107,26 +107,6 @@ local mappings = {
   ["c"] = { "<cmd>BufferClose<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
-  g = {
-    name = "Git",
-    g = { "<cmd>abo :Git<CR>", "Fugitive" },
-    L = { "<cmd>Git blame<cr>", "Blame File" },
-    L = { "<cmd>Git blame<cr>", "Blame File" },
-    C = { "<cmd>Git commit<cr>", "Commit" },
-    d = { "<cmd>Gvdiffsplit<cr>", "Diff" },
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame Line" },
-    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Previous Hunk" },
-    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-    b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-    c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-  },
-
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },

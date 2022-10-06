@@ -13,8 +13,13 @@ local modules = {
   'plugins.barbar',
   'plugins.comment',
   'plugins.gitsigns',
+  'plugins.lightspeed',
   'plugins.lualine',
+  'plugins.project',
+
   'plugins.treesitter',
+  'plugins.neuron',
+  'plugins.markdown-preview',
 
   'plugins.lsp',
   'plugins.dap',
@@ -34,7 +39,7 @@ local modules = {
 
 print("sourcing MYVIMRC --> " .. vim.env.MYVIMRC)
 for _, v in pairs(modules) do
-  package.loaded[v]=nil
+  package.loaded[v] = nil
   print("--> " .. v)
   require(v)
 end
@@ -47,6 +52,3 @@ end
 -- vim.cmd [[colorscheme catppuccin]]
 
 print("Done!")
-
-
-

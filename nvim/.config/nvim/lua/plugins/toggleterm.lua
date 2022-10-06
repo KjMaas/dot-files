@@ -15,7 +15,7 @@ toggleterm.setup {
     end
   end,
 
-  open_mapping = [[<leader>t]],
+  open_mapping = [[<A-t>]],
 
   -- on_open = fun(t: Terminal),                                              -- function to run when the terminal opens 
   -- on_close = fun(t: Terminal),                                             -- function to run when the terminal closes 
@@ -32,9 +32,9 @@ toggleterm.setup {
   start_in_insert = true,
   insert_mappings = false,  -- whether or not the open mapping applies in insert mode
   terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-  persist_size = true,
+  persist_size = false,
   persist_mode = true,      -- if set to true (default) the previous terminal mode will be remembered
-  direction = 'horizontal', -- 'vertical' | 'horizontal' | 'tab' | 'float'
+  direction = 'float',      -- 'vertical' | 'horizontal' | 'tab' | 'float'
   close_on_exit = true,     -- close the terminal window when the process exits
   shell = vim.o.shell,      -- change the default shell
   auto_scroll = true,       -- automatically scroll to the bottom on terminal output
@@ -51,7 +51,7 @@ toggleterm.setup {
     -- width = <value>,
     -- height = <value>,
 
-    winblend = 3,
+    winblend = 0,
 
     -- highlights = {
     --   -- highlights which map to a highlight group name and a table of it's values
@@ -79,3 +79,41 @@ toggleterm.setup {
   },
 
 }
+
+
+-- Register mappings with which-key
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  print("there's an issue with which-key")
+  return
+end
+
+local mappings = {
+
+  t = {
+    name = "Toggleterm",
+
+    h = { "<cmd>ToggleTerm direction=horizontal<CR>", "Horizontal Terminal" },
+    v = { "<cmd>ToggleTerm direction=vertical<CR>", "Vertical Terminal" },
+    f = { "<cmd>ToggleTerm direction=float<CR>", "Floating Terminal" },
+
+    a = { "<cmd>ToggleTermToggleAll<CR>", "Toggle All" },
+
+    s = { "<cmd>ToggleTermSendCurrentLine<CR>", "Send Current Line" },
+    S = { "<cmd>ToggleTermSendVisualLines<CR>", "Send Visual Lines" },
+    V = { "<cmd>ToggleTermSendVisualSelection<CR>", "Send Visual Selection" },
+
+  },
+}
+
+
+local opts = {
+  mode = "n",
+  prefix = "<leader>",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = true,
+}
+
+which_key.register(mappings, opts)

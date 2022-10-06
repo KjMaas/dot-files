@@ -113,6 +113,16 @@ require('lspconfig')['sumneko_lua'].setup{
   },
 }
 
+require('lspconfig')['remark_ls'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
+-- require('lspconfig')['marksman'].setup{
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+-- }
+
 require('lspconfig')['rnix'].setup{
   on_attach = on_attach,
   flags = lsp_flags,
@@ -129,14 +139,8 @@ require('lspconfig')['tsserver'].setup{
 }
 
 
--- Register mappings with which-key
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-  print("there's an issue with which-key")
-  return
-end
-
 -- Toogle diagnostics
+-- also check: https://github.com/neovim/neovim/issues/14825
 local diagnostics_active = true
 function _G.toggle_diagnostics()
   diagnostics_active = not diagnostics_active
@@ -149,17 +153,40 @@ function _G.toggle_diagnostics()
   end
 end
 
+
+-- Register mappings with which-key
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  print("there's an issue with which-key")
+  return
+end
+
 local mappings = {
 
   l = {
     name = "LSP",
+    i = { "<cmd>LspInfo<cr>", "Info" },
+
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    -- d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics", },
+    R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+    -- w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics", },
+    -- l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    -- s = { "<cmd>SymbolsOutline<cr>", "Toggle Symbols Outline" },
+
     f = { "<cmd>lua vim.diagnostic.open_float()<CR>", "open float" },
-    k = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "go to previous" },
-    j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "go to next" },
-    q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "quickfix" },
+    F = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next Diagnostic", },
+    k = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic", },
+    q = { "<cmd>lua vim.diagnostic.set_loclist()<cr>", "Quickfix" },
+
     D = { "<cmd>call v:lua.toggle_diagnostics()<CR>", "toggle in-line diagnostics" },
+
+    m = { "<cmd>Mason<cr>", "Mason (Insall LSPs)" },
   },
 }
+
 
 local opts = {
   mode = "n",

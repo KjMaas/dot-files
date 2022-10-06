@@ -4,7 +4,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
+if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     print("Installing packer, please close and reopen Neovim...")
     vim.cmd [[packadd packer.nvim]]
@@ -120,6 +120,12 @@ return packer.startup(function(use)
     config = function() require('plugins.nvimtree') end,
   })
 
+  -- Better project management
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function() require("plugins.project") end,
+  }
+
   -- nnn (file explorer/manager)
   use({
     'luukvbaal/nnn.nvim',
@@ -170,18 +176,20 @@ return packer.startup(function(use)
   use 'tpope/vim-speeddating'
   use 'tpope/vim-repeat'
   use 'junegunn/vim-easy-align'
-
-  -- -- Markdown
-  -- use 'godlygeek/tabular'
-  -- use 'ellisonleao/glow.nvim'
-  use ({ 
+  use {
+    'ggandor/lightspeed.nvim',
+    config = function() require('plugins.lightspeed') end
+  }
+  -- Markdown and note taking
+  use {
+    "oberblastmeister/neuron.nvim",
+    requires = {'nvim-lua/popup.nvim'},
+    config = function() require('plugins.neuron') end,
+  }
+  use ({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
-    ft = "markdown",
-    -- ToDo: configuration (https://github.com/iamcco/markdown-preview.nvim)
-    config = function()
-      vim.g.mkdp_auto_start = 1
-    end,
+    config = function() require('plugins.markdown-preview') end,
   })
 
   -- -- Startify./../

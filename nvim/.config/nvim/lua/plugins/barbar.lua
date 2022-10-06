@@ -121,7 +121,7 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- Integration with filetree plugins (offset tabline)
 
 local nvim_tree_events = require('nvim-tree.events')
-local bufferline_state = require('bufferline.state')
+local bufferline_state = require('bufferline.api')
 
 local function get_tree_size()
 return require'nvim-tree.view'.View.width

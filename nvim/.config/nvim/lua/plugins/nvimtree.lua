@@ -24,7 +24,7 @@ nvim_tree.setup {
   open_on_setup = true,
   open_on_setup_file = false,
   auto_reload_on_write = true,
-  root_dirs = {},
+  root_dirs = {"git"},
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
@@ -49,7 +49,7 @@ nvim_tree.setup {
     },
   },
 
-  sync_root_with_cwd = false,
+  sync_root_with_cwd = true,
   respect_buf_cwd = true,
   update_focused_file = {
     enable = true,

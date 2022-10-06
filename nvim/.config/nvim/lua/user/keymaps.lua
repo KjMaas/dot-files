@@ -84,10 +84,6 @@ map('v', "<leader>y", '"+y', opts(""))
 map('n', "<leader><C-v>", '"+p', opts(""))
 map('v', "<leader><C-v>", '"+p', opts(""))
 
--- Clear highlight search
-map('n', "<leader>h", ":nohlsearch<CR>", opts(""))
-map('v', "<leader>h", ":nohlsearch<CR>", opts(""))
-
 -- Open file in default application
 map('n', "<leader>xo", "<Cmd> !xdg-open %<CR><CR>", opts("open in default app"))
 
@@ -103,12 +99,6 @@ map('n', "<leader>xo", "<Cmd> !xdg-open %<CR><CR>", opts("open in default app"))
 -- map('n', "<C-N>", ":cnext<CR>", opts("next on quickfix list"))
 -- map('n', "<C-P>", ":cprev<CR>", opts("previous on quickfix list"))
 
--- -- Fugitive
--- map('n', "<leader>G", ":G<CR>", opts(""))
-
--- -- Show line diagnostics
--- map('n', "<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>', opts(""))
-
 -- Run omnifunc, mostly used for autocomplete
 -- map('i', "<C-SPACE>", "<C-x><C-o>", opts(""))
 
@@ -117,9 +107,6 @@ map('n', "<leader>xo", "<Cmd> !xdg-open %<CR><CR>", opts("open in default app"))
 
 -- -- Open all project diagnostics in quickfix list
 -- map('n', "<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>", opts(""))
-
--- -- File explorer
--- map('n', "<leader>e", "<Cmd>NvimTreeToggle<CR>", opts(""))  -- NvimTree
 
 -- Splits
 -- map('n', "<leader>j", ":split<CR>", opts(""))

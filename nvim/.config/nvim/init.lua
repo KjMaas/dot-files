@@ -30,6 +30,7 @@ local modules = {
   'plugins.nvimtree',
   'plugins.telescope',
   'plugins.toggleterm',
+  'plugins.notify',
 
   'plugins.which-key',
 
@@ -37,10 +38,10 @@ local modules = {
 }
 
 
-print("sourcing MYVIMRC --> " .. vim.env.MYVIMRC)
+PACKAGES_STRING = "sourcing MYVIMRC --> " .. vim.env.MYVIMRC
 for _, v in pairs(modules) do
   package.loaded[v] = nil
-  print("--> " .. v)
+  PACKAGES_STRING = PACKAGES_STRING .. "\n--> " .. v
   require(v)
 end
 
@@ -51,4 +52,5 @@ end
 
 -- vim.cmd [[colorscheme catppuccin]]
 
-print("Done!")
+PACKAGES_STRING = PACKAGES_STRING .. "\n\nDone!"
+vim.notify(PACKAGES_STRING)

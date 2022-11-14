@@ -234,6 +234,12 @@ return packer.startup(function(use)
   -- use 'marko-cerovac/material.nvim'
   -- use 'RRethy/nvim-base16'
   use 'chrisbra/Colorizer'
+
+  -- fancy notifications
+  use {
+    'rcarriga/nvim-notify',
+    config = function() require('plugins.notify') end,
+  }
   -- Catppuccin colorscheme
   use({ "catppuccin/nvim", as = "catppuccin" }) 
 

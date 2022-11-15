@@ -36,7 +36,7 @@ nnn.setup({
     setup = nil,       -- or "explorer" / "picker", auto open on setup function
     tabpage = nil,     -- or "explorer" / "picker", auto open when opening new tabpage
     empty = true,      -- only auto open on empty buffer
-    ft_ignore = {      
+    ft_ignore = {
       "gitcommit",     -- dont auto open for these filetypes
     }
   },
@@ -45,7 +45,7 @@ nnn.setup({
   replace_netrw = nil,  -- or "explorer" / "picker"
 
   -- window movement mappings to navigate out of nnn
-  windownav = {         
+  windownav = {
     left = "<C-h>",
     right = "<C-l>",
     next = "<C-j>",

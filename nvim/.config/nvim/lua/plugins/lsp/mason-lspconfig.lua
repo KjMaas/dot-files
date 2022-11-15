@@ -8,8 +8,8 @@ mason_lspconfig.setup({
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
     "jsonls",
-    "lua-language-server",
-    -- "sumneko_lua",
+    -- "lua-language-server",
+    "sumneko_lua",
     "pyright",
   },
 

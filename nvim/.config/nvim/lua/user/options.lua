@@ -12,6 +12,8 @@ vim.wo.signcolumn        = 'number'
 vim.wo.cursorline        = true
 
 -- Behaviour
+vim.opt.list             = false
+vim.opt.listchars        = { space = '_', tab = '>~', eol = '↵' }
 vim.o.hlsearch           = true
 vim.o.ignorecase         = true    -- Ignore case when using lowercase in search
 vim.o.smartcase          = true    -- But don't ignore it when using upper case
@@ -42,6 +44,22 @@ vim.o.undofile = true
 vim.g.loaded_netrwPlugin = false
 -- timeout for mapped sequence completion
 vim.o.timeoutlen = 500
+vim.api.nvim_create_autocmd("BufEnter", {
+  -- pattern = "*",
+  callback = function ()
+    if (vim.bo.filetype == "nnn") then
+      vim.o.timeoutlen = 10
+    end
+  end
+})
+vim.api.nvim_create_autocmd("BufLeave", {
+  -- pattern = "*",
+  callback = function ()
+    if (vim.bo.filetype == "nnn") then
+      vim.o.timeoutlen = 500
+    end
+  end
+})
 
 -- Set clipboard to use system clipboard
 vim.o.clipboard = "unnamedplus"
@@ -74,3 +92,33 @@ vim.o.clipboard = "unnamedplus"
 -- --   underline = false,
 -- --   signs = true,          -- Keep gutter signs
 -- -- }
+--
+
+
+
+
+-- -- Register mappings with which-key
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  print("there's an issue with which-key")
+  return
+end
+
+local mappings = {
+
+  o = {
+    name = "Toggle Option",
+    l = { "<cmd>set list!<cr>", "Toggle eol, tab and space chars ON/OFF" },
+  },
+}
+
+local opts = {
+  mode = "n",
+  prefix = "<leader>",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = true,
+}
+
+which_key.register(mappings, opts)

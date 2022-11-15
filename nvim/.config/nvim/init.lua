@@ -13,6 +13,7 @@ local modules = {
   'plugins.barbar',
   'plugins.comment',
   'plugins.gitsigns',
+  'plugins.colorizer',
   'plugins.lightspeed',
   'plugins.lualine',
   'plugins.project',
@@ -33,6 +34,8 @@ local modules = {
   'plugins.notify',
 
   'plugins.which-key',
+
+  'user.pdexp.export_to_pdf',
 
   'user.colorscheme',
 }

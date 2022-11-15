@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -138,6 +138,10 @@ require('lspconfig')['tsserver'].setup{
   flags = lsp_flags,
 }
 
+require('lspconfig')['tailwindcss'].setup{
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
 
 -- Toogle diagnostics
 -- also check: https://github.com/neovim/neovim/issues/14825

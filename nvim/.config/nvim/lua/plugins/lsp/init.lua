@@ -1,7 +1,7 @@
 -- import LSP config, our installer and our handlers
 
 local modules = {
-  'lua-dev',
+  'neodev',
   'mason',
   'mason-lspconfig',
   'lspconfig',

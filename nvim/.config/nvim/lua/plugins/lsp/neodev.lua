@@ -1,11 +1,12 @@
-local status_ok, lua_dev = pcall(require, "lua-dev")
+local status_ok, neodev = pcall(require, "neodev")
 if not status_ok then
+  notify_on_pcall_fail(neodev)
   return
 end
 
 
 -- IMPORTANT: make sure to setup lua-dev BEFORE lspconfig
-lua_dev.setup({
+neodev.setup({
   library = {
     enabled = true, -- when not enabled, lua-dev will not change any settings to the LSP server
     -- these settings will be used for your Neovim config directory

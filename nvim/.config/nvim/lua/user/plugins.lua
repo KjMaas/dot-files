@@ -61,7 +61,7 @@ return packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim" -- Helper to make LSP installer work nicer with nvim-lspconfig
   use "jose-elias-alvarez/null-ls.nvim"   -- null-ls - formatting and style linting
   use "folke/trouble.nvim"                -- Make it easier to read through diagnostics
-  use "folke/lua-dev.nvim"                -- full signature help, docs and completion for the nvim lua API
+  use "folke/neodev.nvim"                -- full signature help, docs and completion for the nvim lua API
 
   -- Autocompletion
   use "hrsh7th/cmp-path"         -- path completions

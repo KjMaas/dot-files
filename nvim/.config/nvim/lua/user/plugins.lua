@@ -95,6 +95,11 @@ return packer.startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
+    requires = { 
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'nvim-treesitter/playground',
+      'windwp/nvim-ts-autotag'
+    },
     config = function() require('plugins.treesitter') end,
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   })

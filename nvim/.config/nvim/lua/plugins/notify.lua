@@ -22,7 +22,7 @@ notify.setup({
 
   level = 2,
   minimum_width = 0,
-  max_width = 30,
+  max_width = 50,
   render = "minimal",
   stages = "fade_in_slide_out",
   timeout = 3000,

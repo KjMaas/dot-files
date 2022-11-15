@@ -238,13 +238,18 @@ return packer.startup(function(use)
   -- use 'folke/tokyonight.nvim'
   -- use 'marko-cerovac/material.nvim'
   -- use 'RRethy/nvim-base16'
-  use 'chrisbra/Colorizer'
 
   -- fancy notifications
   use {
     'rcarriga/nvim-notify',
     config = function() require('plugins.notify') end,
   }
+
+  use {
+    'NvChad/nvim-colorizer.lua',
+    config = function() require('plugins.colorizer') end,
+  }
+
   -- Catppuccin colorscheme
   use({ "catppuccin/nvim", as = "catppuccin" }) 
 

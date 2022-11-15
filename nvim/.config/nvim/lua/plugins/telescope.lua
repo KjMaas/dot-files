@@ -9,6 +9,7 @@ local actions = require "telescope.actions"
 -- Load extensions
 -- telescope.load_extension('dap')
 -- telescope.load_extension('projects')
+telescope.load_extension("notify")
 
 telescope.setup {
   defaults = {
@@ -122,7 +123,10 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     t = { "<cmd>Telescope live_grep<cr>", "Text" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+
     p = { "<cmd>Telescope projects<cr>", "Projects" },
+
+    n = { "<cmd>Telescope notify<cr>", "Notifications" },
   },
 }
 

@@ -10,6 +10,5 @@ local modules = {
 
 for _, v in pairs(modules) do
   package.loaded["plugins.lsp." .. v]=nil
-  PACKAGES_STRING = PACKAGES_STRING .. "\n    --> " .. v
   require("plugins.lsp." .. v)
 end

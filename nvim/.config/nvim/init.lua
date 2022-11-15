@@ -38,10 +38,8 @@ local modules = {
 }
 
 
-PACKAGES_STRING = "sourcing MYVIMRC --> " .. vim.env.MYVIMRC
 for _, v in pairs(modules) do
   package.loaded[v] = nil
-  PACKAGES_STRING = PACKAGES_STRING .. "\n--> " .. v
   require(v)
 end
 
@@ -51,6 +49,3 @@ end
 -- end
 
 -- vim.cmd [[colorscheme catppuccin]]
-
-PACKAGES_STRING = PACKAGES_STRING .. "\n\nDone!"
-vim.notify(PACKAGES_STRING)

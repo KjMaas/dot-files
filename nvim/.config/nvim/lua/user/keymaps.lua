@@ -12,7 +12,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Reload configuration files
-map('n', "<leader>r", ":source $MYVIMRC<CR>", opts("reload NeoVim config."))
+map('n', "<leader>r",
+  ":source $MYVIMRC<CR> :lua vim.notify(vim.env.MYVIMRC .. \"  sourced!\", \"info\", {title=\":source $MYVIMRC\"})<CR>",
+  opts("reload NeoVim config.")
+)
 
 -- jk to normal mode
 map('i', "jk", "<Esc>", opts("return to normal mode"))

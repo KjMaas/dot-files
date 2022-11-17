@@ -123,6 +123,7 @@ in
       stow				  # Symlinking on steroids!
 
       # development
+      bc            # GNU software calculator
       kitty         # A modern, hackable, featureful, OpenGL based terminal emulator
       # tmux        # Terminal multiplexer
       dbeaver       # Universal SQL Client for developers, DBA and analysts

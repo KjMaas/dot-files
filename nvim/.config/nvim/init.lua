@@ -32,6 +32,7 @@ local modules = {
   'plugins.telescope',
   'plugins.toggleterm',
   'plugins.notify',
+  'plugins.registers',
 
   'plugins.which-key',
 

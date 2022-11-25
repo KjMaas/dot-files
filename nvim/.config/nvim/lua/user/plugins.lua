@@ -197,6 +197,12 @@ return packer.startup(function(use)
     config = function() require('plugins.markdown-preview') end,
   })
 
+  -- better pasting with registers
+  use {
+    "tversteeg/registers.nvim",
+    config = function() require("plugins.registers") end,
+  }
+
   -- -- Startify./../
   -- use({
   --   'mhinz/vim-startify',

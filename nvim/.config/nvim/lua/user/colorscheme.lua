@@ -54,7 +54,7 @@ catppuccin.setup({
 		markdown = true,
 		mini = false,
 		neogit = false,
-		notify = false,
+		notify = true,
 		nvimtree = true,
 		overseer = false,
 		pounce = false,

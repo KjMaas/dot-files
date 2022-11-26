@@ -3,7 +3,7 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #window {
@@ -49,7 +49,7 @@ window#waybar.chromium {
     border-bottom: solid 1px @base0E;
     border-right: solid 5px @base0E;
     border-left: solid 5px @base0E;
-    padding: 3px 0px;
+    padding: 0px 0px;
     /* margin: 10px; */
 }
 

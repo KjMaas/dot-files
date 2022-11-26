@@ -3,7 +3,7 @@
     "ipc": true,
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 15, // Waybar height (to be removed for auto height)
+    "height": 0, // Waybar height (to be removed for auto height)
 
     "width": 1280, // Waybar width
     "spacing": 3, // Gaps between modules (px)
@@ -57,7 +57,7 @@
     },
 
     "tray": {
-        // "icon-size": 16,
+        "icon-size": 14,
         "spacing": 10
     },
 
@@ -173,7 +173,7 @@
     "position": "right", // Waybar position (top|bottom|left|right)
     "height": "", // Waybar height (to be removed for auto height)
 
-    "width": "15", // Waybar width
+    "width": "12", // Waybar width
     "spacing": 5, // Gaps between modules (px)
 
     // Choose the order of the modules

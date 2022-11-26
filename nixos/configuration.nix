@@ -20,8 +20,6 @@ in
     ./hardware-configuration.nix
     # Configure tilling WM
     ../sway/sway.nix
-    # Configure neovim
-    ../home_manager/.config/nixpkgs/nvim/nvim.nix
   ];
 
   nixpkgs.config = {

@@ -51,6 +51,8 @@ gaps right 0
 gaps bottom 0
 gaps left 0
 # thin borders
+smart_borders no_gaps
+smart_gaps off
 hide_edge_borders smart
 default_border pixel 5
 

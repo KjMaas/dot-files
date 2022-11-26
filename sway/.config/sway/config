@@ -45,7 +45,11 @@ bindsym $mod+shift+r exec "$HOME/.config/rofi/scripts/exec_custom_script.sh"
 
 # gaps
 gaps inner 5
-gaps outer 10
+# gaps outer 10
+gaps top 35
+gaps right 0
+gaps bottom 0
+gaps left 0
 # thin borders
 hide_edge_borders smart
 default_border pixel 5
@@ -272,8 +276,10 @@ mode "resize" {
 bar {
   id bar0
   swaybar_command waybar
-  hidden_state hide
-  mode hide
+  # states are: hide | show
+  hidden_state show
+  # modes are: dock|hide|invisible|overlay 
+  mode hide 
   modifier Mod4+Mod1
   #also valid modifiers: Lock Mod4 Mod1
 }

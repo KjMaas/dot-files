@@ -17,6 +17,7 @@ plugins=$plugins'd:dragdrop;'
 plugins=$plugins'l:!git log;'  
 plugins=$plugins'n:!nvim ~/Documents/Notes/tmp.md;'  
 plugins=$plugins'y:!echo $nnn | wl-copy*;'  
+plugins=$plugins'i:!mediainfo $nnn;'  
 export NNN_PLUG=$plugins
 # use Nuke to open files with the corect program
 # export NNN_OPENER=/home/klaasjan/.config/nnn/plugins/nuke

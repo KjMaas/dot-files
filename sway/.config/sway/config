@@ -137,12 +137,33 @@ input "type:keyboard" {
     bindsym $mod+d exec $menu
     # bindsym $mod+m exec ./../wofi/window-select.sh
 
+#
+# Floating Window-related stuffs:
+#
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
+    
+    # normal|none|pixel [<n>]
+    default_floating_border pixel 5
+
+    # width x height
+    floating_maximum_size 750 x 500
+    floating_minimum_size 75 x 50
+
+    # smart|urgent|focus|none
+    focus_on_window_activation smart
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -214,12 +235,6 @@ input "type:keyboard" {
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
 
     # focus the parent container
     bindsym $mod+a focus parent

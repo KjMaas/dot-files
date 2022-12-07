@@ -5,7 +5,6 @@ if not status_ok then
 end
 
 comment.setup {
-  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
   ---Add a space b/w comment and the line
   padding = true,
   ---Whether the cursor should stay at its position

@@ -14,10 +14,12 @@ ts.setup {
     config = {
       javascript = {
         __default = '// %s',
+        statement_block = '{/* %s */}',
         jsx_element = '{/* %s */}',
         jsx_fragment = '{/* %s */}',
         jsx_attribute = '// %s',
-        comment = '// %s'
+        comment = '// %s',
+        ERROR = '{/* %s */}',
       }
     }
 

@@ -18,6 +18,7 @@ local modules = {
   'plugins.lualine',
   'plugins.project',
 
+  'plugins.filetype',
   'plugins.treesitter',
   'plugins.neuron',
   'plugins.markdown-preview',

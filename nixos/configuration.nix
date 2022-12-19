@@ -171,15 +171,19 @@ in
   # sync with Microsoft OneDrive
   services.onedrive.enable = false;
 
-
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      hplip # Print, scan and fax HP drivers for Linux
-      #      hplipWithPlugin             # Print, scan and fax HP drivers for Linux
-      #      python39Packages.distro     # Linux Distribution - a Linux OS platform information API.
-    ];
+# Enable CUPS to print documents.
+  services = {
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        hplip # Print, scan and fax HP drivers for Linux
+      ];
+    };
+    avahi = {
+      enable = true;
+      openFirewall = true;
+      nssmdns = true;
+    };
   };
 
   programs.system-config-printer.enable = true;

@@ -211,7 +211,7 @@ in
       support32Bit = true;
     };
     pulse.enable = true;
-    jack.enable = true;
+    jack.enable = false;
   };
 
 
@@ -237,7 +237,6 @@ in
     vim             # The most popular clone of the VI editor
     git             # Distributed version control system
     alacritty       # A cross-platform, GPU-accelerated terminal emulator
-    shellcheck      # Shell script analysis tool
     docker-compose  # Multi-container orchestration for Docker
 
     # utilities

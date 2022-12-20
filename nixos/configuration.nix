@@ -171,7 +171,7 @@ in
   # sync with Microsoft OneDrive
   services.onedrive.enable = false;
 
-# Enable CUPS to print documents.
+  # Enable CUPS to print documents.
   services = {
     printing = {
       enable = true;
@@ -192,6 +192,12 @@ in
   programs.system-config-printer.enable = true;
 
   # Enable sound.
+  # Scanner support is provided by the SANE library
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.hplipWithPlugin ];
+  };
+
   sound.enable = true;
   hardware.pulseaudio.enable = false;
 
@@ -249,6 +255,7 @@ in
     unzip           # An extraction utility for archives compressed in .zip format
     wget            # Tool for retrieving files using HTTP, HTTPS, and FTP
 
+    gscan2pdf       # A GUI to produce PDFs or DjVus from scanned documents
     gparted         # Graphical disk partitioning tool
     gnumake         # A tool to control the generation of non-source files from sources
     gcc             # GNU Compiler Collection, version 11.3.0 (wrapper script)

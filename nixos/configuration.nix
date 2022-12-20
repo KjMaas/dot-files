@@ -182,7 +182,10 @@ in
     avahi = {
       enable = true;
       openFirewall = true;
-      nssmdns = true;
+      # /!\ ToDo 
+      # nssmdns triggers DNS issues when set to 'true'
+      # https://discourse.nixos.org/t/help-with-local-dns-resolution/20305/6
+      nssmdns = false; 
     };
   };
 

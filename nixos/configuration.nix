@@ -348,7 +348,11 @@ in
     #firewall.enable = false;
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # we don't use long running docker containers, start on socket
+    enableOnBoot = false;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

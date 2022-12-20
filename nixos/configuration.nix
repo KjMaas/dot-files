@@ -22,17 +22,17 @@ in
     ../sway/sway.nix
   ];
 
+  nix = {
+    # package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
+
   nixpkgs.config = {
     allowUnfree = true;
     cudaSupport = true;
   };
 
   hardware.enableAllFirmware = false;
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
 
   hardware.opengl = {
     enable = true;
@@ -191,13 +191,13 @@ in
 
   programs.system-config-printer.enable = true;
 
-  # Enable sound.
   # Scanner support is provided by the SANE library
   hardware.sane = {
     enable = true;
     extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
+  # Remove sound.enable or turn it off if you had it set previously, it seems to cause conflicts with pipewire
   sound.enable = true;
   hardware.pulseaudio.enable = false;
 
@@ -265,7 +265,7 @@ in
   ];
 
   environment.variables = {
-    EDITOR = "lvim";
+    EDITOR = "vim";
   };
 
   # add zsh completion for system packages

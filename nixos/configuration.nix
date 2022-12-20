@@ -10,7 +10,7 @@ let
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec -a "$0" "$@"
+    exec "$@"
   '';
 in
 {
@@ -37,17 +37,21 @@ in
   hardware.opengl = {
     enable = true;
     driSupport = true;
+    driSupport32Bit = true;
   };
+
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
   hardware = {
     nvidiaOptimus.disable = false;
     nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
       # powerManagement.enable = true;
       prime = {
         offload.enable = true;
-        amdgpuBusId = "PCI:4:00:0";
-        nvidiaBusId = "PCI:1:00:0";
+        amdgpuBusId = "PCI:4:0:0";
+        nvidiaBusId = "PCI:1:0:0";
         # In sync mode the Nvidia card is turned on constantly,
         # having impact on laptop battery and health 
         sync.enable = false;
@@ -72,8 +76,7 @@ in
       config.boot.kernelPackages.broadcom_sta
       pkgs.linuxPackages.nvidia_x11
     ];
-    # blacklistedKernelModules = [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
-    blacklistedKernelModules = [ "nouveau" ];
+    blacklistedKernelModules = [ "nouveau" "nvidia_drm" "nvidia_modeset" "nvidia" ];
     kernelModules = [ "wl" ];
   };
 
@@ -123,9 +126,6 @@ in
 
 
   services.xserver = {
-    # Enable the X11 windowing system.
-    videoDrivers = [ "nvidia" ];
-
     # Configure keymap in X11
     layout = "eu";
     xkbOptions = "

@@ -301,17 +301,21 @@ in
           psk = "@PSK_FREE@";
           priority = 10;
         };
-        "Livebox-30AC" = {
-          psk = "@PSK_ORANGE@";
-          priority = 10;
+        "Livebox-8560" = {
+          psk = "@PSK_PRADES@";
+          priority = 5;
+        };
+        "Livebox-8560_EXT" = {
+          psk = "@PSK_PRADES@";
+          priority = 5;
         };
         "NETGEAR78" = {
-          pskRaw = "@PSK_PRADES@";
-          priority = 3;
+          pskRaw = "@PSK_PRADES_BACK@";
+          priority = 5;
         };
         "NETGEAR78_EXT" = {
-          psk = "@PSK_PRADES_EXT@";
-          priority = 4;
+          psk = "@PSK_PRADES_EXT_BACK@";
+          priority = 5;
         };
         "Bbox-9A77B139" = {
           psk = "@PSK_MONICA@";
@@ -327,11 +331,11 @@ in
         };
         "Galaxy S94b45" = {
           psk = "@PSK_ANTALYA@";
-          priority = 90;
+          priority = 9;
         };
         "CAMPUS-NUMERIQUE" = {
           psk = "@PSK_CAMPUS@";
-          priority = 10;
+          priority = 3;
         };
       };
     };

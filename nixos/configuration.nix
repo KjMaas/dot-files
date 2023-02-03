@@ -337,6 +337,14 @@ in
           psk = "@PSK_CAMPUS@";
           priority = 3;
         };
+        "floki_office_plus" = {
+          psk = "@PSK_FLOKI@";
+          priority = 5;
+        };
+        "floki_office" = {
+          psk = "@PSK_FLOKI@";
+          priority = 4;
+        };
       };
     };
 

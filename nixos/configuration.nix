@@ -20,6 +20,8 @@ in
     ./hardware-configuration.nix
     # Configure tilling WM
     ../sway/sway.nix
+    # Cachix configuration written to /etc/nixos/cachix.nix
+    /etc/nixos/cachix.nix
   ];
 
   nix = {
@@ -261,6 +263,7 @@ in
 
     stow            # Simlinking farm on steroids!
 
+    cachix        # Command line client for Nix binary cache hosting https://cachix.org
   ];
 
   environment.variables = {

@@ -297,6 +297,14 @@ in
 
       environmentFile = "/run/keys/wireless";
       networks = {
+        "SFR_7100" = {
+          psk = "@PSK_SFR_2GHZ@";
+          priority = 9;
+        };
+        "SFR_7100_5GHZ" = {
+          psk = "@PSK_SFR_5GHZ@";
+          priority = 10;
+        };
         "Freebox-48448F" = {
           psk = "@PSK_FREE@";
           priority = 10;
@@ -307,7 +315,7 @@ in
         };
         "Livebox-8560_EXT" = {
           psk = "@PSK_PRADES@";
-          priority = 5;
+          priority = 6;
         };
         "NETGEAR78" = {
           pskRaw = "@PSK_PRADES_BACK@";
@@ -343,6 +351,14 @@ in
         };
         "floki_office" = {
           psk = "@PSK_FLOKI@";
+          priority = 4;
+        };
+        "EventVillageByCA" = {
+          psk = "@VILLAGE_BY_CA@";
+          priority = 4;
+        };
+        "L'impertinence - Publique" = {
+          psk = "@IMPERTINENCE@";
           priority = 4;
         };
       };
